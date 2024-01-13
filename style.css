@@ -1,15 +1,13 @@
 body {
   background-color: bisque;
+  font-family: verdana;
 }
 h1 {
-  font-family: verdana;
   color: dimgray;
 }
 p {
-  font-family: verdana;
   color: dimgray;
 }
 .authors {
-  font-family: verdana;
   color: indigo;
 }
