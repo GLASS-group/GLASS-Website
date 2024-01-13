@@ -1,12 +1,10 @@
 body {
   background-color: bisque;
   font-family: verdana;
+  color: midnightblue;
 }
 h1 {
-  color: dimgray;
-}
-p {
-  color: dimgray;
+  color: black;
 }
 .authors {
   color: indigo;
