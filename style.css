@@ -1,15 +1,18 @@
 body {
-  background-color: bisque;
-  font-family: verdana;
-  color: midnightblue;
+    background-color: bisque;
+    font-family: verdana;
+    color: midnightblue;
 }
 h1 {
-  color: black;
-  text-align: center;
+    color: black;
+    text-align: center;
 }
 h2 {
-  text-align: center;
+    text-align: center;
+}
+div {
+    margin: 10px 50px;
 }
 .authors {
-  color: indigo;
+    color: indigo;
 }
