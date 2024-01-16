@@ -2,13 +2,13 @@ body {
     background-color: bisque;
     font-family: verdana;
     color: midnightblue;
+    text-align: center;
 }
 h1 {
     color: black;
 }
 div {
     margin: 60px 120px;
-    text-align: center;
 }
 hr {
     margin: 30px;
