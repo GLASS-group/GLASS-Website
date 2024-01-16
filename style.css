@@ -1,11 +1,8 @@
 body {
     background-color: bisque;
     font-family: verdana;
-    color: midnightblue;
+    color: rgb(20,20,20);
     text-align: center;
-}
-h1 {
-    color: black;
 }
 div {
     margin: 60px 120px;
