@@ -2,6 +2,10 @@
     font-family: lora;
     src: url(fonts/lora/Lora-VariableFont_wght.ttf);
 }
+@font-face {
+    font-family: open-sans;
+    src: url(fonts/open_sans/OpenSans-VariableFont_wdth,wght.ttf);
+}
 body {
     background-color: bisque;
     font-family: lora;
@@ -19,12 +23,14 @@ td {
 }
 .authors {
     color: indigo;
+    font-family: lora;
 }
 .title-section {
     width: 60%;
     margin: 20px auto;
 }
 .main-section {
+    font-family: open-sans;
     width: 80%;
     margin: 20px auto;
 }
