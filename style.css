@@ -16,6 +16,9 @@ div {
 hr {
     margin: 30px;
 }
+td {
+  padding: 5px;
+}
 .authors {
     color: indigo;
 }
