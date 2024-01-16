@@ -1,6 +1,10 @@
+@font-face {
+    font-family: lora;
+    src: url(fonts/lora/Lora-VariableFont_wght.ttf);
+}
 body {
     background-color: bisque;
-    font-family: verdana;
+    font-family: lora;
     color: rgb(20,20,20);
     text-align: center;
 }
