@@ -14,7 +14,7 @@ td {
   padding: 5px;
 }
 img {
-    overflow: contain;
+    max-width: 512px;
 }
 .authors {
     color: indigo;
