@@ -4,7 +4,7 @@ body {
     background-color: bisque;
     color: rgb(20,20,20);
     text-align: center;
-    font-family: open-sans, sans-serif;
+    font-family: /*open-sans,*/ sans-serif;
     font-size: 1rem;
     margin: 0rem;
 }
@@ -74,7 +74,8 @@ nav li a:hover {
 }
 .thin-section {
     width: 60%;
-    margin: 4.5rem auto 1.25rem auto;
+    /*margin: 4.5rem auto 1.25rem auto;*/
+    margin: 1.25rem auto;
 }
 .main-section {
     width: 80%;
