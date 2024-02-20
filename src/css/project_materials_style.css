@@ -15,13 +15,13 @@ article {
     margin: 2.5rem 3rem;
 }
 .major-section-header h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     padding: 0rem;
     margin: 0rem;
     margin-bottom: 0.5rem;
 }
 .major-section-header p {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin: 0rem;
     padding: 0rem;
     font-weight: 300;
@@ -35,12 +35,10 @@ article {
 }
 .project-info-section p {
     margin: 0rem;
-    font-size: 1.2rem;
 }
 .project-info-section a {
     display:inline-block;
     margin: 1rem 0.5rem;
-    font-size: 1.2rem;
     color: #FFFFFF;
     text-decoration: none;
     padding: 0.3rem 1rem;
