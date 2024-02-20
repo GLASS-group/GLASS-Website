@@ -97,7 +97,7 @@ footer {
 
 
 
-@media screen and (max-width: 768px) {
+@media screen or (max-width: 768px) {
 
     .header-title {
         display:block;
