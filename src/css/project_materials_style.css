@@ -2,10 +2,15 @@ article {
     text-align: center;
 }
 #materials-page-top-section {
-    margin: 0rem 4rem;
+    margin: 0rem 2rem;
     border-bottom-style: dashed;
     border-width: 2px;
 }
+
+#materials-page-bottom-section {
+    margin: 0rem 2rem;
+}
+
 .major-section-header {
     margin: 2.5rem 3rem;
 }
@@ -23,7 +28,7 @@ article {
 }
 
 .project-info-section {
-    margin: 2.5rem 0rem;
+    margin: 2rem 0rem;
 }
 .project-info-section h2 {
     margin-bottom: 0.5rem;
@@ -52,6 +57,6 @@ article {
 }
 
 #project-materials-bottom-logo {
-    width: 30rem;
+    width: 20rem;
     margin-bottom: 3rem;
 }
