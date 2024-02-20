@@ -97,7 +97,7 @@ footer {
 
 
 
-@media screen or (max-width: 768px) {
+@media (min-aspect-ratio: ~'4/3') {
 
     .header-title {
         display:block;
