@@ -58,11 +58,10 @@
     }
 
     .author-image {
+        padding:1.5rem;
         vertical-align: auto;
         box-sizing: border-box;
-        width: 100% !important;
-        aspect-ratio: 1/1;
-        padding:1.5rem;
+        width: 100%;
         object-fit: contain;
     }
 }
