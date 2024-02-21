@@ -74,13 +74,70 @@ body {
     text-decoration: underline;
 }
 
+article {
+    text-align: center;
+}
+
+#materials-page-top-section {
+    margin: 0rem 8rem;
+    border-bottom-style: dashed;
+    border-width: 2px;
+}
+
+#materials-page-bottom-section {
+    margin: 0rem 8rem;
+}
+
+.major-section {
+    margin: 2.5rem 0rem;
+}
+.major-section h2 {
+    font-size: 2.2rem;
+    padding: 0rem;
+    margin: 0rem;
+    margin-bottom: 0.5rem;
+}
+.major-section p {
+    font-size: 1.25rem;
+    margin: 0rem;
+    padding: 0rem;
+    font-weight: 300;
+}
+
+.minor-section {
+    margin: 2.5rem 0rem;
+}
+.minor-section h2 {
+    margin-bottom: 0.5rem;
+}
+.minor-section p {
+    margin: 0rem;
+}
+.minor-section a {
+    display:inline-block;
+    margin: 1rem 0.5rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0.3rem 1rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: #FFFFFF;
+    vertical-align: middle;
+}
+
+.minor-section a:hover {
+    color: rgb(112, 253, 112);
+    border-color: rgb(112, 253, 112);;
+}
+
 footer {
     border-top-style:dotted;
     border-width: .3rem;
     padding: 2rem;
     margin-top: auto;
     width: auto;
-  }
+}
 
 @font-face {
     font-family: open-sans;

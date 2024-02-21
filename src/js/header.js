@@ -8,6 +8,7 @@ document.querySelector(".main-header").innerHTML =
         <a class="header-nav-item" href="index.html">Home</a>
         <a class="header-nav-item" href="project_materials.html">Project Materials</a>
         <a class="header-nav-item" href="news.html">News</a>
+        <a class="header-nav-item" href="documentation.html">Documentation</a>
         <a class="header-nav-item" href="about_us.html">About Us</a>
     </div>
 </nav>`;

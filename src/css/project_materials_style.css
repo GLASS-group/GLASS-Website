@@ -1,60 +1,16 @@
-article {
-    text-align: center;
-}
-#materials-page-top-section {
-    margin: 0rem 2rem;
-    border-bottom-style: dashed;
-    border-width: 2px;
-}
-
-#materials-page-bottom-section {
-    margin: 0rem 2rem;
-}
-
-.major-section-header {
-    margin: 2.5rem 0rem;
-}
-.major-section-header h2 {
-    font-size: 2.2rem;
-    padding: 0rem;
-    margin: 0rem;
-    margin-bottom: 0.5rem;
-}
-.major-section-header p {
-    font-size: 1.25rem;
-    margin: 0rem;
-    padding: 0rem;
-    font-weight: 300;
-}
-
-.project-info-section {
-    margin: 2.5rem 0rem;
-}
-.project-info-section h2 {
-    margin-bottom: 0.5rem;
-}
-.project-info-section p {
-    margin: 0rem;
-}
-.project-info-section a {
-    display:inline-block;
-    margin: 1rem 0.5rem;
-    color: #FFFFFF;
-    text-decoration: none;
-    padding: 0.3rem 1rem;
-    border-style: solid;
-    border-radius: 0.5rem;
-    border-width: 1px;
-    border-color: #FFFFFF;
-    vertical-align: middle;
-}
-
-.project-info-section a:hover {
-    color: rgb(112, 253, 112);
-    border-color: rgb(112, 253, 112);;
-}
-
 #project-materials-bottom-logo {
     width: 20rem;
     margin-bottom: 3rem;
+}
+
+@media screen and (max-aspect-ratio: 4/3) {
+
+    #materials-page-top-section {
+        margin: 0rem 2rem;
+    }
+    
+    #materials-page-bottom-section {
+        margin: 0rem 2rem;
+    }
+
 }
