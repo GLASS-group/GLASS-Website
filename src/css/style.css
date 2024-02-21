@@ -146,7 +146,7 @@ footer {
 
 
 
-@media screen and (max-aspect-ratio: 4/3) {
+@media screen and (max-aspect-ratio: 4/3) or (pointer:none) or (pointer:coarse) {
 
     html {
         font-size: 42px;

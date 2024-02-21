@@ -38,7 +38,7 @@
     margin: 0rem;
 }
 
-@media screen and (max-aspect-ratio: 4/3) {
+@media screen and (max-aspect-ratio: 4/3) or (pointer:none) or (pointer:coarse) {
 
     .author-card {
         margin: 2rem 1.5rem;
