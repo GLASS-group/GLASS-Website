@@ -59,9 +59,11 @@
 
     .author-image {
         box-sizing: border-box;
-        width: 100%;
-        height:auto;
+        width: 100% !important;
+        height: 100% !important;
+        aspect-ratio: 1/1;
         padding:1.5rem;
+        object-fit: contain;
     }
 }
 
