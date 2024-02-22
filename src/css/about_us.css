@@ -27,6 +27,7 @@
 .author-about p {
     font-size: 1.15rem;
     margin: 0rem;
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-aspect-ratio: 4/3), (pointer:none), (pointer:coarse) {
