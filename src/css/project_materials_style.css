@@ -48,11 +48,11 @@
 @media screen and (max-aspect-ratio: 4/3), (pointer:none), (pointer:coarse) {
 
     #materials-page-top-section {
-        margin: 0rem 2rem;
+        margin: 0rem 0.5rem;
     }
     
     #materials-page-bottom-section {
-        margin: 0rem 2rem;
+        margin: 0rem 0.5rem;
     }
 
 }
