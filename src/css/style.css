@@ -212,7 +212,7 @@ footer {
         flex-direction: column;
     }
     .horizontal-card-container {
-        margin: 2rem 1.5rem;
+        margin: 2rem 0.25rem;
         padding: 1rem 1rem;
         flex-direction: column;
     }
