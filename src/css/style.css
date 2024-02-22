@@ -37,7 +37,7 @@ body {
     display: inline-block;
     width: 3.5rem;
     vertical-align: middle;
-    margin-left: 15px;
+    margin-left: 1rem;
     text-decoration: none;
 }
 
@@ -76,16 +76,7 @@ body {
 
 article {
     text-align: center;
-}
-
-#materials-page-top-section {
-    margin: 0rem 8rem;
-    border-bottom-style: dashed;
-    border-width: 2px;
-}
-
-#materials-page-bottom-section {
-    margin: 0rem 8rem;
+    margin: 4rem;
 }
 
 .major-section {
@@ -121,6 +112,7 @@ footer {
     padding: 2rem;
     margin-top: auto;
     width: auto;
+    text-align: center;
 }
 
 .horizontal-card-container {
@@ -134,7 +126,7 @@ footer {
 }
 
 .vertical-card-container {
-    display: flex;
+    display: block;
     flex-direction: column;
     background-color:#202829;
     margin: 2rem auto;
@@ -145,10 +137,25 @@ footer {
     align-items: center;
 }
 
+#heads-up-message {
+    font-size: 1.2rem;
+}
+
+#heads-up-message a {
+    color:rgb(112, 253, 112)
+}
+#heads-up-message:visited {
+    color:rgb(112, 253, 112);
+}
+
 @media screen and (max-aspect-ratio: 4/3), (pointer:none), (pointer:coarse) {
 
     html {
         font-size: 42px;
+    }
+
+    article {
+        margin: 1.5rem;
     }
 
     .header-title {

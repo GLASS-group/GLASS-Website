@@ -1,2 +1,2 @@
 document.querySelector(".main-footer").innerHTML =
-`<h2>GLASS</h2>`;
+`<h1>GLASS</h1>`;
