@@ -1,0 +1,58 @@
+.vertical-card-container a {
+    object-fit: contain;
+    width:auto;
+    display: inline-block;
+    margin: 1.5rem 0.5rem;
+    margin-bottom: 0rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0.3rem 1rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: #FFFFFF;
+    vertical-align: middle;
+}
+
+#materials-page-top-section {
+    margin: 0rem 8rem;
+    border-bottom-style: dashed;
+    border-width: 2px;
+}
+
+#materials-page-bottom-section {
+    display:flex;
+    flex-direction: column;
+    margin: 0rem 8rem;
+}
+
+.vertical-card-container p {
+    margin-bottom: 0rem;
+    margin-top: 0.5rem;
+}
+
+.vertical-card-container h2 {
+    margin: 0rem;
+}
+
+.vertical-card-container a:hover {
+    color: rgb(112, 253, 112);
+    border-color: rgb(112, 253, 112);
+}
+
+#project-materials-bottom-logo {
+    width: 20rem;
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-aspect-ratio: 4/3), (pointer:none), (pointer:coarse) {
+
+    #materials-page-top-section {
+        margin: 0rem 0.5rem;
+    }
+    
+    #materials-page-bottom-section {
+        margin: 0rem 0.5rem;
+    }
+
+}
