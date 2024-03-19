@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/static/js/main.52a9a5bd.js",
+    "static/js/453.0733ec41.chunk.js": "/static/js/453.0733ec41.chunk.js",
+    "static/media/presentation.pdf": "/static/media/presentation.3024ce69bd9ed2424d95.pdf",
+    "static/media/plan_presentation.pdf": "/static/media/plan_presentation.1f6083e12931632923ec.pdf",
+    "static/media/design.pdf": "/static/media/design.a87313179cc98610e3fe.pdf",
+    "static/media/progress_evaluation.pdf": "/static/media/progress_evaluation.78f14a6c31bbef690f77.pdf",
+    "static/media/requirements.pdf": "/static/media/requirements.5d31b82c77954100f875.pdf",
+    "static/media/test_plan.pdf": "/static/media/test_plan.e0891ec98c45db4b72d0.pdf",
+    "static/media/plan.pdf": "/static/media/plan.66ddcf538245431bfbf1.pdf",
+    "static/media/glass_logo.svg": "/static/media/glass_logo.9b3d2c3fba3fef5675516a0cd4828c58.svg",
+    "index.html": "/index.html",
+    "main.52a9a5bd.js.map": "/static/js/main.52a9a5bd.js.map",
+    "453.0733ec41.chunk.js.map": "/static/js/453.0733ec41.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.52a9a5bd.js"
+  ]
+}
