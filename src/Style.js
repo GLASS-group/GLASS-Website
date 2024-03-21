@@ -10,7 +10,7 @@ export const style = {
     globalFontSize: {
         fontSize: '16px',
         '@media screen and (max-width: 1000px)': {
-            fontSize: '40px'
+            fontSize: '16px'
          }
     },
     mainBody: {
@@ -18,7 +18,6 @@ export const style = {
         display: 'flex',
         flexDirection: 'column',
         fontFamily: '"Segoe UI", Roboto, Helvetica, Arial, sans-serif, serif',
-        fontSize: '16px',
         backgroundColor: colors.charcoal,
         color: colors.white,
         minHeight: '100vh',
@@ -61,7 +60,7 @@ export const style = {
         display: 'flex',
         display: 'inline',
         margin: 0,
-        marginLeft: '0.5em',
+        marginLeft: '0.2em',
         fontSize: '3em',
         fontWeight: '500',
         verticalAlign: 'middle',
