@@ -148,7 +148,7 @@ export const style = {
         composes: '$globalFontSize',
         display: 'block',
         margin: '2.5em 0em 0em 0em',
-        width: '65vw',
+        width: '75vw',
         padding: '0 0 2.5em 0',
         borderBottomStyle: 'dashed',
         borderWidth: '2px'
