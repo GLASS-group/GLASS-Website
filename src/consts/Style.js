@@ -202,8 +202,10 @@ export const style = {
         columnGap: '2em',
         rowGap: '2rem',
         alignItems: 'center',
+        justifyContent: 'midde',
         '@media screen and (max-width: 1000px)': {
-            flexDirection: 'column'
+            flexDirection: 'column',
+            padding: 0,
         }
     },
     devCardName: {
@@ -216,7 +218,9 @@ export const style = {
         borderRadius: '50%',
         boxShadow: 'rgba(0, 0, 0, .3) 8px 8px 4px 2px',
         '@media screen and (max-width: 1000px)': {
-            width: '95%'
+            width: '85%',
+            height: '85%',
+            marginBottom: '2em'
         }
     },
     devBioText: {
