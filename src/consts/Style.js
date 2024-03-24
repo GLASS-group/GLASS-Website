@@ -3,7 +3,8 @@ export const colors = {
     white: '#FFFFFF',
     mint: '#72FD80',
     slate: '#24262E',
-    lightGray: '#999999'
+    lightGray: '#999999',
+    coolBlue: '#243044'
 }
 
 const sectionMargin = '2rem';
@@ -197,20 +198,35 @@ export const style = {
         backgroundColor: colors.slate,
         padding: '2em',
         marginTop: sectionMargin,
-        display: 'grid',
-        gridTemplateColumns: '3fr 1fr',
-        columnGap: '2em'
+        display: 'flex',
+        columnGap: '2em',
+        rowGap: '2rem',
+        alignItems: 'center',
+        '@media screen and (max-width: 1000px)': {
+            flexDirection: 'column'
+        }
     },
     devCardName: {
         margin: 0,
         fontSize: '2rem'
     },
-    devBioContent: {
-        
-    },
     devCardImage: {
         boxSizing: 'border-box',
-        width: '100%'
+        width: '25%',
+        borderRadius: '50%',
+        boxShadow: 'rgba(0, 0, 0, .3) 8px 8px 4px 2px',
+        '@media screen and (max-width: 1000px)': {
+            width: '95%'
+        }
+    },
+    devBioText: {
+        borderRadius: '2em',
+        border: 'solid',
+        borderWidth: '2px',
+        borderColor: colors.lightGray,
+        backgroundColor: colors.coolBlue,
+        boxSizing: 'border-box',
+        padding: '1em'
     }
 }
 

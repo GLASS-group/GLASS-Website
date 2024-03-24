@@ -13,7 +13,7 @@ function AboutUs() {
                 {
                     devInfo.map((info) => (
                         <div className={classes.devBioCard}>
-                            <div>
+                            <div className={classes.devBioText}>
                                 <h2 className={classes.devCardName}>
                                     {info.name}
                                 </h2>
