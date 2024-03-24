@@ -4,8 +4,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
 import history from './History';
-import pages from './PageList';
-import { projectFiles } from './Files';
+import pages from './consts/PageList';
+import { projectFiles } from './consts/Files';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

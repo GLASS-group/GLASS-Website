@@ -2,9 +2,11 @@ export const colors = {
     charcoal: "#0D0D0D",
     white: '#FFFFFF',
     mint: '#72FD80',
-    slate: '#202829',
+    slate: '#24262E',
     lightGray: '#999999'
 }
+
+const sectionMargin = '2rem';
 
 export const style = {
     globalFontSize: {
@@ -136,8 +138,9 @@ export const style = {
     },
     pageContentHeader: {
         composes: '$globalFontSize',
-        fontSize: '3em',
-        margin: 0
+        fontSize: '2.5em',
+        margin: 0,
+        marginTop: sectionMargin
     },
     mainHeader: {
         composes: '$globalFontSize',
@@ -147,7 +150,7 @@ export const style = {
     contentSubsection: {
         composes: '$globalFontSize',
         display: 'block',
-        margin: '2.5em 0em 0em 0em',
+        margin: `${sectionMargin} 0em 0em 0em`,
         width: '75vw',
         padding: '0 0 2.5em 0',
         borderBottomStyle: 'dashed',
@@ -157,7 +160,7 @@ export const style = {
         composes: '$globalFontSize',
         composes: '$contentSubsection',
         borderBottom: 'none',
-        margin: '2.5em 0em 5em 0em',
+        margin: `${sectionMargin} 0em 4em 0em`,
         padding: 0
     },
     generalFlexColumn: {
@@ -187,6 +190,27 @@ export const style = {
         '@media screen and (max-width: 1000px)': {
             width: '80vw'
         }
+    },
+
+    devBioCard: {
+        borderRadius: '2em',
+        backgroundColor: colors.slate,
+        padding: '2em',
+        marginTop: sectionMargin,
+        display: 'grid',
+        gridTemplateColumns: '3fr 1fr',
+        columnGap: '2em'
+    },
+    devCardName: {
+        margin: 0,
+        fontSize: '2rem'
+    },
+    devBioContent: {
+        
+    },
+    devCardImage: {
+        boxSizing: 'border-box',
+        width: '100%'
     }
 }
 

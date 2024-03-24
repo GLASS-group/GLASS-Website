@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import pages from "./PageList";
-import style from "./Style";
+import pages from "./consts/PageList";
+import style from "./consts/Style";
 import { createUseStyles } from "react-jss";
 
 

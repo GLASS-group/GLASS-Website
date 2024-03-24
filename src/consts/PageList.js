@@ -1,9 +1,9 @@
-import Construction from "./Construction";
-import Home from './Home';
-import News from "./News";
-import Documentation from "./Documentation";
-import ProjectMaterials from "./ProjectMaterials";
-import AboutUs from "./AboutUs";
+import Construction from "../Construction";
+import Home from '../Home';
+import News from "../News";
+import Documentation from "../Documentation";
+import ProjectMaterials from "../ProjectMaterials";
+import AboutUs from "../AboutUs";
 
 const pages = [{title: "Home", content: <Home/>, path: '/home'},
                {title: "Project Materials", content:<ProjectMaterials/>, path: '/project-materials'},

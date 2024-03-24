@@ -5,8 +5,8 @@ import {Link, useLocation} from "react-router-dom";
 
 import history from "./History";
 import Navigation from "./Navigation";
-import style from "./Style"
-import pages from './PageList'
+import style from "./consts/Style"
+import pages from './consts/PageList'
 import Footer from './Footer'
 
 

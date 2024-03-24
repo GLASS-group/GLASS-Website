@@ -1,5 +1,5 @@
 import Construction from "./Construction";
-import style from "./Style";
+import style from "./consts/Style";
 
 import { createUseStyles } from "react-jss";
 

@@ -1,4 +1,4 @@
-import style from "./Style";
+import style from "./consts/Style";
 import { createUseStyles } from "react-jss";
 
 function Footer() {

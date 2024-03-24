@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import style from "./Style";
+import style from "./consts/Style";
 import glassSvg from './images/glass_logo.svg'
 import { NavLink } from "react-router-dom";
 
