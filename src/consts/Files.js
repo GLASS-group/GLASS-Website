@@ -7,8 +7,8 @@ import milestoneOnePresentation from '../files/milestone_1/presentation.pdf'
 import milestoneOneEvaluation from '../files/milestone_1/progress_evaluation.pdf'
 import milestoneTwoPresentation from '../files/milestone_2/presentation.pdf'
 import milestoneTwoEvaluation from '../files/milestone_2/progress_evaluation.pdf'
-//import milestoneThreePresentation from '../files/milestone_3/presentation.pdf'
-//import milestoneThreeEvaluation from '../files/milestone_3/progress_evaluation.pdf'
+import milestoneThreePresentation from '../files/milestone_3/presentation.pdf'
+import milestoneThreeEvaluation from '../files/milestone_3/progress_evaluation.pdf'
 
 export const planFiles = [{name: "Plan", href: planPlan},
                    {name: "Presentation", href: planPresentation}]
@@ -22,8 +22,8 @@ export const milestoneOneFiles = [{name: "Requirements", href: milestoneOneRequi
 export const milestoneTwoFiles = [{name: "Presentation", href: milestoneTwoPresentation},
                            {name: "Progress Evaluation", href: milestoneTwoEvaluation}]
 
-export const milestoneThreeFiles = [{name: "Presentation", href: '/project-materials'},
-                             {name: "Progress Evaluation", href: '/project-materials'}]
+export const milestoneThreeFiles = [{name: "Presentation", href: milestoneThreePresentation},
+                             {name: "Progress Evaluation", href: milestoneThreeEvaluation}]
 
 export const projectFiles = planFiles.concat(milestoneOneFiles, milestoneTwoFiles, milestoneThreeFiles)
 
