@@ -10,6 +10,19 @@ import milestoneTwoEvaluation from '../files/milestone_2/progress_evaluation.pdf
 import milestoneThreePresentation from '../files/milestone_3/presentation.pdf'
 import milestoneThreeEvaluation from '../files/milestone_3/progress_evaluation.pdf'
 
+
+import planTwoPlan from '../files/semester_two/plan/plan.pdf'
+import planTwoPresentation from '../files/semester_two/plan/plan_presentation.pdf'
+// import milestoneOneTwoRequirements from '../files/milestone_1/requirements.pdf'
+// import milestoneOneTwoDesign from '../files/milestone_1/design.pdf'
+// import milestoneOneTwoTest from '../files/milestone_1/test_plan.pdf'
+// import milestoneOneTwoPresentation from '../files/milestone_1/presentation.pdf'
+// import milestoneOneTwoEvaluation from '../files/milestone_1/progress_evaluation.pdf'
+// import milestoneTwoTwoPresentation from '../files/milestone_2/presentation.pdf'
+// import milestoneTwoTwoEvaluation from '../files/milestone_2/progress_evaluation.pdf'
+// import milestoneThreeTwoPresentation from '../files/milestone_3/presentation.pdf'
+// import milestoneThreeTwoEvaluation from '../files/milestone_3/progress_evaluation.pdf'
+
 export const planFiles = [{name: "Plan", href: planPlan},
                    {name: "Presentation", href: planPresentation}]
 
@@ -27,7 +40,16 @@ export const milestoneThreeFiles = [{name: "Presentation", href: milestoneThreeP
 
 export const projectFiles = planFiles.concat(milestoneOneFiles, milestoneTwoFiles, milestoneThreeFiles)
 
-export const fileLinks = [{cardName: "Plan", dueDate: "Jaunary 22nd", links: planFiles},
+export const semesterTwoPlanFiles = [{name: "Plan", href: planTwoPlan},
+                        {name: "Presentation", href: planTwoPresentation}]
+
+export const firstSemesterFileLinks = [{cardName: "Plan", dueDate: "Jaunary 22nd", links: planFiles},
                    {cardName: "Milestone 1", dueDate: "February 19th", links: milestoneOneFiles},
                    {cardName: "Milestone 2", dueDate: "March 18th", links: milestoneTwoFiles},
                    {cardName: "Milestone 3", dueDate: "April 15th", links: milestoneThreeFiles}]
+
+export const secondSemesterFileLinks = [{cardName: "Plan", dueDate: "September 4th", links: semesterTwoPlanFiles},
+                    // {cardName: "Milestone 1", dueDate: "September 30th", links: milestoneOneFiles},
+                    // {cardName: "Milestone 2", dueDate: "October 28th", links: milestoneTwoFiles},
+                    // {cardName: "Milestone 3", dueDate: "November 25th", links: milestoneThreeFiles}
+                ]

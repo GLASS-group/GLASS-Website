@@ -18,8 +18,6 @@ function App() {
     let currentPath = location.pathname;
     const currentPage = pages.find(page => page.path === currentPath);
 
-    console.log(currentPage);
-
     return (
         <div className={classes.mainBody}>
             <Navigation pages={pages}/>

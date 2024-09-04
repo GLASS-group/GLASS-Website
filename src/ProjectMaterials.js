@@ -1,6 +1,6 @@
 import Construction from "./Construction";
 import {colors, style} from "./consts/Style";
-import {fileLinks} from './consts/Files';
+import { firstSemesterFileLinks, secondSemesterFileLinks } from './consts/Files';
 import { Link } from "react-router-dom";
 
 import { createUseStyles } from "react-jss";
@@ -77,12 +77,31 @@ function ProjectMaterials() {
                     <p className={specificClasses.text}>Dr. Ryan Stansifer</p>
                 </div>
             </div>
-            <div className={classes.finalContentSubsection}>
+            <div className={classes.contentSubsection}>
                 <div className={classes.generalFlexColumn}>
 
                     <h1 className={classes.mainHeader}>First Semester</h1>
                     {
-                        fileLinks.map((fileCard) => (
+                        firstSemesterFileLinks.map((fileCard) => (
+                            <div className={classes.contentCard}>
+                                <h3 className={specificClasses.cardHeader}>{fileCard.cardName}</h3>
+                                <p>{fileCard.dueDate}</p>
+                                {
+                                    fileCard.links.map((link) => (
+                                        <a className={specificClasses.fileLinkButton} href={link.href}>{link.name}</a>
+                                    ))
+                                }
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <div className={classes.finalContentSubsection}>
+                <div className={classes.generalFlexColumn}>
+
+                    <h1 className={classes.mainHeader}>Second Semester</h1>
+                    {
+                        secondSemesterFileLinks.map((fileCard) => (
                             <div className={classes.contentCard}>
                                 <h3 className={specificClasses.cardHeader}>{fileCard.cardName}</h3>
                                 <p>{fileCard.dueDate}</p>

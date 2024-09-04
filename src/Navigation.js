@@ -17,10 +17,10 @@ function Navigation({pages}) {
 
   return (
     <header className={classes.navHeader}>
-      <NavLink className={classes.navMainLogo} to='/home'>
-        <img className={classes.mainLogoImage} src={glassSvg}/>
-        <h1 className={classes.mainLogoLabel}>GLASS</h1>
-    </NavLink>
+        <NavLink className={classes.navMainLogo} to='/home'>
+            <img className={classes.mainLogoImage} src={glassSvg}/>
+            <h1 className={classes.mainLogoLabel}>GLASS</h1>
+        </NavLink>
       <ul className={classes.navHeaderMenu}>
         {pages.map((page) => (
           <NavLink to={page.path} key={page.path} className={({isActive}) => ( isActive ? classes.navActiveHeaderItem:classes.navHeaderItem)}>
