@@ -45,9 +45,12 @@ function Documentation() {
                 </div>
             </div>
             <div className={classes.documentationSeparator}></div>
-            <div className={classes.documentationContent}>
-                {docView.content}
+            <div className={classes.documentationContentContainer}>
+                <div className={classes.documentationContent}>
+                    {docView.content}
+                </div>
             </div>
+            <div className={classes.documentationSeparator}></div>
         </div>
         <Footer/>
     </div>
@@ -67,7 +70,7 @@ const thisStyle = {
         overflow : 'auto',
     },
     documentationNavbarContainer : {
-        width: '18%',
+        minWidth: '18%',
         boxSizing : 'border-box',
         overflowY : 'auto',
         margin : '0.5em 0',
@@ -81,6 +84,11 @@ const thisStyle = {
             padding : '5px',
             borderRadius : '3px'
         }
+    },
+    documentationContentContainer : {
+        minWidth : '0',
+        width : '100%',
+        composes : '$documentationNavbarContainer'
     },
     documentationNavbar : {
         padding : '1em'
@@ -120,9 +128,9 @@ const thisStyle = {
         color : colors.white
     },
     documentationContent : {
-        height : '100%',
+        boxSizing : "border-box",
         padding : '1.5em',
-        
+        fontSize : '1.1em'
     }
 }
 

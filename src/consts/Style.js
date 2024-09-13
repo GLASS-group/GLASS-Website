@@ -4,7 +4,7 @@ export const colors = {
     mint: '#72FD80',
     slate: '#24262E',
     lightGray: '#999999',
-    darkGray : '#222222',
+    darkGray : '#333333',
     coolBlue: '#243044'
 }
 
@@ -197,7 +197,7 @@ export const style = {
     devBioCard: {
         borderRadius: '2em',
         backgroundColor: colors.slate,
-        padding: '2em',
+        padding: '2em 4em',
         marginTop: sectionMargin,
         display: 'flex',
         columnGap: '2em',
@@ -217,7 +217,6 @@ export const style = {
         boxSizing: 'border-box',
         width: '25%',
         borderRadius: '50%',
-        boxShadow: 'rgba(0, 0, 0, .3) 8px 8px 4px 2px',
         '@media screen and (max-width: 1000px)': {
             width: '85%',
             height: '85%',
@@ -226,10 +225,7 @@ export const style = {
     },
     devBioText: {
         borderRadius: '2em',
-        border: 'solid',
-        borderWidth: '2px',
         borderColor: colors.lightGray,
-        backgroundColor: colors.coolBlue,
         boxSizing: 'border-box',
         padding: '1em'
     }
