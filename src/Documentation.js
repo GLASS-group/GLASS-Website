@@ -32,12 +32,12 @@ function Documentation() {
                                     {index+1}.0 {section.sectionName}
                                 </a>
                                 {
-                                    section.subsections.map((subsection, subindex) => (
+                                    section.subsections ? section.subsections.map((subsection, subindex) => (
                                         <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
                                            onClick={() => {setDocView(subsection)}}>
                                             {index+1}.{subindex+1} {subsection.subsectionName}
                                         </a>
-                                    ))
+                                    )) : null
                                 }
                             </div>
                         ))
@@ -58,6 +58,8 @@ function Documentation() {
     )
 }
 
+const paragraphSpacing = '1rem'
+
 const thisStyle = {
     mainBody : {
         maxHeight : '100vh'
@@ -73,7 +75,7 @@ const thisStyle = {
         minWidth: '18%',
         boxSizing : 'border-box',
         overflowY : 'auto',
-        margin : '0.5em 0',
+        margin : '1em 0',
         '&::-webkit-scrollbar' : {
             width : '6px',
             transform : 'translateX(-20px)'
@@ -121,10 +123,7 @@ const thisStyle = {
     },
     docNavSubsection : {
         composes: '$docNavSection',
-        textIndent : '2em',
-        '&::before' : {
-            content : '""'
-        }
+        marginLeft : '1.5em'
     },
     activeSubsection :  {
         composes: '$docNavSubsection',
@@ -133,7 +132,49 @@ const thisStyle = {
     documentationContent : {
         boxSizing : "border-box",
         padding : '0 1.5em',
-        fontSize : '1.1em'
+        fontSize : '1.1em',
+        '& p' : {
+            margin : 0,
+            marginBottom : paragraphSpacing,
+        },
+        '& p code, & li code' : {
+            display : 'inline-block',
+            backgroundColor : colors.slate,
+            padding : '0 4px',
+            borderRadius : '4px',
+            margin : '2px 0'
+        },
+        '& h1' : {
+            margin : `${paragraphSpacing} 0`
+        },
+        '& h2' : {
+            margin : 0,
+            marginBottom : paragraphSpacing,
+            marginTop : '2rem'
+        },
+        '& code' : {
+            display : 'block',
+            margin : 0,
+            margin : '2rem 0',
+            backgroundColor : colors.slate,
+            padding : '0.75em 1em',
+            borderRadius : '4px',
+            whiteSpace : 'pre',
+            lineHeight : '1.5em',
+            overflowX : 'auto',
+            '&::-webkit-scrollbar' : {
+                height : '6px',
+                transform : 'translateX(-20px)',
+                backgroundColor : colors.darkGray,
+                borderRadius : '3px'
+            },
+            '&::-webkit-scrollbar-thumb' : {
+                height : '5px',
+                backgroundColor : colors.lightGray,
+                padding : '5px',
+                borderRadius : '3px'
+            }
+        }
     }
 }
 
