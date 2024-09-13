@@ -110,7 +110,7 @@ const mobileView = {
         width : '100%',
     },
     mobileNavMenu : {
-        position: 'absolute',
+        position: 'fixed',
         top: '0',
         left: '0',
         width : '100%',
