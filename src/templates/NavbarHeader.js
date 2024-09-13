@@ -5,12 +5,12 @@ import { NavLink } from "react-router-dom";
 import defaultStyles from './consts/DefaultStyles';
 
 function NavbarHeader({style, logo, logoLabel, navOptions, active, highlightActive=true}) {
-
+    
     const styles = createUseStyles(style ? mergeJson(defaultStyleDefs, style) : defaultStyleDefs)();
 
     const highlight = highlightActive ? active : null
 
-    return (
+    return isMobile ? null : (
         <header className={styles.navHeader}>
             {
                 logo || logoLabel ? (
