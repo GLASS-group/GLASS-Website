@@ -10,6 +10,9 @@ import pages from './consts/PageList'
 import Footer from './Footer'
 
 
+import Documentation from './Documentation';
+
+
 
 function App() {
     const location = useLocation()
@@ -18,13 +21,18 @@ function App() {
     let currentPath = location.pathname;
     const currentPage = pages.find(page => page.path === currentPath);
 
-    return (
-        <div className={classes.mainBody}>
-            <Navigation pages={pages}/>
-            {currentPage.content}
-            <Footer/>
-        </div>
-    );
+    if (currentPage.title === 'Documentation') {
+        return <Documentation/>
+    } else {
+        return (
+            <div className={classes.mainBody}>
+                <Navigation pages={pages}/>
+                {currentPage.content}
+                <Footer/>
+            </div>
+        );
+    }
+
 }
 
 export default App;

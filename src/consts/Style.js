@@ -4,6 +4,7 @@ export const colors = {
     mint: '#72FD80',
     slate: '#24262E',
     lightGray: '#999999',
+    darkGray : '#222222',
     coolBlue: '#243044'
 }
 
@@ -175,7 +176,7 @@ export const style = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '2em',
+        padding: '0.5em',
         marginTop: 'auto',
         borderTop: 'dotted',
         borderWidth: '4px'
