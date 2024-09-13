@@ -90,7 +90,8 @@ const thisStyle = {
         overflow : 'auto',
     },
     documentationNavbarContainer : {
-        minWidth: '18%',
+        minWidth: '18em',
+        width : '20%',
         boxSizing : 'border-box',
         overflowY : 'auto',
         margin : '1em 0',
@@ -144,7 +145,8 @@ const thisStyle = {
     docNavSubsection : {
         composes: '$docNavSection',
         display : 'block',
-        marginLeft : '1.5em',
+        boxSizing : 'border-box',
+        marginLeft : '1em',
         marginBottom : '0.5rem'
     },
     activeSubsection :  {
