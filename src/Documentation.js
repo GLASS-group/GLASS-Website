@@ -12,11 +12,19 @@ import { useState } from "react";
 
 import documentation from "./consts/DocumentationContent";
 
+import plusPng from './images/plus.png'
+import minusPng from './images/minus.png'
+
 function Documentation() {
-    const classes = createUseStyles(mergeJson(style, thisStyle))();
+    const classes = createUseStyles(mergeJson(mergeJson(style, thisStyle), thisStyleMobile))();
 
     const [docView, setDocView] = useState(documentation[0]);
 
+    const [sectionsOpen, setSectionsOpen] = useState(documentation.map((section) => false))
+
+    const toggleSection = (sectionIndex) => {
+        setSectionsOpen(sectionsOpen.map((section, index) => (index === sectionIndex ? !sectionsOpen[index] : sectionsOpen[index])))
+    }
 
     return(
     <div className={classes.mainBody}>
@@ -27,12 +35,22 @@ function Documentation() {
                     {
                         documentation.map((section, index) => (
                             <div>
-                                <a className={section === docView ? classes.activeSection : classes.docNavSection}
-                                   onClick={() => {setDocView(section)}}>
-                                    {index+1}.0 {section.sectionName}
-                                </a>
+                                <div className={classes.sectionContainer}>
+                                    <div className={section === docView ? classes.activeSection : classes.docNavSection}
+                                         onClick={() => {setDocView(section)}}>
+                                        <a>{index+1}.0 {section.sectionName}</a>
+                                    </div>
+                                    {
+                                        section.subsections ?
+                                        <a className={classes.docNavSubsectionToggle}>
+                                            <img className={classes.docNavSubsectionToggleImage} 
+                                                 onClick={() => {toggleSection(index)}}
+                                                 src={sectionsOpen[index] ? minusPng : plusPng}/>
+                                        </a> : null
+                                    }
+                                </div>
                                 {
-                                    section.subsections ? section.subsections.map((subsection, subindex) => (
+                                    section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
                                         <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
                                            onClick={() => {setDocView(subsection)}}>
                                             {index+1}.{subindex+1} {subsection.subsectionName}
@@ -103,11 +121,13 @@ const thisStyle = {
         marginLeft : '0.5em',
     },
     docNavSection : {
-        display : 'block',
+        display : 'inline-block',
+        alignItems : 'center',
         fontWeight : 400,
         fontSize : '1.25em',
-        marginBottom : '0.5em',
-        padding : '.3em .6em',
+        padding : '0.4em .6em',
+        flex : 1,
+        maxWidth : 'auto',
         borderRadius : '.5em',
         color : colors.lightGray,
         
@@ -123,7 +143,9 @@ const thisStyle = {
     },
     docNavSubsection : {
         composes: '$docNavSection',
-        marginLeft : '1.5em'
+        display : 'block',
+        marginLeft : '1.5em',
+        marginBottom : '0.5rem'
     },
     activeSubsection :  {
         composes: '$docNavSubsection',
@@ -138,9 +160,9 @@ const thisStyle = {
             marginBottom : paragraphSpacing,
         },
         '& p code, & li code' : {
-            display : 'inline-block',
+            display : 'inline',
             backgroundColor : colors.slate,
-            padding : '0 4px',
+            padding : '2px 4px',
             borderRadius : '4px',
             margin : '2px 0'
         },
@@ -175,7 +197,27 @@ const thisStyle = {
                 borderRadius : '3px'
             }
         }
+    },
+    sectionContainer : {
+        display : 'flex',
+        alignItems : 'center',
+        marginBottom : '0.5em',
+    },
+    docNavSubsectionToggle : {
+        marginLeft : 'auto'
+    },
+    docNavSubsectionToggleImage : {
+        height : '1.5rem',
+        padding : '0',
+        marginLeft : '1rem',
+        '&:hover' : {
+            cursor : 'pointer'
+        }
     }
+}
+
+const thisStyleMobile = {
+
 }
 
 export default Documentation;
