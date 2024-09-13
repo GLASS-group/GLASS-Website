@@ -50,7 +50,7 @@ function Documentation() {
                     {docView.content}
                 </div>
             </div>
-            <div className={classes.documentationSeparator}></div>
+            <div className={classes.documentationSeparatorTwo}></div>
         </div>
         <Footer/>
     </div>
@@ -96,6 +96,9 @@ const thisStyle = {
     documentationSeparator : {
         marginLeft : '0.5em',
         borderRight : '2px solid white'
+    },
+    documentationSeparatorTwo : {
+        marginLeft : '0.5em',
     },
     docNavSection : {
         display : 'block',
