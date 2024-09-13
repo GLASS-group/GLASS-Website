@@ -52,7 +52,7 @@ function Documentation() {
             </div>
             <div className={classes.documentationSeparatorTwo}></div>
         </div>
-        <Footer/>
+        <Footer override={{navFooter : {borderTopStyle : 'solid', borderTopWidth : '2px'}}}/>
     </div>
     
     )
@@ -91,7 +91,7 @@ const thisStyle = {
         composes : '$documentationNavbarContainer'
     },
     documentationNavbar : {
-        padding : '1em'
+        padding : '0.25em 1em'
     },
     documentationSeparator : {
         marginLeft : '0.5em',
@@ -132,7 +132,7 @@ const thisStyle = {
     },
     documentationContent : {
         boxSizing : "border-box",
-        padding : '1.5em',
+        padding : '0 1.5em',
         fontSize : '1.1em'
     }
 }
