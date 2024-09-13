@@ -99,7 +99,7 @@ const mobileView = {
         margin : '1rem',
         marginLeft : 'auto',
         marginRight : '1.5rem',
-        padding : '0rem',
+        marginTop : '1.5rem',
         height : '3rem',
         width : '3rem',
         '&:hover' : {
@@ -127,7 +127,7 @@ const mobileView = {
         display : 'block',
         color : colors.white,
         textDecoration : 'none',
-        margin : '1rem',
+        margin : '1rem 2rem',
         padding : '0.5rem 0',
         border : '1px solid white',
         borderRadius : '0.5rem',
