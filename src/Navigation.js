@@ -87,8 +87,8 @@ const mobileView = {
         marginLeft : 'auto',
         marginRight : '0.5rem',
         padding : '0rem',
-        height : '4rem',
-        width : '4rem',
+        height : '3rem',
+        width : '3rem',
         '&:hover' : {
             cursor : 'pointer'
         }
@@ -100,8 +100,8 @@ const mobileView = {
         marginLeft : 'auto',
         marginRight : '1.5rem',
         padding : '0rem',
-        height : '4rem',
-        width : '4rem',
+        height : '3rem',
+        width : '3rem',
         '&:hover' : {
             cursor : 'pointer'
         }
