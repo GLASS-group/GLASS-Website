@@ -67,9 +67,11 @@ function Documentation() {
                 </div>
                 { showTOC ? 
                 <div className={classes.mobileNavMenu}>
+                    <div className={classes.mobileTocFlexColumn}>
                     <a className={classes.mobileHeaderMenuClose} onClick={() => {setShowTOC(false)}}>
                         <img className={classes.menuImage} src={xPng}/>
                     </a>
+                    <div className={classes.mobileTocContainer}>
                     {
                             documentation.map((section, index) => (
                                 <div>
@@ -98,6 +100,8 @@ function Documentation() {
                                 </div>
                             ))
                         }
+                    </div>
+                    </div>
                 </div> : null }
                 <div id="main-content-window" className={classes.documentationContentContainer}>
                     <div className={classes.documentationContent}>
@@ -364,6 +368,26 @@ const thisStyle = {
         height : '100%',
         backgroundColor : '#000000F6'
     },
+    mobileTocContainer : {
+        height : '100%',
+        overflowY : 'auto',
+        marginBottom : '1.5rem',
+        '&::-webkit-scrollbar' : {
+            width : '6px',
+            transform : 'translateX(-20px)'
+        },
+        '&::-webkit-scrollbar-thumb' : {
+            width : '5px',
+            backgroundColor : colors.darkGray,
+            padding : '5px',
+            borderRadius : '3px'
+        }
+    },
+    mobileTocFlexColumn :{
+        display : 'flex',
+        flexDirection : 'column',
+        height : '100%'
+    }
 }
 
 export default Documentation;
