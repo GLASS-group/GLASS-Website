@@ -8,7 +8,7 @@ import Footer from "./Footer";
 
 import { colors } from "./consts/Style";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import documentation from "./consts/DocumentationContent";
 
@@ -40,13 +40,15 @@ function Documentation() {
 
     const [docView, setDocView] = useState(documentation[0]);
 
-    const documentationContentWindow = document.getElementById("main-content-window");
+    const documentationContentWindow = useRef(null);
 
     const updateDocView = (section) => {
-        documentationContentWindow.scrollTo({
-            top: 0,
-            left: 0
-          });
+        if (section.name != docView.name) {
+            documentationContentWindow.current.scrollTo({
+                top: 0,
+                left: 0
+              });
+        }
         setDocView(section)
     }
 
@@ -78,7 +80,7 @@ function Documentation() {
                                     <div className={classes.sectionContainerMobile}>
                                         <div className={section === docView ? classes.activeSection : classes.docNavSection}
                                              onClick={() => {updateDocView(section); setShowTOC(false)}}>
-                                            <a>{index+1}.0 {section.sectionName}</a>
+                                            <a>{index+1}.0 {section.name}</a>
                                         </div>
                                         {
                                             section.subsections ?
@@ -93,7 +95,7 @@ function Documentation() {
                                         section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
                                             <a className={subsection === docView ? classes.activeSubsectionMobile : classes.docNavSubsectionMobile} 
                                                onClick={() => {updateDocView(subsection); setShowTOC(false)}}>
-                                                {index+1}.{subindex+1} {subsection.subsectionName}
+                                                {index+1}.{subindex+1} {subsection.name}
                                             </a>
                                         )) : null
                                     }
@@ -103,7 +105,7 @@ function Documentation() {
                     </div>
                     </div>
                 </div> : null }
-                <div id="main-content-window" className={classes.documentationContentContainer}>
+                <div ref={documentationContentWindow} className={classes.documentationContentContainer}>
                     <div className={classes.documentationContent}>
                         {docView.content}
                     </div>
@@ -120,7 +122,7 @@ function Documentation() {
                                     <div className={classes.sectionContainer}>
                                         <div className={section === docView ? classes.activeSection : classes.docNavSection}
                                              onClick={() => {updateDocView(section)}}>
-                                            <a>{index+1}.0 {section.sectionName}</a>
+                                            <a>{index+1}.0 {section.name}</a>
                                         </div>
                                         {
                                             section.subsections ?
@@ -135,7 +137,7 @@ function Documentation() {
                                         section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
                                             <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
                                                onClick={() => {updateDocView(subsection)}}>
-                                                {index+1}.{subindex+1} {subsection.subsectionName}
+                                                {index+1}.{subindex+1} {subsection.name}
                                             </a>
                                         )) : null
                                     }
@@ -145,7 +147,7 @@ function Documentation() {
                     </div>
                 </div>
                 <div className={classes.documentationSeparator}></div>
-                <div id="main-content-window" className={classes.documentationContentContainer}>
+                <div ref={documentationContentWindow} className={classes.documentationContentContainer}>
                     <div className={classes.documentationContent}>
                         {docView.content}
                     </div>
@@ -157,6 +159,7 @@ function Documentation() {
     </div>
     
     )
+    
 }
 
 const paragraphSpacing = '1rem'
