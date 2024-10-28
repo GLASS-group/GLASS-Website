@@ -15,7 +15,7 @@ export const documentation = [
                 {lineBreak}
                 <h2>Where can I download GLASS?</h2>
                 <p>
-                    The most recent version (as well as all previous versions) of GLASS can be found on
+                    The most recent version of GLASS (as well as all previous versions) can be found on
                     our <a href="https://glass-project.com/download">download page</a>.
                 </p>
                 <h2>What do I need to run GLASS?</h2>
