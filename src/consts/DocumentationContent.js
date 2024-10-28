@@ -297,14 +297,141 @@ export const documentation = [
             },
             {
                 name : "Productions",
-                content : 
+                content :
                     <div>
                         <h1>Productions</h1>
                         {lineBreak}
                         <h2>What are productions?</h2>
                         <p>
-                            Tokens are the individual strings of characters (usually words, numbers, or symbols) that can appear in your syntax. The first step in the GLASS pipeline is lexing the source file, or in simpler terms, splitting up the source file into
-                            the individual tokens that appear in the file. Therefore, it is important that any possible string that may appear in your source file is declared as a token in your syntax definition.
+                            Productions are the building blocks that are used to define the structure of a given source file.
+                        </p>
+                        <p>
+                            After a source file is lexed by GLASS (See Section 4.2 Tokens), the token sequence that has been read
+                            from the source file is then passed to the parser, where the productions defined in the syntax
+                            definition file are used to parse the tokens into a parse tree.
+                        </p>
+                        <h2>Grammar productions: a brief lesson</h2>
+                        <p>
+                            For those that are unfamiliar with the concept of a grammar production, here we will give a brief lesson
+                            on what they are and how they work. If you are already familiar with grammar productions, feel free to
+                            skip to <strong>Declaring productions</strong>.
+
+                            First, lets go over some terminology:
+                            <ul>
+                                <li>A <em>terminal</em> is a part of a grammar production that does not produce anything further. In
+                                the case of GLASS, all of your defined tokens will function as terminals.</li>
+                                <li>A <em>non-terminal</em> is a part of your grammar production that produces other terminals
+                                or non-terminals.</li>
+                                <li>A <em>starting production</em> is the production that you begin parsing with.</li>
+                            </ul>
+
+                            Now, think of a grammar production as DNA, carrying instructions on how your source file should be built. Every
+                            grammar production has two sides, a left and right side. Below is an example of a grammar production, written
+                            as it would be written in a syntax definition file.
+                        </p>
+                        <code>
+                            S -> S A.
+                        </code>
+                        <p>
+                            For this example, let's assume <code>A</code> is the name of a defined token in our syntax definition file that
+                            corresponds to a lowercase <code>a</code>, and that the above production is our starting production. This means
+                            that <code>A</code> is a terminal and <code>S</code> is a non-terminal in the production above, and we can
+                            assume that we start our parsing with an <code>S</code> non-terminal.
+                        </p>
+                        <p>
+                            What does this mean? Well, if we start with an <code>S</code>:
+                        </p>
+                        <code>
+                            S
+                        </code>
+                        <p>
+                            our "DNA" tells us that an <code>S</code> can produce (i.e. can be transformed into, indicated by the arrow <code>-></code>)
+                            another <code>S</code> followed by an <code>A</code>. We now have:
+                        </p>
+                        <code>
+                            S A
+                        </code>
+                        <p>
+                            We know from our original assumptions that an <code>A</code> corresponds to the token defined as a
+                            lowercase <code>a</code>:
+                        </p>
+                        <code>
+                            S a
+                        </code>
+                        <p>
+                            Now we have another <code>S</code>, and we already know that our production rules tell us that
+                            an <code>S</code> can be transformed into another <code>S</code> followed by another <code>A</code>, and
+                            that each <code>A</code> becomes a lowercase <code>a</code>. We now have:
+                        </p>
+                        <code>
+                            S a a
+                        </code>
+                        <p>
+                            We could repeat this process as many times as we want...
+                        </p>
+                        <code>
+                            S a a a a a a a a
+                        </code>
+                        <p>
+                            ...but we still have an S. You may think it is fine to leave it how it is, but it turns out that we are not
+                            allowed to leave any non-terminals in our final result. So how do we fix this?
+                        </p>
+                        <p>
+                            Well, we actually need to declare a second production in order to make sure we can end what would otherwise
+                            be an infinite loop of producing more <code>a</code>'s. Let's add a second production to our list:
+                        </p>
+                        <code>
+                            S -> S A.
+                            S -> A.
+                        </code>
+                        <p>
+                            This production allows for an <code>S</code> to produce only an <code>A</code>. If we apply this new production
+                            to the S in the sequence we already have, and reduce the <code>A</code> to a lowercase <code>a</code>, we get:
+                        </p>
+                        <code>
+                            a a a a a a a a a
+                        </code>
+                        <p>
+                            We no longer have any non-terminals in our sequence, and have successfully generated the
+                            sequence <code>aaaaaaaaa</code> using our grammar productions.
+                        </p>
+                        <p>
+                            Something important to note is that there is nothing that says when we should use the first production (<code>S -> S A.</code>) and
+                            when we should use the second (<code>S -> A.</code>). Because of this, this set of two productions defines a grammar that allows for
+                            any sequence of at least one <code>a</code> to be generated. Therefore, you could use these two productions to parse any file that
+                            contained only <code>a</code>'s within it. Can you see how this can be a very powerful tool?
+                        </p>
+                        <p>
+                            With the right combination of productions, we can produce some very complex results! Here is another fun example:
+                        </p>
+                        <code>
+                            S -> A B A B ON_THE A SHORE.
+                            A -> SHE.
+                            A -> SEA.
+                            B -> SELLS.
+                            B -> SHELLS.
+                        </code>
+                        <p>
+                            Assuming...
+                            <ul>
+                                <li><code>S</code> is our starting production</li>
+                                <li><code>S</code>,<code>A</code>, and <code>B</code> are all non-terminals</li>
+                                <li><code>SHE</code>, <code>SEA</code>, <code>SELLS</code>, <code>SHELLS</code>, <code>ON_THE</code>, and <code>SHORE</code> are
+                                    terminals that correspond to the strings "she", "sea", "sells", "shells", "on the", and "shore", respectively.</li>
+                            </ul>
+                            We can use this set of productions to generate a variety of tongue-twister sentences, such as:
+                            <ul>
+                                <li>she sells sea shells on the sea shore</li>
+                                <li>she shells she sells on the she shore</li>
+                                <li>sea sells she shells on the sea shore</li>
+                                <li>sea sells sea sells on the sea shore</li>
+                            </ul>
+                            In fact, there are 32 possible sentences that can be generated from that set of productions.
+                        </p>
+                        <p>
+                            This concludes this section on teaching grammar productions. If you wish to learn more about grammar productions (in particular, GLASS
+                            uses context-free grammar productions), resource such as <a href="https://en.wikipedia.org/wiki/Formal_grammar#:~:text=A%20formal%20grammar%20is%20defined,and%20a%20designated%20start%20symbol.">Wikipedia articles</a> exist
+                            to read, though their contents will be much more technical in nature. If you choose to learn more, happy reading!
                         </p>
                         <h2>Declaring productions</h2>
                         <p>
@@ -409,7 +536,9 @@ export const documentation = [
         name : "Interpretation Script",
         content : 
             <div>
-                Test section 3 content
+                <h1>Interpretation Script</h1>
+                {lineBreak}
+                <h2>What is an interpretation script?</h2>
             </div>,
         subsections : [
             {
@@ -417,20 +546,6 @@ export const documentation = [
                 content : 
                     <div>
                         Test subsection 3.1 content
-                    </div>
-            },
-            {
-                name : "Test Subsection",
-                content : 
-                    <div>
-                        Test subsection 3.2 content
-                    </div>
-            },
-            {
-                name : "Test Subsection",
-                content : 
-                    <div>
-                        Test subsection 3.3 content
                     </div>
             }
         ]

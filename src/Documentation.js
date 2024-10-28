@@ -25,13 +25,14 @@ function Documentation() {
     const [showMenu, setShowMenu] = useState(false)
     const [showTOC, setShowTOC] = useState(false);
 
-  
+
     const handleResize = () => {
-          setIsMobile(window.innerWidth < 1100)
-          if (!isMobile) {
-            setShowMenu(false)
-            setShowTOC(false)
-          }
+        setIsMobile(window.innerWidth < 1100);
+    }
+
+    if (!isMobile && showMenu) {
+        setShowMenu(false);
+        setShowTOC(false);
     }
 
     useEffect(() => {
@@ -180,7 +181,7 @@ const thisStyle = {
          flexDirection : 'column'
     },
     documentationNavbarContainer : {
-        minWidth: '18em',
+        minWidth: '20rem',
         width : '20%',
         boxSizing : 'border-box',
         overflowY : 'auto',

@@ -13,22 +13,21 @@ const MOBILE_WIDTH = 1100
 function Navigation({pages}) {
   const classes = createUseStyles(mergeJson(style, mobileView))();
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_WIDTH)
-  const [showMenu, setShowMenu] = useState(false)
-
-  const toggleShowMenu = () => {
-    setShowMenu(!showMenu);
-  }
+  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_WIDTH);
+  const [showMenu, setShowMenu] = useState(false);
  
-  //choose the screen size 
+  //choose the screen size
   const handleResize = () => {
-        setIsMobile(window.innerWidth < MOBILE_WIDTH)
-        if (!isMobile) setShowMenu(false)
+        setIsMobile(window.innerWidth < MOBILE_WIDTH);
   }
-  
+
+  if (!isMobile && showMenu) {
+      setShowMenu(false);
+  }
+
   // create an event listener
   useEffect(() => {
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
   })
 
 
@@ -39,12 +38,12 @@ function Navigation({pages}) {
             <img className={classes.mainLogoImage} src={glassSvg}/>
             <h1 className={classes.mainLogoLabel}>GLASS</h1>
         </NavLink>
-        <a className={classes.mobileHeaderMenu} onClick={toggleShowMenu}>
+        <a className={classes.mobileHeaderMenu} onClick={() => setShowMenu(true)}>
             <img className={classes.menuImage} src={menuPng}/>
         </a>
         { showMenu ? 
             <div className={classes.mobileNavMenu}>
-                <a className={classes.mobileHeaderMenuClose} onClick={toggleShowMenu}>
+                <a className={classes.mobileHeaderMenuClose} onClick={() => setShowMenu(false)}>
                     <img className={classes.menuImage} src={xPng}/>
                 </a>
                 <ul className={classes.navHeaderMenuMobile}>
