@@ -8,10 +8,12 @@ import  menuPng  from './images/menu.png';
 import xPng from './images/x.png';
 import { colors } from './consts/Style';
 
+const MOBILE_WIDTH = 1100
+
 function Navigation({pages}) {
   const classes = createUseStyles(mergeJson(style, mobileView))();
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_WIDTH)
   const [showMenu, setShowMenu] = useState(false)
 
   const toggleShowMenu = () => {
@@ -20,7 +22,7 @@ function Navigation({pages}) {
  
   //choose the screen size 
   const handleResize = () => {
-        setIsMobile(window.innerWidth < 1000)
+        setIsMobile(window.innerWidth < MOBILE_WIDTH)
         if (!isMobile) setShowMenu(false)
   }
   
@@ -29,9 +31,6 @@ function Navigation({pages}) {
     window.addEventListener("resize", handleResize)
   })
 
-  function temp() {
-    console.log('The "temp()" function was called');
-  }
 
 
   return isMobile ? (

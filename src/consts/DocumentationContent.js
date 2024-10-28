@@ -7,48 +7,45 @@ const lineBreak = <HorizontalBreak style={{horizontalBreak : {maxWidth : '45rem'
 export const documentation = [
     {
         sectionName : "Installation",
-        content : 
+        content :
             <div>
                 <h1>
                     Installation
                 </h1>
+                {lineBreak}
+                <h2>Where can I download GLASS?</h2>
                 <p>
-                Lorem ipsum dolor sit amet, <code>consectetur</code> adipiscing elit. Maecenas feugiat nec nisi vitae congue. Suspendisse enim odio, rhoncus a massa quis, aliquam tempor augue. Donec turpis neque, malesuada nec blandit sit amet, consequat in neque. Curabitur scelerisque in turpis non molestie. Aliquam laoreet, libero quis malesuada consequat, purus nibh tincidunt arcu, eu scelerisque tellus odio sit amet erat. Vivamus fringilla neque ut pulvinar dignissim. Donec rutrum vestibulum velit, a aliquam tortor elementum sed. Curabitur eleifend volutpat tortor, sit amet congue eros fermentum nec. Duis vitae malesuada nulla, vitae pulvinar nisl. Donec eleifend imperdiet enim, eget suscipit diam sagittis vel. Donec varius lorem vel ligula ornare, vitae blandit turpis eleifend. Nullam ac pretium ligula, blandit commodo tortor.
+                    The most recent version (as well as all previous versions) of GLASS can be found on
+                    our <a href="https://glass-project.com/download">download page</a>.
+                </p>
+                <h2>What do I need to run GLASS?</h2>
+                <p>
+                    Along with the GLASS installation, Java is required in order to run the JAR file located within
+                    the GLASS installation folder.
+                </p>
+                <p>
+                    GLASS has been built using <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html">Java 20</a>. It is recommended that GLASS is run with this same version of
+                    Java, however, newer versions of Java should almost certainly be able to run it. Older versions of Java may be able to run GLASS as well.
+                </p>
+                <h2>How do I run GLASS?</h2>
+                <p>
+                    The GLASS JAR can be ran by executing the following command within the GLASS installation directory:
                 </p>
                 <code>
-                Integer condimentum facilisis feugiat. Sed feugiat, enim nec viverra laoreet, nisi turpis finibus tellus, id ullamcorper massa orci eu lectus. Pellentesque eu tellus sollicitudin massa sollicitudin posuere quis at lectus. Mauris augue velit, accumsan at dui ac, tincidunt convallis augue. Quisque at nisl urna. Nunc lobortis lacinia eros, ac varius neque efficitur at. Mauris lacus nulla, convallis vitae sapien vel, aliquam ultrices leo. In hac habitasse platea dictumst. Proin sit amet lacinia turpis. Suspendisse lobortis turpis in dui laoreet vestibulum. Vivamus vitae metus sed libero rutrum semper sit amet a tortor. Integer posuere lectus risus.
+                    java -jar GLASS-0.1.0a.jar
                 </code>
-                <p>
-                Aenean at tempor dui. Fusce hendrerit massa tempus, fermentum turpis quis, iaculis eros. Nulla vehicula porta placerat. Sed cursus hendrerit sagittis. Integer condimentum ut augue non pretium. Quisque vitae auctor ante, ut viverra elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam placerat placerat ipsum, placerat efficitur enim laoreet vitae. Aenean interdum placerat nisi a sodales. Donec vulputate, eros id varius vestibulum, mi ante vestibulum leo, at venenatis massa ante non ligula. Donec ut sollicitudin sapien. Praesent ut massa viverra, facilisis quam sed, varius nisl. Sed id purus ut mi dapibus pharetra sit amet nec purus. Phasellus consectetur, odio vel rutrum facilisis, purus ex pellentesque eros, vitae euismod justo ex a neque. Sed vel metus sed nulla aliquet gravida facilisis eget nisl.
-                </p>
-                <p>
-                Sed ante leo, maximus et tortor vitae, pretium sodales dui. Nullam luctus elit id elit tincidunt viverra. Nunc in blandit sem. Sed in consectetur mi. Nam rhoncus felis diam, et ultricies ante eleifend a. Ut interdum nibh at ipsum mattis posuere. Proin ut erat iaculis, vulputate odio suscipit, tempus augue.
-                </p>
-                <p>
-                Mauris sapien ante, tempor sed gravida at, ultricies ac leo. Quisque orci ipsum, aliquet et egestas non, hendrerit euismod ligula. Phasellus laoreet ligula sit amet ex auctor, eget iaculis purus vestibulum. Duis ut hendrerit mauris. Maecenas justo turpis, bibendum vitae auctor vitae, faucibus ac ex. Cras sit amet velit a arcu hendrerit pretium. Nullam arcu magna, cursus eu ante gravida, rutrum iaculis lacus. Cras vehicula nisi quis nibh tristique, sed semper mauris molestie. Quisque lacinia metus euismod elit dictum fermentum. Nulla vestibulum egestas nisi, sit amet lacinia nibh cursus in. Nulla quis elementum sem.
-                </p>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat nec nisi vitae congue. Suspendisse enim odio, rhoncus a massa quis, aliquam tempor augue. Donec turpis neque, malesuada nec blandit sit amet, consequat in neque. Curabitur scelerisque in turpis non molestie. Aliquam laoreet, libero quis malesuada consequat, purus nibh tincidunt arcu, eu scelerisque tellus odio sit amet erat. Vivamus fringilla neque ut pulvinar dignissim. Donec rutrum vestibulum velit, a aliquam tortor elementum sed. Curabitur eleifend volutpat tortor, sit amet congue eros fermentum nec. Duis vitae malesuada nulla, vitae pulvinar nisl. Donec eleifend imperdiet enim, eget suscipit diam sagittis vel. Donec varius lorem vel ligula ornare, vitae blandit turpis eleifend. Nullam ac pretium ligula, blandit commodo tortor.
-                </p>
-                <p>
-                Integer condimentum facilisis feugiat. Sed feugiat, enim nec viverra laoreet, nisi turpis finibus tellus, id ullamcorper massa orci eu lectus. Pellentesque eu tellus sollicitudin massa sollicitudin posuere quis at lectus. Mauris augue velit, accumsan at dui ac, tincidunt convallis augue. Quisque at nisl urna. Nunc lobortis lacinia eros, ac varius neque efficitur at. Mauris lacus nulla, convallis vitae sapien vel, aliquam ultrices leo. In hac habitasse platea dictumst. Proin sit amet lacinia turpis. Suspendisse lobortis turpis in dui laoreet vestibulum. Vivamus vitae metus sed libero rutrum semper sit amet a tortor. Integer posuere lectus risus.
-                </p>
-                <p>
-                Aenean at tempor dui. Fusce hendrerit massa tempus, fermentum turpis quis, iaculis eros. Nulla vehicula porta placerat. Sed cursus hendrerit sagittis. Integer condimentum ut augue non pretium. Quisque vitae auctor ante, ut viverra elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam placerat placerat ipsum, placerat efficitur enim laoreet vitae. Aenean interdum placerat nisi a sodales. Donec vulputate, eros id varius vestibulum, mi ante vestibulum leo, at venenatis massa ante non ligula. Donec ut sollicitudin sapien. Praesent ut massa viverra, facilisis quam sed, varius nisl. Sed id purus ut mi dapibus pharetra sit amet nec purus. Phasellus consectetur, odio vel rutrum facilisis, purus ex pellentesque eros, vitae euismod justo ex a neque. Sed vel metus sed nulla aliquet gravida facilisis eget nisl.
-                </p>
-                <p>
-                Sed ante leo, maximus et tortor vitae, pretium sodales dui. Nullam luctus elit id elit tincidunt viverra. Nunc in blandit sem. Sed in consectetur mi. Nam rhoncus felis diam, et ultricies ante eleifend a. Ut interdum nibh at ipsum mattis posuere. Proin ut erat iaculis, vulputate odio suscipit, tempus augue.
-                </p>
+                <p>Please note that in the above command, <code>GLASS-0.1.0a.jar</code> should be replace with the name
+                    of the appropriate JAR file for your installed version of GLASS.</p>
             </div>
     },
     {
-        sectionName : "Syntax Definition",
-        content : 
+        sectionName: "Syntax Definition",
+        content:
             <div>
                 <h1>Syntax Definition</h1>
                 {lineBreak}
             </div>,
-        subsections : [
+        subsections: [
             {
                 subsectionName : "Syntax Definition Files",
                 content : 

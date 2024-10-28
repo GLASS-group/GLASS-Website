@@ -13,15 +13,12 @@ import milestoneThreeEvaluation from '../files/milestone_3/progress_evaluation.p
 
 import planTwoPlan from '../files/semester_two/plan/plan.pdf'
 import planTwoPresentation from '../files/semester_two/plan/plan_presentation.pdf'
-// import milestoneOneTwoRequirements from '../files/milestone_1/requirements.pdf'
-// import milestoneOneTwoDesign from '../files/milestone_1/design.pdf'
-// import milestoneOneTwoTest from '../files/milestone_1/test_plan.pdf'
-// import milestoneOneTwoPresentation from '../files/milestone_1/presentation.pdf'
-// import milestoneOneTwoEvaluation from '../files/milestone_1/progress_evaluation.pdf'
-// import milestoneTwoTwoPresentation from '../files/milestone_2/presentation.pdf'
-// import milestoneTwoTwoEvaluation from '../files/milestone_2/progress_evaluation.pdf'
-// import milestoneThreeTwoPresentation from '../files/milestone_3/presentation.pdf'
-// import milestoneThreeTwoEvaluation from '../files/milestone_3/progress_evaluation.pdf'
+import milestoneFourPresentation from '../files/semester_two/milestone_4/presentation.pdf'
+import milestoneFourEvaluation from '../files/semester_two/milestone_4/progress_evaluation.pdf'
+import milestoneFivePresentation from '../files/semester_two/milestone_5/presentation.pdf'
+import milestoneFiveEvaluation from '../files/semester_two/milestone_5/progress_evaluation.pdf'
+import milestoneFivePoster from '../files/semester_two/milestone_5/poster.pdf'
+
 
 export const planFiles = [{name: "Plan", href: planPlan},
                    {name: "Presentation", href: planPresentation}]
@@ -38,6 +35,13 @@ export const milestoneTwoFiles = [{name: "Presentation", href: milestoneTwoPrese
 export const milestoneThreeFiles = [{name: "Presentation", href: milestoneThreePresentation},
                              {name: "Progress Evaluation", href: milestoneThreeEvaluation}]
 
+export const milestoneFourFiles = [{name : 'Presentation', href: milestoneFourPresentation},
+                             {name: 'Progress Evaluation', href: milestoneFourEvaluation}]
+
+export const milestoneFiveFiles = [{name : 'Presentation', href: milestoneFivePresentation},
+                                   {name : 'Progress Evaluation', href : milestoneFiveEvaluation},
+                                   {name : 'Poster', href : milestoneFivePoster}]
+
 export const projectFiles = planFiles.concat(milestoneOneFiles, milestoneTwoFiles, milestoneThreeFiles)
 
 export const semesterTwoPlanFiles = [{name: "Plan", href: planTwoPlan},
@@ -49,7 +53,6 @@ export const firstSemesterFileLinks = [{cardName: "Plan", dueDate: "Jaunary 22nd
                    {cardName: "Milestone 3", dueDate: "April 15th", links: milestoneThreeFiles}]
 
 export const secondSemesterFileLinks = [{cardName: "Plan", dueDate: "September 4th", links: semesterTwoPlanFiles},
-                    // {cardName: "Milestone 1", dueDate: "September 30th", links: milestoneOneFiles},
-                    // {cardName: "Milestone 2", dueDate: "October 28th", links: milestoneTwoFiles},
-                    // {cardName: "Milestone 3", dueDate: "November 25th", links: milestoneThreeFiles}
+                    {cardName: "Milestone 4", dueDate: "September 30th", links: milestoneFourFiles},
+                    {cardName: " Milestone 5", dueDate : "October 28th", links : milestoneFiveFiles}
                 ]

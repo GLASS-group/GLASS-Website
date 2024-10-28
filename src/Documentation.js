@@ -8,15 +8,38 @@ import Footer from "./Footer";
 
 import { colors } from "./consts/Style";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import documentation from "./consts/DocumentationContent";
 
 import plusPng from './images/plus.png'
 import minusPng from './images/minus.png'
+import xPng from './images/x.png'
+
+const MOBILE_WIDTH = 1100
 
 function Documentation() {
-    const classes = createUseStyles(mergeJson(mergeJson(style, thisStyle), thisStyleMobile))();
+    const classes = createUseStyles(mergeJson(style, thisStyle))();
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1100)
+    const [showMenu, setShowMenu] = useState(false)
+    const [showTOC, setShowTOC] = useState(false);
+
+    const toggleShowMenu = () => {
+      setShowMenu(!showMenu);
+    }
+  
+    const handleResize = () => {
+          setIsMobile(window.innerWidth < 1100)
+          if (!isMobile) {
+            setShowMenu(false)
+            setShowTOC(false)
+          }
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize)
+    })
 
     const [docView, setDocView] = useState(documentation[0]);
 
@@ -26,50 +49,104 @@ function Documentation() {
         setSectionsOpen(sectionsOpen.map((section, index) => (index === sectionIndex ? !sectionsOpen[index] : sectionsOpen[index])))
     }
 
+    const toggleTOC  = () => {
+        setShowTOC(!showTOC)
+        console.log(showTOC)
+    }
+
     return(
     <div className={classes.mainBody}>
         <Navigation pages={pages}/>
-        <div className={classes.documentationMain}>
-            <div className={classes.documentationNavbarContainer}>
-                <div className={classes.documentationNavbar}>
+        {
+            isMobile ?
+            <div className={classes.documentationMainMobile}>
+                <div className={classes.docuemntationToggleTOCMobile}>
+                    <a className={classes.toggleTOCButton} onClick={() => {setShowTOC(true)}}>View Table of Contents</a>
+                </div>
+                { showTOC ? 
+                <div className={classes.mobileNavMenu}>
+                    <a className={classes.mobileHeaderMenuClose} onClick={() => {setShowTOC(false)}}>
+                        <img className={classes.menuImage} src={xPng}/>
+                    </a>
                     {
-                        documentation.map((section, index) => (
-                            <div>
-                                <div className={classes.sectionContainer}>
-                                    <div className={section === docView ? classes.activeSection : classes.docNavSection}
-                                         onClick={() => {setDocView(section)}}>
-                                        <a>{index+1}.0 {section.sectionName}</a>
+                            documentation.map((section, index) => (
+                                <div>
+                                    <div className={classes.sectionContainerMobile}>
+                                        <div className={section === docView ? classes.activeSection : classes.docNavSection}
+                                             onClick={() => {setDocView(section); setShowTOC(false)}}>
+                                            <a>{index+1}.0 {section.sectionName}</a>
+                                        </div>
+                                        {
+                                            section.subsections ?
+                                            <a className={classes.docNavSubsectionToggle}>
+                                                <img className={classes.docNavSubsectionToggleImage} 
+                                                     onClick={() => {toggleSection(index)}}
+                                                     src={sectionsOpen[index] ? minusPng : plusPng}/>
+                                            </a> : null
+                                        }
                                     </div>
                                     {
-                                        section.subsections ?
-                                        <a className={classes.docNavSubsectionToggle}>
-                                            <img className={classes.docNavSubsectionToggleImage} 
-                                                 onClick={() => {toggleSection(index)}}
-                                                 src={sectionsOpen[index] ? minusPng : plusPng}/>
-                                        </a> : null
+                                        section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
+                                            <a className={subsection === docView ? classes.activeSubsectionMobile : classes.docNavSubsectionMobile} 
+                                               onClick={() => {setDocView(subsection); setShowTOC(false)}}>
+                                                {index+1}.{subindex+1} {subsection.subsectionName}
+                                            </a>
+                                        )) : null
                                     }
                                 </div>
-                                {
-                                    section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
-                                        <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
-                                           onClick={() => {setDocView(subsection)}}>
-                                            {index+1}.{subindex+1} {subsection.subsectionName}
-                                        </a>
-                                    )) : null
-                                }
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
+                </div> : null }
+                <div className={classes.documentationContentContainer}>
+                    <div className={classes.documentationContent}>
+                        {docView.content}
+                    </div>
                 </div>
+                <div className={classes.documentationSeparatorTwo}></div>
             </div>
-            <div className={classes.documentationSeparator}></div>
-            <div className={classes.documentationContentContainer}>
-                <div className={classes.documentationContent}>
-                    {docView.content}
+            :
+            <div className={classes.documentationMain}>
+                <div className={classes.documentationNavbarContainer}>
+                    <div className={classes.documentationNavbar}>
+                        {
+                            documentation.map((section, index) => (
+                                <div>
+                                    <div className={classes.sectionContainer}>
+                                        <div className={section === docView ? classes.activeSection : classes.docNavSection}
+                                             onClick={() => {setDocView(section)}}>
+                                            <a>{index+1}.0 {section.sectionName}</a>
+                                        </div>
+                                        {
+                                            section.subsections ?
+                                            <a className={classes.docNavSubsectionToggle}>
+                                                <img className={classes.docNavSubsectionToggleImage} 
+                                                     onClick={() => {toggleSection(index)}}
+                                                     src={sectionsOpen[index] ? minusPng : plusPng}/>
+                                            </a> : null
+                                        }
+                                    </div>
+                                    {
+                                        section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
+                                            <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
+                                               onClick={() => {setDocView(subsection)}}>
+                                                {index+1}.{subindex+1} {subsection.subsectionName}
+                                            </a>
+                                        )) : null
+                                    }
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
+                <div className={classes.documentationSeparator}></div>
+                <div className={classes.documentationContentContainer}>
+                    <div className={classes.documentationContent}>
+                        {docView.content}
+                    </div>
+                </div>
+                <div className={classes.documentationSeparatorTwo}></div>
             </div>
-            <div className={classes.documentationSeparatorTwo}></div>
-        </div>
+        }
         <Footer override={{navFooter : {borderTopStyle : 'solid', borderTopWidth : '2px'}}}/>
     </div>
     
@@ -88,6 +165,10 @@ const thisStyle = {
         height : '100%',
         flexGrow : 1,
         overflow : 'auto',
+    },
+    documentationMainMobile : {
+         composes : '$documentationMain',
+         flexDirection : 'column'
     },
     documentationNavbarContainer : {
         minWidth: '18em',
@@ -153,6 +234,18 @@ const thisStyle = {
         composes: '$docNavSubsection',
         color : colors.white
     },
+    docNavSubsectionMobile : {
+        composes: '$docNavSection',
+        display : 'block',
+        boxSizing : 'border-box',
+        marginLeft : '4em',
+        marginBottom : '0.5rem',
+        marginRight : '2rem'
+    },
+    activeSubsectionMobile :  {
+        composes: '$docNavSubsectionMobile',
+        color : colors.white
+    },
     documentationContent : {
         boxSizing : "border-box",
         padding : '0 1.5em',
@@ -176,9 +269,16 @@ const thisStyle = {
             marginBottom : paragraphSpacing,
             marginTop : '2rem'
         },
+        '& p a' : {
+            color : colors.mint,
+            textDecoration : 'none',
+            '&:hover' : {
+                cursor : 'pointer',
+                textDecoration: 'underline'
+            }
+        },
         '& code' : {
             display : 'block',
-            margin : 0,
             margin : '2rem 0',
             backgroundColor : colors.slate,
             padding : '0.75em 1em',
@@ -205,6 +305,11 @@ const thisStyle = {
         alignItems : 'center',
         marginBottom : '0.5em',
     },
+    sectionContainerMobile : {
+        composes : '$sectionContainer',
+        marginLeft : '2.2rem',
+        marginRight : '2.2rem'
+    },
     docNavSubsectionToggle : {
         marginLeft : 'auto'
     },
@@ -215,11 +320,48 @@ const thisStyle = {
         '&:hover' : {
             cursor : 'pointer'
         }
-    }
-}
+    },
+    docuemntationToggleTOCMobile : {
+        fontSize : '1.2rem',
+        padding : '1.25rem',
+        textAlign : 'center',
+        borderBottom : '2px solid white'
+    },
 
-const thisStyleMobile = {
-
+    toggleTOCButton : {
+        border : '1px solid white',
+        borderRadius : '0.4rem',
+        padding : '0.4rem 0.8rem',
+        '&:hover' :  {
+            'cursor' : 'pointer',
+            'color': colors.mint,
+            borderColor : colors.mint
+        }
+    },
+    mobileHeaderMenuClose : {
+        composes : "$mobileHeaderMenu",
+        display : 'block',
+        margin : '1rem',
+        marginLeft : 'auto',
+        marginRight : '1.5rem',
+        marginTop : '1.5rem',
+        height : '3rem',
+        width : '3rem',
+        '&:hover' : {
+            cursor : 'pointer'
+        }
+    },
+    menuImage : {
+        width : '100%',
+    },
+    mobileNavMenu : {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width : '100%',
+        height : '100%',
+        backgroundColor : '#000000F6'
+    },
 }
 
 export default Documentation;
