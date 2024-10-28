@@ -124,11 +124,12 @@ const mobileView = {
     },
     navHeaderItemMobile : {
         display : 'block',
-        color : colors.white,
+        color : colors.lightGray,
         textDecoration : 'none',
         margin : '1rem 2rem',
         padding : '0.5rem 0',
-        border : '1px solid white',
+        border : '1px solid',
+        borderColor : colors.lightGray,
         borderRadius : '0.5rem',
         textAlign : 'center',
         fontSize : '1.35rem',
@@ -138,7 +139,9 @@ const mobileView = {
         }
     },
     navActiveHeaderItemMobile : {
-        composes : "$navHeaderItemMobile"
+        composes : "$navHeaderItemMobile",
+        color : colors.white,
+        borderColor : colors.white
     }
 }
 

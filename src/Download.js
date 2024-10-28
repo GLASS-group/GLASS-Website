@@ -80,7 +80,8 @@ const thisStyle = {
         padding : '0.4rem 0.8rem',
         border : '1px solid white',
         borderRadius : '0.4rem',
-        color : 'white',
+        color : colors.white,
+        borderColor : colors.white,
         textDecoration : 'none',
         '&:hover' : {
             color : colors.mint,

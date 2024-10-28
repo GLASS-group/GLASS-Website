@@ -6,6 +6,33 @@ const lineBreak = <HorizontalBreak style={{horizontalBreak : {maxWidth : '45rem'
 
 export const documentation = [
     {
+        sectionName : "Getting Started",
+        content :
+            <div>
+                <h1>
+                    Getting Started
+                </h1>
+                {lineBreak}
+                <h2>Welcome!</h2>
+                <p>
+                    Welcome to the GLASS documentation. you can use the navigation panel on the left (viewable by clicking the <code>View Table of Contents</code> button in
+                    mobile view) to access the various sections of this documentation.
+                </p>
+                <p>
+                    Some sections of the documentation have subsections, which are accessible in the table of contents by clicking the <code>+</code> next to the corresponding
+                    section name.
+                </p>
+                <h2>Tutorial: Building your first GLASS language</h2>
+                <p>
+                    Some pages of this documentation contain sections with this same name as this one. These sections provide a step-by-step guide to creating your first syntax
+                    definition and interpretation script using GLASS to evaluate simple mathematical expressions.
+                </p>
+                <p>
+                    If it is your first time using GLASS, we encourage you to follow along with these sections!
+                </p>
+            </div>
+    },
+    {
         sectionName : "Installation",
         content :
             <div>
@@ -29,13 +56,15 @@ export const documentation = [
                 </p>
                 <h2>How do I run GLASS?</h2>
                 <p>
-                    The GLASS JAR can be ran by executing the following command within the GLASS installation directory:
+                    The GLASS .jar file can be ran by executing the following command within the GLASS installation directory:
                 </p>
                 <code>
                     java -jar GLASS-0.1.0a.jar
                 </code>
-                <p>Please note that in the above command, <code>GLASS-0.1.0a.jar</code> should be replace with the name
-                    of the appropriate JAR file for your installed version of GLASS.</p>
+                <p>
+                    Please note that in the above command, <code>GLASS-0.1.0a.jar</code> should be replace with the name
+                    of the appropriate .jar file for your installed version of GLASS.
+                </p>
             </div>
     },
     {
@@ -44,6 +73,23 @@ export const documentation = [
             <div>
                 <h1>Syntax Definition</h1>
                 {lineBreak}
+                <h2>What is a syntax definition?</h2>
+                <p>
+                    A syntax definition is a set of named regex patterns and grammar productions which are used to understand the structure of a file that you would like to parse using the GLASS system. If
+                    concepts such as "regex patterns" and "grammar productions" are entirely new to you, no worries! This section will provide an small description of these concepts, as well as providing
+                    resources for learning more about them.
+                </p>
+                <p>
+                    Before continuing, please make sure you have downloaded GLASS and its dependancies. To understand how to install GLASS, please see Section 2.0 of this documentation.
+                </p>
+                <h2>Tutorial: Building your first GLASS language</h2>
+                <p>
+                    To begin using GLASS, we must first create a file where we will write our syntax definition. Within the folder containing the GLASS .jar file, create a file named <code>expression.syntax</code>.
+                </p>
+                <p>
+                    <em>If you are unable to change the file extension when renaming the file, you may need to change your system settings to show file extensions. On Windows, this can be done by enabling the
+                        "Show file extensions" option in Settings.</em>
+                </p>
             </div>,
         subsections: [
             {
@@ -54,34 +100,51 @@ export const documentation = [
                         {lineBreak}
                         <h2>What are syntax definition files?</h2>
                         <p>
-                            Syntax definition files are used to define the syntax of the grammar you wish to parse by declaring and defining tokens and productions.
+                            Syntax definition files are files which are given to GLASS as input. These files contain the a series of token and production declarations which define the syntax of a file you wish to parse.
+                            These files typically have the file extension <code>.syntax</code>, though this is not a requirement.
                         </p>
                         <p>
-                            Syntax definition files (extension .syntax) are made up of three major parts:
+                            Syntax definition files are made up of three major parts:
                         </p>
                         <ul>
                             <li>
-                                An optional settings block, for changing settings related to how the grammar is parsed
+                                An optional name, which defines the name of the syntax you are defining (Naming the syntax may be useful for debugging purposes).
                             </li>
                             <li>
-                                A token block, where tokens are defined with a name and a regex pattern.
+                                A token block, where the tokens that appear in your syntax are defined.
                             </li>
                             <li>
-                                A production block, where grammar productions are defined in a BNF-like format.
+                                A production block, where the grammar productions that define your syntax structure are defined.
                             </li>
                         </ul>
                         <p>
-                            All three of the above blocks must be written in the .syntax file in the order they are listed above. Below is an example of how these blocks would appear in a .syntax file:
+                            All three of the above fields must be written in the <code>.syntax</code> file in the order they are listed above. Below is an example of how these blocks would appear in a .syntax file:
                         </p>
                         <code>
-                            settings &#123;<br/>
-                            {tab}# Settings can be set within this block<br/>
-                            &#125;<br/>
+                            name My_Syntax # This field is optional<br/>
+                            <br/>
                             tokens &#123;<br/>
                             {tab}# Tokens are defined within this block<br/>
                             &#125;<br/>
+                            <br/>
                             productions &#123;<br/>
                             {tab}# Grammar productions are defined within this block<br/>
+                            &#125;<br/>
+                        </code>
+                        <h2>Tutorial: Building your first GLASS language</h2>
+                        <p>
+                            Within the <code>expression.syntax</code> file you have created, copy and paste the code template above. You may remove the comments (All <code>#</code> followed by some text) and change
+                            the name of the syntax definition to <code>Expression_Syntax</code>. When you are done, your <code>expression.syntax</code> file should look like this:
+                        </p>
+                        <code>
+                            name Expression_Syntax<br/>
+                            <br/>
+                            tokens &#123;<br/>
+                            <br/>
+                            &#125;<br/>
+                            <br/>
+                            productions &#123;<br/>
+                            <br/>
                             &#125;<br/>
                         </code>
                     </div>
@@ -176,7 +239,7 @@ export const documentation = [
         ]
     },
     {
-        sectionName : "Test Section",
+        sectionName : "Interpretation Script",
         content : 
             <div>
                 Test section 3 content
@@ -201,36 +264,6 @@ export const documentation = [
                 content : 
                     <div>
                         Test subsection 3.3 content
-                    </div>
-            }
-        ]
-    },
-    {
-        sectionName : "Test Section",
-        content : 
-            <div>
-                Test section 4 content
-            </div>,
-        subsections : [
-            {
-                subsectionName : "Test Subsection",
-                content : 
-                    <div>
-                        Test subsection 4.1 content
-                    </div>
-            },
-            {
-                subsectionName : "Test Subsection",
-                content : 
-                    <div>
-                        Test subsection 4.2 content
-                    </div>
-            },
-            {
-                subsectionName : "Test Subsection",
-                content : 
-                    <div>
-                        Test subsection 4.3 content
                     </div>
             }
         ]

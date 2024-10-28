@@ -25,9 +25,6 @@ function Documentation() {
     const [showMenu, setShowMenu] = useState(false)
     const [showTOC, setShowTOC] = useState(false);
 
-    const toggleShowMenu = () => {
-      setShowMenu(!showMenu);
-    }
   
     const handleResize = () => {
           setIsMobile(window.innerWidth < 1100)
@@ -43,15 +40,20 @@ function Documentation() {
 
     const [docView, setDocView] = useState(documentation[0]);
 
+    const documentationContentWindow = document.getElementById("main-content-window");
+
+    const updateDocView = (section) => {
+        documentationContentWindow.scrollTo({
+            top: 0,
+            left: 0
+          });
+        setDocView(section)
+    }
+
     const [sectionsOpen, setSectionsOpen] = useState(documentation.map((section) => false))
 
     const toggleSection = (sectionIndex) => {
         setSectionsOpen(sectionsOpen.map((section, index) => (index === sectionIndex ? !sectionsOpen[index] : sectionsOpen[index])))
-    }
-
-    const toggleTOC  = () => {
-        setShowTOC(!showTOC)
-        console.log(showTOC)
     }
 
     return(
@@ -73,7 +75,7 @@ function Documentation() {
                                 <div>
                                     <div className={classes.sectionContainerMobile}>
                                         <div className={section === docView ? classes.activeSection : classes.docNavSection}
-                                             onClick={() => {setDocView(section); setShowTOC(false)}}>
+                                             onClick={() => {updateDocView(section); setShowTOC(false)}}>
                                             <a>{index+1}.0 {section.sectionName}</a>
                                         </div>
                                         {
@@ -88,7 +90,7 @@ function Documentation() {
                                     {
                                         section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
                                             <a className={subsection === docView ? classes.activeSubsectionMobile : classes.docNavSubsectionMobile} 
-                                               onClick={() => {setDocView(subsection); setShowTOC(false)}}>
+                                               onClick={() => {updateDocView(subsection); setShowTOC(false)}}>
                                                 {index+1}.{subindex+1} {subsection.subsectionName}
                                             </a>
                                         )) : null
@@ -97,7 +99,7 @@ function Documentation() {
                             ))
                         }
                 </div> : null }
-                <div className={classes.documentationContentContainer}>
+                <div id="main-content-window" className={classes.documentationContentContainer}>
                     <div className={classes.documentationContent}>
                         {docView.content}
                     </div>
@@ -113,7 +115,7 @@ function Documentation() {
                                 <div>
                                     <div className={classes.sectionContainer}>
                                         <div className={section === docView ? classes.activeSection : classes.docNavSection}
-                                             onClick={() => {setDocView(section)}}>
+                                             onClick={() => {updateDocView(section)}}>
                                             <a>{index+1}.0 {section.sectionName}</a>
                                         </div>
                                         {
@@ -128,7 +130,7 @@ function Documentation() {
                                     {
                                         section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
                                             <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
-                                               onClick={() => {setDocView(subsection)}}>
+                                               onClick={() => {updateDocView(subsection)}}>
                                                 {index+1}.{subindex+1} {subsection.subsectionName}
                                             </a>
                                         )) : null
@@ -139,7 +141,7 @@ function Documentation() {
                     </div>
                 </div>
                 <div className={classes.documentationSeparator}></div>
-                <div className={classes.documentationContentContainer}>
+                <div id="main-content-window" className={classes.documentationContentContainer}>
                     <div className={classes.documentationContent}>
                         {docView.content}
                     </div>
