@@ -381,7 +381,7 @@ export const documentation = [
                             be an infinite loop of producing more <code>a</code>'s. Let's add a second production to our list:
                         </p>
                         <code>
-                            S -> S A.
+                            S -> S A.<br/>
                             S -> A.
                         </code>
                         <p>
@@ -405,10 +405,10 @@ export const documentation = [
                             With the right combination of productions, we can produce some very complex results! Here is another fun example:
                         </p>
                         <code>
-                            S -> A B A B ON_THE A SHORE.
-                            A -> SHE.
-                            A -> SEA.
-                            B -> SELLS.
+                            S -> A B A B ON_THE A SHORE.<br/>
+                            A -> SHE.<br/>
+                            A -> SEA.<br/>
+                            B -> SELLS.<br/>
                             B -> SHELLS.
                         </code>
                         <p>
