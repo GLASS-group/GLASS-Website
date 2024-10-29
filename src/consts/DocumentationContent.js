@@ -505,7 +505,7 @@ export const documentation = [
                         </p>
                         <code>
                         productions &#123;<br/>
-                            {tab}[CONTINUED_EXPERSSION] EXPRESSION -&gt; EXPRESSION ADD_OPERATOR TERM<br/>
+                            {tab}[CONTINUED_EXPRESSION] EXPRESSION -&gt; EXPRESSION ADD_OPERATOR TERM<br/>
                             {tab}[EXPRESSION_IS_TERM] =&gt; TERM.<br/>
                             <br/>
                             {tab}[CONTINUED_TERM] TERM -&gt; TERM MULTIPLY_OPERATOR FACTOR<br/>
@@ -529,14 +529,15 @@ export const documentation = [
             <p>
                 After a syntax is defined and a source file is parsed by GLASS, the user has an opportunity to define how the parsed source should be interpreted
                 by writing an interpretation script. This interpretation script is written in a Java-like syntax that allows you to read, manipulate, write, and print
-                values from the parse tree to produce any output you deem appropriate.
-
+                values from the parse tree to produce any output you deem appropriate. These files typically have the file extension <code>.gscript</code>, though this is not a requirement.
+            </p>
+            <p>
                 This section will provide a description of how to write an interpretation script. The following section (Section 6) outlines the various functionalities available
                 for use within an interpretation script.
             </p>
             <h2>Tutorial: Building your first GLASS language</h2>
             <p>
-                To begin using GLASS, we must first create the file where we will write our syntax definition. Within the folder containing the GLASS <code>.jar</code> file, create a file named <code>expression.syntax</code>.
+                In order to write the interpretation script, we must create a new file. Within the folder containing the GLASS <code>.jar</code> file, create a file named <code>expression.gscript</code>.
             </p>
             <p>
                 <em>If you are unable to change the file extension when renaming the file, you may need to change your system settings to show file extensions. On Windows, this can be done by enabling the
@@ -545,70 +546,316 @@ export const documentation = [
         </div>,
         subsections : [
             {
-                name : "Test Subsection",
-                content : 
+                name : "Basic Script Syntax",
+                content :
                     <div>
-                        Test subsection 3.1 content
-                    </div>,
-                subsubsections : [
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    },
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    },
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    }
-                ]
+                        <h1>Basic Script Syntax</h1>
+                        {lineBreak}
+                        <h2>Writing an interpretation script</h2>
+                        <p>
+                            An interpretation script is made up of a series of statements and function definitions.
+                            There are four statement types in the GLASS scripting system:
+                            <ul>
+                                <li>Variable assignment statements</li>
+                                <li>Function call statements</li>
+                                <li>Return statements</li>
+                                <li>If statements</li>
+                            </ul>
+                            Below you will find descriptions of each statement type and their basic syntax. For a more
+                            in-depth explanation of each statement's syntax, See Section 6.1 Statements.
+                        </p>
+                        <p>
+                            At the bottom of this page, in the tutorial, there is an example interpretation script for
+                            reference.
+                        </p>
+                        <h2>Variable assignment statements</h2>
+                        <p>
+                            A variable assignment statement can be used to assign a value to a variable. This variable
+                            can then be used in future expressions, and its value will be read and used during the
+                            expression's evaluation. A variable assignment statement consists of a variable identifier, an equals
+                            sign <code>=</code>, and an expression,
+                            followed by a semicolon <code>;</code>.
+                        </p>
+                        <p>
+                            Variable identifiers must follow the following rules:
+                            <ul>
+                                <li>Identifiers must only contain letters, numbers, and underscores</li>
+                                <li>Identifiers must start with a letter</li>
+                                <li>Identifiers must not end with an underscore</li>
+                            </ul>
+                        </p>
+                        <p>
+                            Below is an example of a valid variable assignment statement:
+                        </p>
+                        <code>
+                            myVariable_123 = (5 + 18) * 3;
+                        </code>
+                        <h2>Function call statements</h2>
+                        <p>
+                            Functions can be called in a function call statement without needing to handle their output.
+                            A function call statement consists of a function name, an open parenthesis <code>(</code>, a list of
+                            arguments, and a closed parenthesis <code>)</code>, followed by a semicolon <code>;</code>.
+                        </p>
+                        <p>
+                            Pre-defined function, along with their names and their allowed parameters, can be found in
+                            the
+                            list of functions under Section 6.3 Functions.
+                        </p>
+                        <p>
+                            Below is an example of a valid function call statement (assume <code>name</code> is a
+                            predefined variable storing a String):
+                        </p>
+                        <code>
+                            print("My name is", name);
+                        </code>
+                        <h2>Return statements</h2>
+                        <p>
+                            When defining a production function (See Section 5.2 Production Functions), one can choose to
+                            assign a return value to the function. After the function is executed and the return statement is
+                            reached, the return expression will be evaluated, and its value will be substituted in place of the
+                            original function call if the function was called within an expression. A return statement consists
+                            of the <code>return</code> keyword, followed by an expression and a semicolon <code>;</code>.
+                        </p>
+                        <p>
+                            Below is an example of a valid return statement that returns the value 34:
+                        </p>
+                        <code>
+                            return 60 / 4 + 19;
+                        </code>
+                        <h2>If statements</h2>
+                        <p>
+                            Sometimes, you only want a series of statements to be executed if a certain condition is met. For this
+                            reason, we have the if statement. An if statement consists of the <code>if</code> keyword,
+                            an open parenthesis <code>(</code>, a conditional expression, a closed parenthesis <code>)</code>, an
+                            open brace <code>&#123;</code>, a series of statements, followed by a closed brace <code>&#125;</code>.
+                        </p>
+                        <p>
+                            The series of statements placed between the open and closed braces will only be executed if the conditional
+                            expression placed within the if statement is evaluated to be true.
+                        </p>
+                        <p>
+                            In some cases, you will want to execute some series of statements if a condition is true, and another
+                            series of statements if the condition is false. For this reason, you may add an "else" block to your if statement, which
+                            can be placed immediately after the last closing brace <code>&#125;</code> of an if statement. This
+                            else block consists of the <code>else</code> keyword, an open brace <code>&#123;</code>, a series of
+                            statements, and by a closed brace <code>&#125;</code>.
+                        </p>
+                        <p>
+                            In this case, the series of statements placed within the else block will only be executed if the conditional
+                            expression placed within the if statement is evaluated to be false.
+                        </p>
+                        <p>
+                            Below is an example of a valid if statement, where the script will print <code>Hooray!</code> if the value
+                            of <code>x</code> is 3, otherwise, the script will print <code>Aw man!</code>:
+                        </p>
+                        <code>
+                            if (x == 3) &#123; <br/>
+                            {tab}print("Hooray!"); <br/>
+                            &#125; else &#123; <br/>
+                            {tab}print("Aw man!");<br/>
+                            &#125;
+                        </code>
+                        <h2>Tutorial: Building your first GLASS language</h2>
+                        <p>
+                            Within the <code>expression.gscript</code> file you have created, type or copy the
+                            following two lines of code. This code contains the <code>traverse</code> function,
+                            which has yet to be explained, but will be explained in the following section, Section 5.2
+                            Production Functions.
+                        </p>
+                        <code>
+                            print("Final result:", traverse());<br/>
+                            <br/>
+                            # Production functions go here
+                        </code>
+                    </div>
             },
             {
-                name : "Test Subsection",
-                content : 
+                name : "Production Functions",
+                content :
                     <div>
-                        Test subsection 3.1 content
-                    </div>,
-                subsubsections : [
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    },
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    },
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    }
-                ]
-            },
-            {
-                name : "Test Subsection",
-                content : 
-                    <div>
-                        Test subsection 3.1 content
-                    </div>,
-                subsubsections : [
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    },
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    },
-                    {
-                        name : "Test subsubsection",
-                        content : <div>Hello world!</div>
-                    }
-                ]
+                        <h1>Production Functions</h1>
+                        {lineBreak}
+                        <h2>What are production functions?</h2>
+                        <p>
+                            Productions functions are a special type of function which can be declared inside of an
+                            interpretation script. These functions are called as the parse tree, which
+                            is generated based on the syntax definition file given to GLASS, is traversed.
+                        </p>
+                        <p>
+                            For each production defined in the syntax definition file used, a production function
+                            can be defined, which describes the actions that should be performed when a node
+                            produced by the given production is visited during the parse tree's traversal.
+                        </p>
+                        <h2>The <code>traverse</code> function</h2>
+                        <p>
+                            In order to begin traversing the parse tree, we need a way to indicate that we wish to do
+                            so. That is what the <code>traverse</code> function is for.
+                        </p>
+                        <p>
+                            When the <code>traverse</code> function is called, either in an expression or in a function
+                            call statement, a traversal of the parsed source's parse tree is initiated, starting at the
+                            root node. Based on the production used to generate the root node, the production function
+                            corresponding to said production will be called. If no such production function exists,
+                            the <code>traverse</code> function will return <code>null</code>.
+                        </p>
+                        <p>
+                            <em>Note: the </em><code>traverse</code><em> function cannot be called within a production function.</em>
+                        </p>
+                        <h2>The <code>child</code> function</h2>
+                        <p>
+                            Once a traversal of the parse tree has begun, we need a way to indicate when to travel
+                            further down the parse tree to visit a child of the current node. This is where
+                            the <code>child</code> function comes in.
+                        </p>
+                        <p>
+                            The <code>child</code> function can only be called within a production function, and takes a
+                            single integer argument. When the <code>child</code> function is called, the passed integer
+                            will be used as an index to find the right side symbol of the production corresponding to
+                            the current production function.
+                        </p>
+                        <p>
+                            For example, if we are within the production function for the following production:
+                        </p>
+                        <code>
+                            S -&gt; A B C.
+                        </code>
+                        <p>
+                            <code>child(0)</code> will find the symbol <code>A</code>, <code>child(1)</code> will find
+                            the symbol <code>B</code>, and <code>child(2)</code> will find the symbol <code>C</code>.
+                        </p>
+                        <p>
+                            If the found symbol is a non-terminal, then the parse tree traversal will move to visit the
+                            node corresponding to said non-terminal in the current production. The production used
+                            to generate this new node will be found, and the <code>child</code> function call will return the
+                            return value of the production function corresponding to the new node. If no such production
+                            function exists, or the corresponding production function does not contain a return statement,
+                            then the <code>child</code> function call will return <code>null</code>.
+                        </p>
+                        <p>
+                            If the found symbol is a terminal, then the parse tree traversal will move to visit the
+                            node corresponding to said terminal, and the <code>child</code> function will return the value
+                            of the token corresponding to said terminal node.
+                        </p>
+                        <p>
+                            After the <code>child</code> function returns, the parse tree traversal will move back up to
+                            the same node that was being visited when the function was originally called.
+                        </p>
+                        <h2>Tutorial: Building your first GLASS language</h2>
+                        <p>
+                            This step is the meat and potatoes of making our expression evaluator work. We will have to
+                            write production functions for each of the functions we have previously defined. Below is
+                            the explanation for the logic we will use to write each production function.
+                            <ul>
+                                <li>
+                                    For production <code>CONTINUED_EXPRESSION</code> we want to retrieve and save the
+                                    evaluated value of the first child (the non-terminal <code>EXPRESSION</code>), determine
+                                    whether
+                                    we should add or subtract based on the contents of the second child (the
+                                    terminal <code>ADD_OPERATOR</code>), and then add or subtract the evaluated value of the third
+                                    child (the non-terminal <code>TERM</code>) to our first value accordingly and return
+                                    the sum or difference.
+                                </li>
+                                <li>
+                                    For production <code>EXPRESSION_IS_TERM</code>, we simply want to return the
+                                    evaluated value of the first child (the non-terminal <code>TERM</code>).
+                                </li>
+                                <li>
+                                    For production <code>CONTINUED_TERM</code> we want to retrieve and save the
+                                    evaluated value of the first child (the non-terminal <code>TERM</code>), determine
+                                    whether
+                                    we should multiply or divide based on the contents of the second child (the
+                                    terminal <code>MULTIPLY_OPERATOR</code>), and then multiply or divide the evaluated value of
+                                    the third
+                                    child (the non-terminal <code>FACTOR</code>) to our first value accordingly and
+                                    return
+                                    the product or quotient.
+                                </li>
+                                <li>
+                                    For production <code>TERM_IS_FACTOR</code>, we want to return the
+                                    evaluated value of the first child (the non-terminal <code>FACTOR</code>).
+                                </li>
+                                <li>
+                                    For production <code>NUMBER</code>, we want to return the
+                                    contents of the first child (the non-terminal <code>NUMBER</code>).
+                                </li>
+                                <li>
+                                    For production <code>SUBEXPRESSION</code>, we want to return the
+                                    evaluated value of the second child (the non-terminal <code>EXPRESSION</code>).
+                                </li>
+                            </ul>
+                            With all of this in mind, the production functions for each production have been written
+                            below. Take some time to read them and make sure you understand what they do. Then, when you
+                            are ready, within your <code>expression.gscript</code> file, replace the comment that
+                            reads <code># Production functions go here</code> with the code found in the block below:
+                        </p>
+                        <code>
+                            production CONTINUED_EXPRESSION &#123;<br/>
+                            {tab}x = child(0);<br/>
+                            <br/>
+                            {tab}if (child(1) == "+") &#123;<br/>
+                            {tab}{tab}x = x + child(2);<br/>
+                            {tab}&#125; else &#123;<br/>
+                            {tab}{tab}x = x - child(2);<br/>
+                            {tab}&#125;<br/>
+                            {tab}<br/>
+                            {tab}return x; <br/>
+                            &#125;<br/>
+                            <br/>
+                            production EXPRESSION_IS_TERM &#123;<br/>
+                            {tab}return child(0);<br/>
+                            &#125;<br/>
+                            <br/>
+                            production CONTINUED_TERM &#123;<br/>
+                            {tab}x = child(0);<br/>
+                            <br/>
+                            {tab}if (child(1) == "*") &#123;<br/>
+                            {tab}{tab}x = x * child(2);<br/>
+                            {tab}&#125; else &#123;<br/>
+                            {tab}{tab}x = x / child(2);<br/>
+                            {tab}&#125;<br/>
+                            {tab}<br/>
+                            {tab}return x; <br/>
+                            &#125;<br/>
+                            <br/>
+                            production TERM_IS_FACTOR &#123;<br/>
+                            {tab}return child(0);<br/>
+                            &#125;<br/>
+                            <br/>
+                            production NUMBER &#123;<br/>
+                            {tab}return child(0);<br/>
+                            &#125;<br/>
+                            <br/>
+                            production SUBEXPRESSION &#123;<br/>
+                            {tab}return child(1);<br/>
+                            &#125;<br/>
+                        </code>
+                        <p>
+                            You have now successfully created a syntax definition and an interpretation script for
+                            evaluating mathematical expression! Create a file named <code>expression.txt</code>, and
+                            type a mathematical expression in it. Then, run GLASS (see Section 3.0 Installation),
+                            enter <code>expression.syntax</code> as the name of the syntax definition, <code>expression.txt</code> as
+                            the name of the source file, and <code>expression.gscript</code> as the name of the
+                            interpretation script, and GLASS should output the result of the simplified expression.
+                        </p>
+                        <p>
+                            Here are some examples to try:
+                            <ul>
+                                <li>The expression <code>4 + 2</code> should evaluate to <code>6</code>.</li>
+                                <li>The expression <code>3 * 6 - 7 + 2</code> should evaluate to <code>13</code>.</li>
+                                <li>The expression <code>6 * 2 + (5 - 3) * 3 - 8</code> should evaluate to <code>10</code>.</li>
+                                <li>The expression <code>(3 + 4) + 7 * 2 - 1 - 9</code> should evaluate to <code>11</code>.</li>
+                                <li>The expression <code>5 - 2 + 4 * (8 - (5 + 1)) + 9</code> should evaluate to <code>20</code>.</li>
+                                <li>The expression <code>(8 - 1 + 3) * 6 - ((3 + 7) * 2)</code> should evaluate to <code>40</code>.</li>
+                            </ul>
+                        </p>
+                        <p>
+                            This is the end of the tutorial part of the documentation. The following sections provides deeper insight into
+                            how GLASS works. Happy reading!
+                        </p>
+                    </div>
             }
         ]
-    }  
+    }
 ]
 
 export default documentation;

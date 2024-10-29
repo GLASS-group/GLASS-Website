@@ -27,7 +27,7 @@ function Documentation() {
 
 
     const handleResize = () => {
-        setIsMobile(window.innerWidth < 1100);
+        setIsMobile(window.innerWidth < MOBILE_WIDTH);
     }
 
     if (!isMobile && showMenu) {
@@ -44,7 +44,7 @@ function Documentation() {
     const documentationContentWindow = useRef(null);
 
     const updateDocView = (section) => {
-        if (section.name != docView.name) {
+        if (section.name !== docView.name) {
             documentationContentWindow.current.scrollTo({
                 top: 0,
                 left: 0
@@ -53,9 +53,9 @@ function Documentation() {
         setDocView(section)
     }
 
-    const [sectionsOpen, setSectionsOpen] = useState(documentation.map((section) => false))
+    const [sectionsOpen, setSectionsOpen] = useState(documentation.map(() => false))
     const [subsectionsOpen, setSubsectionsOpen] = useState(documentation.map(
-        (section) => section.subsections ? section.subsections.map((subsection) => false) : [])
+        (section) => section.subsections ? section.subsections.map(() => false) : [])
     )
 
     const toggleSection = (sectionIndex) => {
@@ -83,7 +83,7 @@ function Documentation() {
                 <div className={classes.mobileNavMenu}>
                     <div className={classes.mobileTocFlexColumn}>
                     <a className={classes.mobileHeaderMenuClose} onClick={() => {setShowTOC(false)}}>
-                        <img className={classes.menuImage} src={xPng}/>
+                        <img className={classes.menuImage} src={xPng} alt={"Exit button"}/>
                     </a>
                     <div className={classes.mobileTocContainer}>
                     {
@@ -99,7 +99,8 @@ function Documentation() {
                                             <a className={classes.docNavSubsectionToggle}>
                                                 <img className={classes.docNavSubsectionToggleImage} 
                                                      onClick={() => {toggleSection(index)}}
-                                                     src={sectionsOpen[index] ? minusPng : plusPng}/>
+                                                     src={sectionsOpen[index] ? minusPng : plusPng}
+                                                     alt={"Expand or collapse current section"}/>
                                             </a> : null
                                         }
                                     </div>
@@ -116,7 +117,8 @@ function Documentation() {
                                                         <a className={classes.docNavSubsectionToggle}>
                                                             <img className={classes.smalldocNavSubsectionToggleImage} 
                                                                  onClick={() => {toggleSubsection(index, subindex)}}
-                                                                 src={subsectionsOpen[index][subindex] ? minusPng : plusPng}/>
+                                                                 src={subsectionsOpen[index][subindex] ? minusPng : plusPng}
+                                                                 alt={"Expand or collapse current section"}/>
                                                         </a> : null
                                                     }
 
@@ -167,7 +169,8 @@ function Documentation() {
                                             <a className={classes.docNavSubsectionToggle}>
                                                 <img className={classes.docNavSubsectionToggleImage} 
                                                      onClick={() => {toggleSection(index)}}
-                                                     src={sectionsOpen[index] ? minusPng : plusPng}/>
+                                                     src={sectionsOpen[index] ? minusPng : plusPng}
+                                                     alt={"Expand or collapse current section"}/>
                                             </a> : null
                                         }
                                     </div>
@@ -184,7 +187,8 @@ function Documentation() {
                                                             <a className={classes.docNavSubsectionToggle}
                                                                 onClick={() => {toggleSubsection(index, subindex)}}>
                                                                 <img className={classes.smalldocNavSubsectionToggleImage} 
-                                                                    src={subsectionsOpen[index][subindex] ? minusPng : plusPng}/>
+                                                                    src={subsectionsOpen[index][subindex] ? minusPng : plusPng}
+                                                                     alt={"Expand or collapse current section"}/>
                                                             </a>
                                                          : null
                                                     }
@@ -350,7 +354,7 @@ const thisStyle = {
             margin : 0,
             marginBottom : paragraphSpacing,
         },
-        '& p code, & li code' : {
+        '& p code, & li code, & h2 code': {
             display : 'inline',
             backgroundColor : colors.slate,
             padding : '2px 4px',
@@ -411,7 +415,7 @@ const thisStyle = {
     },
     docNavSubsectionToggleImage : {
         height : '1.5rem',
-        padding : '0',
+        padding : '0rem',
         marginLeft : '1rem',
         '&:hover' : {
             cursor : 'pointer'
