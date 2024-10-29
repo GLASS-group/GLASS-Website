@@ -105,7 +105,7 @@ export const documentation = [
                 <h2>What is a syntax definition?</h2>
                 <p>
                     A syntax definition is a set of named regex patterns and grammar productions which are used to understand the structure of a source file. If
-                    concepts such as "regex patterns" and "grammar productions" are entirely new to you, no worries! This section will provide an small description of these concepts, as well as providing
+                    concepts such as "regex patterns" and "grammar productions" are entirely new to you, no worries! This section will provide a small description of these concepts, as well as providing
                     resources for learning more about them.
                 </p>
                 <p>
@@ -198,7 +198,7 @@ export const documentation = [
                             <li>Ignored tokens: These are tokens that may be within a source file, but do not contribute to the structure of the grammar itself. Whitespace (spaces, tabs, newlines) and comments are common examples of tokens that may be ignored.</li>
                         </ul>
                         <p>
-                            A single token may be declared per line within the token block using the following syntax
+                            A single token may be declared per line within the token block using the following syntax:
                         </p>
                         <code>[TOKEN ACTIVITY] [TOKEN NAME] : /[TOKEN REGEX]/</code>
                         <p>
@@ -330,7 +330,7 @@ export const documentation = [
                             as it would be written in a syntax definition file.
                         </p>
                         <code>
-                            S -> S A.
+                            S -&gt; S A.
                         </code>
                         <p>
                             For this example, let's assume <code>A</code> is the name of a defined token in our syntax definition file that
@@ -345,7 +345,7 @@ export const documentation = [
                             S
                         </code>
                         <p>
-                            our "DNA" tells us that an <code>S</code> can produce (i.e. can be transformed into, indicated by the arrow <code>-></code>)
+                            our "DNA" tells us that an <code>S</code> can produce (i.e. can be transformed into, indicated by the arrow <code>-&gt;</code>)
                             another <code>S</code> followed by an <code>A</code>. We now have:
                         </p>
                         <code>
@@ -381,8 +381,8 @@ export const documentation = [
                             be an infinite loop of producing more <code>a</code>'s. Let's add a second production to our list:
                         </p>
                         <code>
-                            S -> S A.<br/>
-                            S -> A.
+                            S -&gt; S A.<br/>
+                            S -&gt; A.
                         </code>
                         <p>
                             This production allows for an <code>S</code> to produce only an <code>A</code>. If we apply this new production
@@ -396,8 +396,8 @@ export const documentation = [
                             sequence <code>aaaaaaaaa</code> using our grammar productions.
                         </p>
                         <p>
-                            Something important to note is that there is nothing that says when we should use the first production (<code>S -> S A.</code>) and
-                            when we should use the second (<code>S -> A.</code>). Because of this, this set of two productions defines a grammar that allows for
+                            Something important to note is that there is nothing that says when we should use the first production (<code>S -&gt; S A.</code>) and
+                            when we should use the second (<code>S -&gt; A.</code>). Because of this, this set of two productions defines a grammar that allows for
                             any sequence of at least one <code>a</code> to be generated. Therefore, you could use these two productions to parse any file that
                             contained only <code>a</code>'s within it. Can you see how this can be a very powerful tool?
                         </p>
@@ -405,11 +405,11 @@ export const documentation = [
                             With the right combination of productions, we can produce some very complex results! Here is another fun example:
                         </p>
                         <code>
-                            S -> A B A B ON_THE A SHORE.<br/>
-                            A -> SHE.<br/>
-                            A -> SEA.<br/>
-                            B -> SELLS.<br/>
-                            B -> SHELLS.
+                            S -&gt; A B A B ON_THE A SHORE.<br/>
+                            A -&gt; SHE.<br/>
+                            A -&gt; SEA.<br/>
+                            B -&gt; SELLS.<br/>
+                            B -&gt; SHELLS.
                         </code>
                         <p>
                             Assuming...
@@ -435,76 +435,63 @@ export const documentation = [
                         </p>
                         <h2>Declaring productions</h2>
                         <p>
-                            Tokens are declared within the token block of the syntax definition file, and can be of two types:
+                            Productions are declared within the production block of the syntax definition file. A single token may be declared per line within the token block using the following syntax:
                         </p>
-                        <ul>
-                            <li>Active tokens: These are tokens that are a part of the structure of the grammar. Most tokens are active tokens.</li>
-                            <li>Ignored tokens: These are tokens that may be within a source file, but do not contribute to the structure of the grammar itself. Whitespace (spaces, tabs, newlines) and comments are common examples of tokens that may be ignored.</li>
-                        </ul>
+                        <code>[NON-TERMINAL] -&gt; [LIST OF TERMINALS AND NON-TERMINALS].</code>
                         <p>
-                            A single token may be declared per line within the token block using the following syntax
-                        </p>
-                        <code>[TOKEN ACTIVITY] [TOKEN NAME] : /[TOKEN REGEX]/</code>
-                        <p>
-                            Token activity will be either the keyword <code>active</code> or <code>ignored</code> depending on the type of token you wish to declare.
-                        </p>
-                        <p>
-                            Token name is the name that will be used to refer to this token in the future. All token names must follow the following rules:
+                            Keep in mind:
                             <ul>
-                                <li>Token names must only contain letters, numbers, and underscores</li>
-                                <li>Token names must start with a letter</li>
-                                <li>Token names must not end with an underscore</li>
-                                <li>All token names for a given syntax definition must be unique and are case insensitive (i.e. <code>apple</code> and <code>APPLE</code> are considered the same token name).</li>
+                                <li>Non-terminals do not have to be defined explicity, and are rather implicitly defined by their inclusion in productions</li>
+                                <li>Non-terminals may have any name that is not already a reserved or declared token name</li>
+                                <li>The symbol on the left side of the production (left of the arrow <code>-&gt;</code>) must be a non-terminal</li>
+                                <li>Non-terminal names follow the same rules as token names (See Section 4.2 Tokens)</li>
                             </ul>
                         </p>
                         <p>
-                            Some examples of valid token names are:
+                            Some examples of valid productions are:
                         </p>
                         <ul>
-                            <li><code>IF</code></li>
-                            <li><code>ELSE</code></li>
-                            <li><code>GREATER_THAN</code></li>
-                            <li><code>X</code></li>
-                            <li><code>ABC_123</code></li>
-                            <li><code>VALID_TOKEN_NAME</code></li>
+                            <li><code>S -&gt; A B C.</code></li>
+                            <li><code>S -&gt; S B_2.</code></li>
+                            <li><code>B_2 -&gt; B_1 B_2.</code></li>
                         </ul>
+                        <h2>Parent and child productions</h2>
                         <p>
-                            Some examples of invalid  token names are:
-                        </p>
-                        <ul>
-                            <li><code>_TEST</code></li>
-                            <li><code>_A00</code></li>
-                            <li><code>TOKEN123!</code></li>
-                            <li><code>42_WALLABY_WAY</code></li>
-                        </ul>
-                        <h2>Reserved production names</h2>
-                        <p>The following token names are reserved, and therefore cannot be used as a token name in any syntax definition file:</p>
-                        <ul>
-                            <li><code>EPSILON</code> (reserved for the empty string, for use in productions)</li>
-                            <li><code>EOF</code> (reserved for the end of file character)</li>
-                            <li><code>WHITESPACE</code>  (reserved for all whitespace, and is ignored by default)</li>
-                            <li><code>INLINE_WHITESPACE</code>  (reserved for tabs and spaces, and is ignored by default)</li>
-                        </ul>
-                        <h2>Production declarations</h2>
-                        <p>
-                            Token regex is simply a regex pattern that will be used to identify whether or not some input matches a given token.
-                        </p>
-                        <p>
-                            If you are unaware, "regex" stands for "regular expression". A regex pattern is used to decide whether or not a given string of characters
-                            matches with a certain pattern of characters. Understanding regex will be important in order to use GLASS. <a href="https://regexone.com/">RegexOne</a> provides
-                            a great tutorial on how to write regex patterns.
-                        </p>
-                        <p><em>Note: Since regex patterns are defined with a starting and ending forward slash </em>(<code>/</code>)<em> in the syntax definition file, if you
-                            wish to include a forward slash in your regex, you must escape it using a backslash </em>(<code>\</code>)<em>.</em></p>
-                        <p>
-                            Below is an example of a full token declaration, including a regex pattern:
+                            Sometimes, multiple productions will have the same left side non-terminal. For example:
                         </p>
                         <code>
-                            visible A_SEQUENCE = /a+/
+                            FRUIT_LIST -&gt; FRUIT_LIST APPLE.<br/>
+                            FRUIT_LIST -&gt; FRUIT_LIST BANANA.<br/>
+                            FRUIT_LIST -&gt; FRUIT_LIST CHERRY.<br/>
+                            FRUIT_LIST -&gt; EPSILON.
                         </code>
                         <p>
-                            Based on this token declaration, any string that contains a series of a's (i.e. <code>aaaaa</code>) could be should to be an <code>A_SEQUENCE</code> token.
+                            In these instances, it can feel redundant to right the left side over and over again. Luckily, you can
+                            simplify these productions by declaring only a single "parent" production (exactly as how all productions have
+                            been written up until this point), followed by a list of child productions (written with a thick arrow <code>=&gt;</code> symbol),
+                            with only a single period at the end of the list. Below is an example of the above fruit list productions rewritten
+                            using parent and child productions. These two notations are functionally equivalent within GLASS.
                         </p>
+                        <code>
+                            FRUIT_LIST -&gt; FRUIT_LIST APPLE<br/>
+                            =&gt; FRUIT_LIST BANANA<br/>
+                            =&gt; FRUIT_LIST CHERRY<br/>
+                            =&gt; EPSILON.
+                        </code>
+                        <h2>Naming productions</h2>
+                        <p>
+                            When it comes time to write the interpretation script for your language, you will need to be able to refer to your productions. This
+                            can be done by rewriting the production in the interpretation script file, but this can be tedious. Instead, a shorthand name can be
+                            applied to each production by preceeding it with an identifier (following the same rules for token and non-terminal names) surrounded
+                            by square brackets, as shown below:
+                        </p>
+                        <code>
+                            [NAME_ONE] FRUIT_LIST -&gt; FRUIT_LIST APPLE<br/>
+                            [NAME_TWO] =&gt; FRUIT_LIST BANANA<br/>
+                            [NAME_THREE] =&gt; FRUIT_LIST CHERRY<br/>
+                            [NAME_FOUR] =&gt; EPSILON.
+                        </code>
+                        <p>Also note that productions may share names with existing terminals (tokens) or non-terminals.</p>
                         <h2>Tutorial: Building your first GLASS language</h2>
                         <p>
                             The grammar productions required to define the stucture of a mathematical expression are quite simple. We know the following things are true about mathematical expressions:
@@ -513,19 +500,19 @@ export const documentation = [
                                 <li>A term is either a single factor, or can be defined recursively as another term multipled or divided with a factor.</li>
                                 <li>A factor is either a single number, or an expression surrounded by parenthesis</li>
                             </ul>
-                            Using these rules, we can define our grammar productions as shown in the block below. This
-                            block should replace the empty production block in your current <code>expression.syntax</code> file:
+                            Using these rules, we can define our grammar productions as shown below. We will also provide a name for each production to be used in the future. The
+                            block below should replace the empty production block in your current <code>expression.syntax</code> file:
                         </p>
                         <code>
                         productions &#123;<br/>
-                            {tab}EXPRESSION -{'>'} EXPRESSION ADD_OPERATOR TERM<br/>
-                            {tab}={'>'} TERM.<br/>
+                            {tab}[CONTINUED_EXPERSSION] EXPRESSION -&gt; EXPRESSION ADD_OPERATOR TERM<br/>
+                            {tab}[EXPRESSION_IS_TERM] =&gt; TERM.<br/>
                             <br/>
-                            {tab}TERM -{'>'} TERM MULTIPLY_OPERATOR FACTOR<br/>
-                            {tab}={'>'} FACTOR.<br/>
+                            {tab}[CONTINUED_TERM] TERM -&gt; TERM MULTIPLY_OPERATOR FACTOR<br/>
+                            {tab}[TERM_IS_FACTOR] =&gt; FACTOR.<br/>
                             <br/>
-                            {tab}FACTOR -{'>'} NUMBER<br/>
-                            {tab}={'>'} LEFT_PARENTHESIS EXPRESSION RIGHT_PARENTHESIS.<br/>
+                            {tab}[NUMBER] FACTOR -&gt; NUMBER<br/>
+                            {tab}[SUBEXPRESSION] =&gt; LEFT_PARENTHESIS EXPRESSION RIGHT_PARENTHESIS.<br/>
                             &#125;
                         </code>
                     </div>
@@ -535,18 +522,90 @@ export const documentation = [
     {
         name : "Interpretation Script",
         content : 
-            <div>
-                <h1>Interpretation Script</h1>
-                {lineBreak}
-                <h2>What is an interpretation script?</h2>
-            </div>,
+        <div>
+            <h1>Interpretation Script</h1>
+            {lineBreak}
+            <h2>What is an interpretation script?</h2>
+            <p>
+                After a syntax is defined and a source file is parsed by GLASS, the user has an opportunity to define how the parsed source should be interpreted
+                by writing an interpretation script. This interpretation script is written in a Java-like syntax that allows you to read, manipulate, write, and print
+                values from the parse tree to produce any output you deem appropriate.
+
+                This section will provide a description of how to write an interpretation script. The following section (Section 6) outlines the various functionalities available
+                for use within an interpretation script.
+            </p>
+            <h2>Tutorial: Building your first GLASS language</h2>
+            <p>
+                To begin using GLASS, we must first create the file where we will write our syntax definition. Within the folder containing the GLASS <code>.jar</code> file, create a file named <code>expression.syntax</code>.
+            </p>
+            <p>
+                <em>If you are unable to change the file extension when renaming the file, you may need to change your system settings to show file extensions. On Windows, this can be done by enabling the
+                    "Show file extensions" option in Settings.</em>
+            </p>
+        </div>,
         subsections : [
             {
                 name : "Test Subsection",
                 content : 
                     <div>
                         Test subsection 3.1 content
-                    </div>
+                    </div>,
+                subsubsections : [
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    },
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    },
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    }
+                ]
+            },
+            {
+                name : "Test Subsection",
+                content : 
+                    <div>
+                        Test subsection 3.1 content
+                    </div>,
+                subsubsections : [
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    },
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    },
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    }
+                ]
+            },
+            {
+                name : "Test Subsection",
+                content : 
+                    <div>
+                        Test subsection 3.1 content
+                    </div>,
+                subsubsections : [
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    },
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    },
+                    {
+                        name : "Test subsubsection",
+                        content : <div>Hello world!</div>
+                    }
+                ]
             }
         ]
     }  

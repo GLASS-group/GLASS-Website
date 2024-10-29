@@ -54,9 +54,20 @@ function Documentation() {
     }
 
     const [sectionsOpen, setSectionsOpen] = useState(documentation.map((section) => false))
+    const [subsectionsOpen, setSubsectionsOpen] = useState(documentation.map(
+        (section) => section.subsections ? section.subsections.map((subsection) => false) : [])
+    )
 
     const toggleSection = (sectionIndex) => {
-        setSectionsOpen(sectionsOpen.map((section, index) => (index === sectionIndex ? !sectionsOpen[index] : sectionsOpen[index])))
+        setSectionsOpen(sectionsOpen.map((section, index) => (index === sectionIndex ? !section : section)))
+    }
+
+    const toggleSubsection = (sectionIndex, subsectionIndex) => {
+        setSubsectionsOpen(subsectionsOpen.map((section, index) => (
+            index === sectionIndex ? section.map((subsection, subindex) => (
+                subindex === subsectionIndex ? !subsection : subsection
+            )) : section
+        )))
     }
 
     return(
@@ -94,12 +105,36 @@ function Documentation() {
                                     </div>
                                     {
                                         section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
-                                            <a className={subsection === docView ? classes.activeSubsectionMobile : classes.docNavSubsectionMobile} 
-                                               onClick={() => {updateDocView(subsection); setShowTOC(false)}}>
-                                                {index+1}.{subindex+1} {subsection.name}
-                                            </a>
+                                            <div>
+                                                <div className={classes.sectionContainerMobile}>
+                                                    <div className={subsection === docView ? classes.activeSubsectionMobile : classes.docNavSubsectionMobile} 
+                                                       onClick={() => {updateDocView(subsection); setShowTOC(false)}}>
+                                                        <a>{index+1}.{subindex+1} {subsection.name}</a>
+                                                    </div>
+                                                    {
+                                                        subsection.subsubsections ?
+                                                        <a className={classes.docNavSubsectionToggle}>
+                                                            <img className={classes.smalldocNavSubsectionToggleImage} 
+                                                                 onClick={() => {toggleSubsection(index, subindex)}}
+                                                                 src={subsectionsOpen[index][subindex] ? minusPng : plusPng}/>
+                                                        </a> : null
+                                                    }
+
+                                                </div>
+                                                {
+                                                    subsection.subsubsections && subsectionsOpen[index][subindex] ? subsection.subsubsections.map((subsubsection, subsubindex) => (
+                                                        <div className={classes.sectionContainerMobile}>
+                                                            <div className={subsubsection === docView ? classes.activeSubSubsectionMobile : classes.docNavSubSubsectionMobile} 
+                                                               onClick={() => {updateDocView(subsubsection); setShowTOC(false)}}>
+                                                                <a>{index+1}.{subindex+1}.{subsubindex+1} {subsubsection.name}</a>
+                                                            </div>
+                                                        </div>
+                                                    )) : null
+                                                }
+                                            </div>
                                         )) : null
                                     }
+                                    
                                 </div>
                             ))
                         }
@@ -113,7 +148,9 @@ function Documentation() {
                 </div>
                 <div className={classes.documentationSeparatorTwo}></div>
             </div>
+
             :
+
             <div className={classes.documentationMain}>
                 <div className={classes.documentationNavbarContainer}>
                     <div className={classes.documentationNavbar}>
@@ -136,10 +173,35 @@ function Documentation() {
                                     </div>
                                     {
                                         section.subsections && sectionsOpen[index] ? section.subsections.map((subsection, subindex) => (
-                                            <a className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
-                                               onClick={() => {updateDocView(subsection)}}>
-                                                {index+1}.{subindex+1} {subsection.name}
-                                            </a>
+                                            <div>
+                                                <div className={classes.sectionContainer}>
+                                                    <div className={subsection === docView ? classes.activeSubsection : classes.docNavSubsection} 
+                                                       onClick={() => {updateDocView(subsection); setShowTOC(false)}}>
+                                                        <a>{index+1}.{subindex+1} {subsection.name}</a>
+                                                    </div>
+                                                    {
+                                                        subsection.subsubsections ? 
+                                                            <a className={classes.docNavSubsectionToggle}
+                                                                onClick={() => {toggleSubsection(index, subindex)}}>
+                                                                <img className={classes.smalldocNavSubsectionToggleImage} 
+                                                                    src={subsectionsOpen[index][subindex] ? minusPng : plusPng}/>
+                                                            </a>
+                                                         : null
+                                                    }
+                                                </div>
+                                                {
+                                                    subsection.subsubsections && subsectionsOpen[index][subindex] ? subsection.subsubsections.map((subsubsection, subsubindex) => (
+                                                        <div>
+                                                            <div className={classes.sectionContainer}>
+                                                                <div className={subsection === docView ? classes.activeSubSubsection : classes.docNavSubSubsection} 
+                                                                   onClick={() => {updateDocView(subsubsection); setShowTOC(false)}}>
+                                                                    <a>{index+1}.{subindex+1}.{subsubindex+1} {subsection.name}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )) : null
+                                                }
+                                            </div>
                                         )) : null
                                     }
                                 </div>
@@ -248,11 +310,35 @@ const thisStyle = {
         composes: '$docNavSection',
         display : 'block',
         boxSizing : 'border-box',
-        marginLeft : '4em',
+        marginLeft : '2em',
         marginBottom : '0.5rem',
         marginRight : '2rem'
     },
     activeSubsectionMobile :  {
+        composes: '$docNavSubsectionMobile',
+        color : colors.white
+    },
+
+    docNavSubSubsection : {
+        composes: '$docNavSection',
+        display : 'block',
+        boxSizing : 'border-box',
+        marginLeft : '2em',
+        marginBottom : '0.5rem'
+    },
+    activeSubSubsection :  {
+        composes: '$docNavSubsection',
+        color : colors.white
+    },
+    docNavSubSubsectionMobile : {
+        composes: '$docNavSection',
+        display : 'block',
+        boxSizing : 'border-box',
+        marginLeft : '4em',
+        marginBottom : '0.5rem',
+        marginRight : '2rem'
+    },
+    activeSubSubsectionMobile :  {
         composes: '$docNavSubsectionMobile',
         color : colors.white
     },
@@ -327,6 +413,15 @@ const thisStyle = {
         height : '1.5rem',
         padding : '0',
         marginLeft : '1rem',
+        '&:hover' : {
+            cursor : 'pointer'
+        }
+    },
+    smalldocNavSubsectionToggleImage : {
+        height : '1.5rem',
+        padding : '0.25rem',
+        marginLeft : '1rem',
+        boxSizing : 'border-box',
         '&:hover' : {
             cursor : 'pointer'
         }
