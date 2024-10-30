@@ -356,6 +356,7 @@ const thisStyle = {
         },
         '& p code, & li code, & h2 code': {
             display : 'inline',
+            whiteSpace : 'normal',
             backgroundColor : colors.slate,
             padding : '2px 4px',
             borderRadius : '4px',
