@@ -20,39 +20,41 @@ import milestoneFiveEvaluation from '../files/semester_two/milestone_5/progress_
 import milestoneFivePoster from '../files/semester_two/milestone_5/poster.pdf'
 
 
-export const planFiles = [{name: "Plan", href: planPlan},
+const planFiles = [{name: "Plan", href: planPlan},
                    {name: "Presentation", href: planPresentation}]
 
-export const milestoneOneFiles = [{name: "Requirements", href: milestoneOneRequirements},
+const milestoneOneFiles = [{name: "Requirements", href: milestoneOneRequirements},
                            {name: "Design", href: milestoneOneDesign},
                            {name: "Test", href: milestoneOneTest},
                            {name: "Presentation", href: milestoneOnePresentation},
                            {name: "Progress Evaluation", href: milestoneOneEvaluation}]
 
-export const milestoneTwoFiles = [{name: "Presentation", href: milestoneTwoPresentation},
+const milestoneTwoFiles = [{name: "Presentation", href: milestoneTwoPresentation},
                            {name: "Progress Evaluation", href: milestoneTwoEvaluation}]
 
-export const milestoneThreeFiles = [{name: "Presentation", href: milestoneThreePresentation},
+const milestoneThreeFiles = [{name: "Presentation", href: milestoneThreePresentation},
                              {name: "Progress Evaluation", href: milestoneThreeEvaluation}]
 
-export const milestoneFourFiles = [{name : 'Presentation', href: milestoneFourPresentation},
+const milestoneFourFiles = [{name : 'Presentation', href: milestoneFourPresentation},
                              {name: 'Progress Evaluation', href: milestoneFourEvaluation}]
 
-export const milestoneFiveFiles = [{name : 'Presentation', href: milestoneFivePresentation},
+const milestoneFiveFiles = [{name : 'Presentation', href: milestoneFivePresentation},
                                    {name : 'Progress Evaluation', href : milestoneFiveEvaluation},
                                    {name : 'Poster', href : milestoneFivePoster}]
 
-export const projectFiles = planFiles.concat(milestoneOneFiles, milestoneTwoFiles, milestoneThreeFiles)
-
-export const semesterTwoPlanFiles = [{name: "Plan", href: planTwoPlan},
+const semesterTwoPlanFiles = [{name: "Plan", href: planTwoPlan},
                         {name: "Presentation", href: planTwoPresentation}]
 
-export const firstSemesterFileLinks = [{cardName: "Plan", dueDate: "Jaunary 22nd", links: planFiles},
+const firstSemesterFileLinks = [{cardName: "Plan", dueDate: "Jaunary 22nd", links: planFiles},
                    {cardName: "Milestone 1", dueDate: "February 19th", links: milestoneOneFiles},
                    {cardName: "Milestone 2", dueDate: "March 18th", links: milestoneTwoFiles},
                    {cardName: "Milestone 3", dueDate: "April 15th", links: milestoneThreeFiles}]
 
-export const secondSemesterFileLinks = [{cardName: "Plan", dueDate: "September 4th", links: semesterTwoPlanFiles},
+const secondSemesterFileLinks = [{cardName: "Plan", dueDate: "September 4th", links: semesterTwoPlanFiles},
                     {cardName: "Milestone 4", dueDate: "September 30th", links: milestoneFourFiles},
-                    {cardName: " Milestone 5", dueDate : "October 28th", links : milestoneFiveFiles}
-                ]
+                    {cardName: " Milestone 5", dueDate : "October 28th", links : milestoneFiveFiles}]
+
+export const projectMaterialBreakdown = [{ title : 'First Semester', milestoneFiles : firstSemesterFileLinks },
+                                         { title : 'Second Semester', milestoneFiles : secondSemesterFileLinks }]
+export const projectFiles = planFiles.concat(milestoneOneFiles, milestoneTwoFiles, milestoneThreeFiles)
+

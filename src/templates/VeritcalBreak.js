@@ -2,22 +2,23 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { mergeJson } from './MergeJson';
 
-function HorizontalBreak({style}) {
+function VerticalBreak({style}) {
 
     const styles = createUseStyles(style ? mergeJson(defaultStyleDefs, style) : defaultStyleDefs)();
 
     return (
-        <div className={styles.horizontalBreak}/>
+        <div className={styles.verticalBreak}/>
     )
 }
 
-export default HorizontalBreak;
+export default VerticalBreak;
 
 const defaultStyleDefs = {
-    horizontalBreak : {
-        margin : '2rem 0rem',
+    verticalBreak : {
+        margin : '0rem 2rem',
         padding : 0,
-        width : '100%',
-        borderBottom : '1px solid lightGray'
+        height : '85%',
+        borderRight : '1px solid lightGray',
+        display : 'flex'
     }
 }

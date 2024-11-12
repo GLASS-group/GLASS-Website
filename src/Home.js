@@ -1,17 +1,21 @@
 import Construction from "./Construction";
 import style from "./consts/Style";
-import { Link } from "react-router-dom";
-import Glass0_1_0a from './releases/GLASS-0.1.0a.zip'
+import {NavbarHeader} from "./consts/NavbarPages";
+import Footer from './Footer';
 
 import { createUseStyles } from "react-jss";
 
 function Home() {
     const classes = createUseStyles(style)();
     return(
-        <article className={classes.pageContent}>
-            <h1 className={classes.pageContentHeader}>Home</h1>
-            <Construction/>
-        </article>
+        <div className={classes.mainBody}>
+            <NavbarHeader/>
+            <article className={classes.pageContent}>
+                <h1 className={classes.pageContentHeader}>Home</h1>
+                <Construction/>
+            </article>
+            <Footer/>
+        </div>
     )
 }
 export default Home;

@@ -1,0 +1,122 @@
+Additions:
+    General:
+        * Added feature that saves the lexers and parsers for internal syntax definition and interpretation script
+          handling. This allows for the program to be run faster every use after the tables are generated (previously,
+          all parse tables were regenerated during each run of the tool).
+            * Lexers and parsers for internal systems can be forced rebuilt by running GLASS with the -rb/--rebuild
+              argument in the command line.
+        * Added new command line arguments for added flexibility and automation.
+            * -so / --script-only - Runs GLASS in script only mode (the user will not be prompted for a syntax
+              definition nor a source file).
+            * -sd / --syntax-definition - Must be followed by a file path. Will use the file at the provided path as
+              the syntax definition automatically (the user will not be prompted for a syntax definition file).
+            * -sf / --source-file - Must be followed by a file path. Will use the file at the provided path as the
+              source file automatically (the user will not be prompted for a source file).
+            * -s / --script - Must be followed by a file path. Will use the file at the provided path as the script
+              file automatically (the user will not be prompted for a script file).
+    Interpretation Script:
+        * Added warning log messages for when traverse() or child() is unable to find a production function
+          corresponding to the current node's production.
+        * Implemented variable scope.
+            * Scope narrows/broadens as expected based on block nesting.
+        * Added array support.
+            * Arrays can be declared as a list of values surrounded by square brackets (ex. [1, 2, 4, 8]).
+            * Arrays can be indexed using typical array indexing notation (ex. array = [1, 2, 4, 8], array[3] equals 8).
+            * Arrays contain the following fields:
+                * length - returns the number of elements in the array.
+            * Arrays support the following functions:
+                * add(value) - Adds the provided value to the end of the array.
+                * add(index, value) - Inserts the provided value at the provided index.
+                * remove(index) - Removes and returns the value at the provided index.
+                * push(value) - Inserts the provided value at the front of the array.
+                * pop() - Removes and returns the first element of the array.
+        * Added floating point number support.
+        * Added while loops.
+        * Added file I/O support via the new File object type.
+            * Files can be declared using an object initialization syntax similar to Java
+            (i.e. new File("filename.txt")).
+            * Files support the following functions:
+                * open(mode) - Opens the file in the desired mode, where 'mode' is either "read" or "write".
+                * isOpen() - Returns true if the File is currently open, otherwise returns false.
+                * getMode() - Returns "closed" if the File is closed, "read" if the File is opened in read mode, and
+                  "write" if the File is opened in write mode.
+                * write(data) - If File is opened in write mode, writes the String contents of 'data' to the File.
+                * read() - If File is opened in read mode, returns the full contains of the File.
+                * readLine() - If File is opened in read mode, returns the next unread line of the File.
+                * hasNextLine() - Returns true if the file contains an unread line, otherwise returns false.
+                * close() - Closes the File. It may then be reopened using the 'open()' function.
+        * Added prompt() function for user input via terminal.
+            * Can take an optional argument to print a prompt to the user for input.
+            * Returns the contents of the String that the user types.
+        * Added SyntaxDefinition object type for loading syntax definitions and ingesting source files
+            * The object's constructor takes a String containing the file path of a syntax definition file
+              (ex. new SyntaxDefinition("some_file.syntax")).
+            * SyntaxDefinitions support the following functions:
+                * load() - Loads and parses the contents of the syntax definition file passed to the constructor.
+                * ingest(filepath) - Once syntax definition is loaded, this function receives the path to a source file
+                  written according to the given syntax definition, and returns a ParseTree object containing the
+                  parsed contents of the source file.
+        * Added ParseTree object type.
+            * This object type can not be initialized via a constructor, and can only be obtained via the
+              SyntaxDefinition object's ingest() function.
+        * Added Script object type.
+            * The object's constructor takes a String containing the file path of an interpretation script file
+              (ex. new Script("some_script.gscript")).
+            * Scripts support the following functions:
+                * load() - Loads and parses the contents of the script file passed to the constructor.
+                * execute(parseTree) - Once the script is loaded, this function receives a parse tree and returns
+                  the value returned by the called script, if any.
+                    * If no parse tree is passed, the value of "parseTree" within the called script will be null.
+        * Added new "paresTree" keyword.
+            * This keyword contains the contents of the parse tree passed to the current script.
+                * Any script called directly by a GLASS interface will use that last parsed source's tree as
+                  the value of "parseTree".
+                * If no parse tree is passed to the script, the value of "parseTree" within the script will be null.
+        * Added several functions for type conversion.
+            * int(value) - Attempts to convert the passed value to an integer. If successful, returns the converted
+              value. If unsuccessful, will always return 0.
+            * float(value) - Attempts to convert the passed value to a float. If successful, returns the converted
+              value. If unsuccessful, will always return 0.
+            * string(value) - Converts the passed value to a String.
+            * boolean(value) - Converts the passed value to a boolean.
+        * Added function type(value), which returns the name of the type of the passed value.
+        * Added support for user defined functions.
+            * User functions can be defined with the following syntax: "function [NAME] ([PARAMETERS]) {[STATEMENTS]}".
+              Below is an example:
+                    > function sayHello(name) {
+                    >     print("Hello " + name + "!");
+                    > }
+              Calling sayHello("Bob") will result in the String "Hello Bob!" being printed to terminal.
+            * Overloading is not currently supported for user-defined functions.
+            * User functions may be called before they are defined in the order of the script file (i.e. a function
+              definition may appear below a line where the function itself is called).
+
+Changes:
+    General:
+        * Changed default verbosity setting from one (only errors) to two (errors and warnings).
+        * Changed argument '-verbosity' to '--verbosity'.
+        * Changed argument '-log' to '--log'.
+    Interpretation Script:
+        * Modified how all expression operations are handled, ensuring expressions are evaluated as expected (This
+          was not a bug, as expression handling simply had a temporary system in place, which has been changed).
+        * The traverse() function must now receive a ParseTree object, which will be the ParseTree that is traversed.
+          (Old scripts may be fixed by simply replacing traverse() with traverse(parseTree)).
+        * traverse() and child() may now receive additional arguments beyond their required arguments.
+            * If a production function is successfully called from either traverse() or child(), within the function,
+              the variable "args" will be set to an array containing each of the arguments passed to the traverse()
+              or child() function.
+    Internal:
+        * Changed how Strings are represented internally to allow for extra functionality (accessible fields and
+          functions) and to allow for more object data types (such as the newly added arrays) to be more easily added
+          in the future.
+
+Bug Fixes:
+    Interpretation Script:
+        * Fixed bug where calling traverse() in a script with no production functions corresponding to the root node
+          production would cause GLASS to crash.
+        * Fixed bug where calling return() within an if-else block would not properly return from function call,
+          causing GLASS to crash.
+        * Fixed bug with reading in String literals containing escaped characters (in particular \", \n, \t, \r,
+          and \\).
+        * String literals can no longer span multiple lines.
+

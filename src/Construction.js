@@ -9,8 +9,8 @@ function Construction() {
     return (
         <div className={classes.constructionMessage}>
             <em>This website is still in progress... please pardon our dust!</em>
-            <h3 className={classes.constructionPrompt}>Looking for our project materials (presentations, requirements document, etc.)? Look <Link 
-            to='/project-materials' className={classes.constructionLink}>here</Link>!</h3>
+            <h3>Looking for our project materials (presentations, requirements document, etc.)? Look <Link
+            to='/project-materials'>here</Link>!</h3>
         </div>
     )
 }

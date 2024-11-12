@@ -109,7 +109,7 @@ export const documentation = [
                     resources for learning more about them.
                 </p>
                 <p>
-                    Before continuing, please make sure you have downloaded GLASS and its dependancies. To understand how to install GLASS, please see Section 2.0 of this documentation.
+                    Before continuing, please make sure you have downloaded GLASS and its dependencies. To understand how to install GLASS, please see Section 2.0 of this documentation.
                 </p>
                 <h2>Tutorial: Building your first GLASS language</h2>
                 <p>
@@ -276,7 +276,7 @@ export const documentation = [
                         </code>
                         <h2>Tutorial: Building your first GLASS language</h2>
                         <p>In order to read in mathematical expressions, we need to define tokens for the additive operators (<code>+</code> and <code>-</code>), the multiplicative 
-                        operators (<code>*</code> and <code>/</code>), parenthesis, and numbers (for simplicitity, we will stick to non-negative integers). We will also declare an
+                        operators (<code>*</code> and <code>/</code>), parenthesis, and numbers (for simplicity, we will stick to non-negative integers). We will also declare an
                         ignored token for comments, which we will define as any text that follows a <code>#</code> until the end of a line. Below is the token block that
                         should be include at the top of your syntax definition file, with a token declaration for each token that may appear in our mathematical expressions. This
                         block should replace the empty token block in your current <code>expression.syntax</code> file:</p>
@@ -441,7 +441,7 @@ export const documentation = [
                         <p>
                             Keep in mind:
                             <ul>
-                                <li>Non-terminals do not have to be defined explicity, and are rather implicitly defined by their inclusion in productions</li>
+                                <li>Non-terminals do not have to be defined explicitly, and are rather implicitly defined by their inclusion in productions</li>
                                 <li>Non-terminals may have any name that is not already a reserved or declared token name</li>
                                 <li>The symbol on the left side of the production (left of the arrow <code>-&gt;</code>) must be a non-terminal</li>
                                 <li>Non-terminal names follow the same rules as token names (See Section 4.2 Tokens)</li>
@@ -482,7 +482,7 @@ export const documentation = [
                         <p>
                             When it comes time to write the interpretation script for your language, you will need to be able to refer to your productions. This
                             can be done by rewriting the production in the interpretation script file, but this can be tedious. Instead, a shorthand name can be
-                            applied to each production by preceeding it with an identifier (following the same rules for token and non-terminal names) surrounded
+                            applied to each production by preceding it with an identifier (following the same rules for token and non-terminal names) surrounded
                             by square brackets, as shown below:
                         </p>
                         <code>
@@ -494,10 +494,10 @@ export const documentation = [
                         <p>Also note that productions may share names with existing terminals (tokens) or non-terminals.</p>
                         <h2>Tutorial: Building your first GLASS language</h2>
                         <p>
-                            The grammar productions required to define the stucture of a mathematical expression are quite simple. We know the following things are true about mathematical expressions:
+                            The grammar productions required to define the structure of a mathematical expression are quite simple. We know the following things are true about mathematical expressions:
                             <ul>
                                 <li>An expression is either a single term, or can be defined recursively as another expression added or subtracted with a term.</li>
-                                <li>A term is either a single factor, or can be defined recursively as another term multipled or divided with a factor.</li>
+                                <li>A term is either a single factor, or can be defined recursively as another term multiplied or divided with a factor.</li>
                                 <li>A factor is either a single number, or an expression surrounded by parenthesis</li>
                             </ul>
                             Using these rules, we can define our grammar productions as shown below. We will also provide a name for each production to be used in the future. The
