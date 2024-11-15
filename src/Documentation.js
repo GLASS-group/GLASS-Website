@@ -234,8 +234,8 @@ const thisStyle = {
         flexDirection: 'column'
     },
     documentationNavbarContainer: {
-        minWidth: '23rem',
-        width: '25%',
+        minWidth: '22rem',
+        width: '23%',
         boxSizing: 'border-box',
         overflowY: 'auto',
         margin: '1em 0',
