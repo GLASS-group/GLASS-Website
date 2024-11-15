@@ -1,4 +1,4 @@
-import HorizontalBreak from '../templates/HorizontalBreak';
+import HorizontalBreak from '../../templates/HorizontalBreak';
 
 const tab = '    '
 

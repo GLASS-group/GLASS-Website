@@ -2,11 +2,12 @@ import {createUseStyles} from "react-jss";
 import style, {colors} from "./consts/Style";
 import glassSvg from './images/glass_logo.svg'
 import {NavLink} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {mergeJson} from "./templates/MergeJson";
 import menuPng from './images/menu.png';
 import xPng from './images/x.png';
 import useMobile from "./templates/Mobile";
+
 
 
 function Navigation({pages}) {
@@ -16,6 +17,8 @@ function Navigation({pages}) {
     const classes = createUseStyles(mergeJson(style, thisStyle))();
 
     const [showMenu, setShowMenu] = useState(false);
+
+
 
     if (!isMobile && showMenu) {
         setShowMenu(false);

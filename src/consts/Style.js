@@ -8,7 +8,8 @@ export const colors = {
     lightGray: '#999999',
     darkGray : '#333333',
     coolBlue: '#243044',
-    overlayBackground: '#000000F4'
+    overlayBackground: '#000000F4',
+    subtleOverlayBackground: '#000000A0'
 }
 
 const sectionMargin = '2rem';

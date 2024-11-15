@@ -5,36 +5,40 @@ import Navigation from "./Navigation";
 import {pages} from "./consts/NavbarPages";
 import Footer from "./Footer";
 import {useRef, useState} from "react";
-import documentation from "./consts/DocumentationContent";
+import documentation from "./consts/documentation/Documentation-0.2.0a";
 import plusPng from './images/plus.png'
 import minusPng from './images/minus.png'
 import xPng from './images/x.png'
 import useMobile from "./templates/Mobile";
-
+import {useParams, useNavigate} from "react-router";
+import {useEffect} from "react";
 
 function Documentation() {
+
     const classes = createUseStyles(mergeJson(style, thisStyle))();
 
     const [showTOC, setShowTOC] = useState(false);
-
     const isMobile = useMobile();
+    const { page } = useParams();
+    const [docView, setDocView] = useState(null);
+    const navigate = useNavigate();
+    const documentationContentWindow = useRef(null);
 
     if (!isMobile && showTOC) {
         setShowTOC(false);
     }
 
-    const [docView, setDocView] = useState(documentation[0]);
-
-    const documentationContentWindow = useRef(null);
+    const nameToPath = (section) => section.name.replaceAll(' ', '-').replaceAll('/','-').toLowerCase();
 
     const updateDocView = (section) => {
-        if (section.name !== docView.name) {
+        if (docView !== null && section.name !== docView.name) {
             documentationContentWindow.current.scrollTo({
                 top: 0,
                 left: 0
             });
         }
         setDocView(section)
+        if (isMobile) setShowTOC(false);
     }
 
     const initializeTOCSectionsOpen = (sections) => {
@@ -54,7 +58,7 @@ function Documentation() {
         return sections.map((section, index) => (
             <div>
                 <div className={classes.sectionContainer}>
-                    <div className={section === docView ? classes.activeSection : classes.docNavSection}
+                    <div className={page === nameToPath(section) ? classes.activeSection : classes.docNavSection}
                          onClick={() => updateDocView(section)}>
                         <a>{fullIndexList.length === 0 ? `${index + 1}.0` : sectionPrefix + `${index + 1}`} {section.name}</a>
                     </div>
@@ -83,12 +87,10 @@ function Documentation() {
     }
 
     const [TOCSectionsOpen, setTOCSectionsOpen] = useState(initializeTOCSectionsOpen(documentation))
-
     const tableOfContents = buildTOC(documentation, TOCSectionsOpen, []);
 
     const toggleSection = (sectionIndexList, currentIndex) => {
         const newOpens = updateSectionsOpen(TOCSectionsOpen, sectionIndexList, currentIndex)
-        console.log(newOpens)
         setTOCSectionsOpen(newOpens)
     }
 
@@ -108,6 +110,69 @@ function Documentation() {
             }
         })
     }
+
+    const findMatchingPage = (pageName, sections) => {
+        for (let i in sections) {
+            if (nameToPath(sections[i]) === pageName) {
+                return sections[i]
+            }
+            else if (sections[i].subsections) {
+                const found = findMatchingPage(pageName, sections[i].subsections)
+                if (found !== null) return found
+            }
+        }
+        return null
+    }
+
+    const openTOCByPath = (sections, pathName) => {
+        let openings = []
+        for (let i in sections) {
+            const section = sections[i]
+            let shouldOpen = false;
+            if (section.subsections) {
+                for (let j in section.subsections) {
+                    if (nameToPath(section.subsections[j]) === pathName) {
+                        shouldOpen = true;
+                    }
+                }
+            }
+            const subsectionsShould = section.subsections ? openTOCByPath(section.subsections, pathName) : null
+            for (let j in subsectionsShould) {
+                if (subsectionsShould[j].open) shouldOpen = true;
+            }
+            openings.push({open : shouldOpen, subsections: subsectionsShould})
+        }
+        return openings.length === 0 ? null : openings
+    }
+
+    const combineOpens = (opensOne, opensTwo) => (
+        opensOne.map((ones, index) => ({open : ones.open || opensTwo[index].open,
+                                        subsections : ones.subsections ? combineOpens(ones.subsections, opensTwo[index].subsections) : null}))
+    )
+
+    useEffect(() => {
+        if (docView === null) {
+            const desiredPage = findMatchingPage(page, documentation)
+            if (desiredPage !== null) updateDocView(desiredPage)
+            else updateDocView(documentation[0])
+        } else {
+            const pathName = nameToPath(docView)
+            if (page !== pathName) {
+                navigate(`/documentation/${pathName}`);
+            }
+        }
+    }, [docView])
+
+    useEffect(() => {
+        const opens = openTOCByPath(documentation, page)
+        setTOCSectionsOpen(combineOpens(TOCSectionsOpen, opens))
+        if (page === undefined) {
+            navigate('/documentation/introduction', {replace:true});
+        } else {
+            const desiredPage = findMatchingPage(page, documentation)
+            if (desiredPage !== null) updateDocView(desiredPage)
+        }
+    }, [page])
 
     return (
         <div className={classes.mainBody}>
@@ -140,7 +205,7 @@ function Documentation() {
 
                 <div ref={documentationContentWindow} className={classes.documentationContentContainer}>
                     <div className={classes.documentationContent}>
-                        {docView.content}
+                        {docView ? docView.content : null}
                     </div>
                 </div>
                 <div className={classes.documentationSeparatorTwo}></div>
@@ -151,8 +216,6 @@ function Documentation() {
     )
 
 }
-
-const paragraphSpacing = '1rem'
 
 const thisStyle = {
     mainBody: {
@@ -171,8 +234,8 @@ const thisStyle = {
         flexDirection: 'column'
     },
     documentationNavbarContainer: {
-        minWidth: '20rem',
-        width: '20%',
+        minWidth: '23rem',
+        width: '25%',
         boxSizing: 'border-box',
         overflowY: 'auto',
         margin: '1em 0',
@@ -232,9 +295,9 @@ const thisStyle = {
         fontSize: '1.1em',
         '& p': {
             margin: 0,
-            marginBottom: paragraphSpacing,
+            marginBottom: '1rem',
         },
-        '& p code, & li code, & h2 code': {
+        '& p code, & li code, & h2 code, & h3 code': {
             display: 'inline',
             whiteSpace: 'normal',
             backgroundColor: colors.slate,
@@ -243,11 +306,11 @@ const thisStyle = {
             margin: '2px 0'
         },
         '& h1': {
-            margin: `${paragraphSpacing} 0`
+            margin: `1rem 0`
         },
         '& h2': {
             margin: 0,
-            marginBottom: paragraphSpacing,
+            marginBottom: '1rem',
             marginTop: '2rem'
         },
         '& p a': {

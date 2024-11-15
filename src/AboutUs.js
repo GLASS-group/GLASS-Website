@@ -136,7 +136,7 @@ const thisStyle = {
         boxSizing: 'border-box',
         width: '18rem',
         borderRadius: '50%',
-        marginTop : '2rem'
+        margin : '2rem 0',
     },
     showDevInfoButton : {
         borderRadius: '0.5rem',

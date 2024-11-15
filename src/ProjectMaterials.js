@@ -19,7 +19,7 @@ function ProjectMaterials() {
             <article className={isMobile ? classes.pageContentMobile : classes.pageContent}>
                 <div className={classes.contentSection}>
                     <h1>Project Name: GLASS</h1>
-                    <h2>Generalized Language Abstraction and Specification System</h2>
+                    <h2>Generalized Language Abstraction and Scripting System</h2>
                     <h3 className={classes.subheader}>Team Members</h3>
                     <p>Tommy Galletta</p>
                     <p>(tommy.tpg03@gmail.com)</p>
@@ -85,9 +85,9 @@ const thisStyle = {
         flexDirection: 'column',
         backgroundColor: colors.slate,
         boxSizing: 'border-box',
-        borderRadius: '2em',
+        borderRadius: '1em',
         margin: '2.5rem 1rem 0 1rem',
-        padding: '2rem',
+        padding: '1.5rem',
         width: '45%',
         height : 'auto',
         '& h3' : {
