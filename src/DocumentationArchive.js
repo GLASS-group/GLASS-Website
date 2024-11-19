@@ -5,7 +5,7 @@ import Navigation from "./Navigation";
 import {pages} from "./consts/NavbarPages";
 import Footer from "./Footer";
 import {useRef, useState} from "react";
-import documentation from "./consts/documentation/Documentation-0.2.0a";
+import {releases} from "./consts/Releases";
 import plusPng from './images/plus.png'
 import minusPng from './images/minus.png'
 import xPng from './images/x.png'
@@ -19,10 +19,13 @@ function Documentation() {
 
     const [showTOC, setShowTOC] = useState(false);
     const isMobile = useMobile();
-    const { page } = useParams();
+    const { page, version } = useParams();
     const [docView, setDocView] = useState(null);
     const navigate = useNavigate();
     const documentationContentWindow = useRef(null);
+
+    const matchingRelease = releases.find((release) => release.documentationPath === version);
+    const documentation = matchingRelease ? matchingRelease.relatedDocumentation : null;
 
     if (!isMobile && showTOC) {
         setShowTOC(false);
@@ -158,7 +161,7 @@ function Documentation() {
         } else {
             const pathName = nameToPath(docView)
             if (page !== pathName) {
-                navigate(`/documentation/${pathName}`);
+                navigate(`/archive/documentation/${version}/${pathName}`);
             }
         }
     }, [docView])
@@ -167,7 +170,7 @@ function Documentation() {
         const opens = openTOCByPath(documentation, page)
         setTOCSectionsOpen(combineOpens(TOCSectionsOpen, opens))
         if (page === undefined) {
-            navigate('/documentation/introduction', {replace:true});
+            navigate(`/archive/documentation/${version}/introduction`, {replace:true});
         } else {
             const desiredPage = findMatchingPage(page, documentation)
             if (desiredPage !== null) updateDocView(desiredPage)
@@ -296,9 +299,6 @@ const thisStyle = {
         '& p': {
             margin: 0,
             marginBottom: '1rem',
-        },
-        '& li' : {
-            margin : '0.25rem 0 '
         },
         '& p code, & li code, & h2 code, & h3 code': {
             display: 'inline',

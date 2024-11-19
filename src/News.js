@@ -87,6 +87,7 @@ function News() {
                     )
                 }
             </article>
+            <div className={classes.padding}/>
             <Footer/>
         </div>
     )
@@ -105,7 +106,7 @@ const thisStyle = {
         backgroundColor : colors.slate,
         borderRadius : '0.5rem',
         transition : 'background-color .2s ease-in-out',
-        margin : '2rem 0',
+        margin : '2rem 0 0 0',
         '&:hover': {
             backgroundColor: colors.coolBlue,
             cursor : 'pointer',
@@ -209,7 +210,8 @@ const thisStyle = {
             fontWeight : 400
         },
         '& p' : {
-            fontSize : '1.1rem'
+            fontSize : '1.1rem',
+            lineHeight : '1.6rem'
         },
         '& h5' : {
             display : 'inline-block',
@@ -217,6 +219,18 @@ const thisStyle = {
             fontSize : '1rem',
             fontWeight : 400,
             fontStyle : 'italic'
+        },
+        '& a' : {
+            color : colors.mint,
+            textDecoration : 'none',
+            '&:hover' : {
+                textDecoration : 'underline',
+                cursor : 'pointer'
+            }
+        },
+        '& li' : {
+            margin : '0.25rem 0',
+            fontSize : '1.1rem'
         },
         animationDuration : '0.15s',
         animationTimingFunction : 'ease-in',
@@ -265,6 +279,9 @@ const thisStyle = {
             padding: '5px',
             borderRadius: '3px'
         }
+    },
+    padding : {
+        padding : '2rem'
     }
 }
 

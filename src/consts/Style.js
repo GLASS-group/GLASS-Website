@@ -41,7 +41,7 @@ export const style = {
     },
     pageContentMobile : {
       composes: '$pageContent',
-      width: '80%'
+      width: '85%'
     },
     constructionMessage: {
         margin: '3rem 0rem',

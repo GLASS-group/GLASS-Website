@@ -14,11 +14,20 @@ Additions:
               source file automatically (the user will not be prompted for a source file).
             * -s / --script - Must be followed by a file path. Will use the file at the provided path as the script
               file automatically (the user will not be prompted for a script file).
+    GUI:
+        * Added GUI for interacting with GLASS.
+            * Packaged as a precompiled executable.
+            * Contains a window for creation of syntax definition files, as well as an execution window for reading
+              in and parsing a source file using a provided syntax definition file.
     Interpretation Script:
         * Added warning log messages for when traverse() or child() is unable to find a production function
           corresponding to the current node's production.
         * Implemented variable scope.
             * Scope narrows/broadens as expected based on block nesting.
+        * Strings now support the following functions:
+            * length() - Returns the length of the given String
+            * substring(start, end) - Returns the substring starting at index "start" of the String (inclusive), and
+              ending at index "end" of the String (exclusive).
         * Added array support.
             * Arrays can be declared as a list of values surrounded by square brackets (ex. [1, 2, 4, 8]).
             * Arrays can be indexed using typical array indexing notation (ex. array = [1, 2, 4, 8], array[3] equals 8).
@@ -36,7 +45,7 @@ Additions:
             * Files can be declared using an object initialization syntax similar to Java
             (i.e. new File("filename.txt")).
             * Files support the following functions:
-                * open(mode) - Opens the file in the desired mode, where 'mode' is either "read" or "write".
+                * open(mode) - Opens the file in the desired mode, where 'mode' is either "read" or "write". Returns itself.
                 * isOpen() - Returns true if the File is currently open, otherwise returns false.
                 * getMode() - Returns "closed" if the File is closed, "read" if the File is opened in read mode, and
                   "write" if the File is opened in write mode.
@@ -53,12 +62,14 @@ Additions:
               (ex. new SyntaxDefinition("some_file.syntax")).
             * SyntaxDefinitions support the following functions:
                 * load() - Loads and parses the contents of the syntax definition file passed to the constructor.
-                * ingest(filepath) - Once syntax definition is loaded, this function receives the path to a source file
-                  written according to the given syntax definition, and returns a ParseTree object containing the
-                  parsed contents of the source file.
-        * Added ParseTree object type.
+                * ingest(source) - Once syntax definition is loaded, this function receives some source String
+                  written according to the given syntax definition, and returns a ParseNode object containing the
+                  parsed contents of the source String.
+        * Added ParseNode object type.
             * This object type can not be initialized via a constructor, and can only be obtained via the
               SyntaxDefinition object's ingest() function.
+            * ParseNodes support the following functions:
+                * traverse(optional_argument_list) - Replaces the previous traverse global function (see Changes section below).
         * Added Script object type.
             * The object's constructor takes a String containing the file path of an interpretation script file
               (ex. new Script("some_script.gscript")).
@@ -67,7 +78,7 @@ Additions:
                 * execute(parseTree) - Once the script is loaded, this function receives a parse tree and returns
                   the value returned by the called script, if any.
                     * If no parse tree is passed, the value of "parseTree" within the called script will be null.
-        * Added new "paresTree" keyword.
+        * Added new "parseTree" keyword.
             * This keyword contains the contents of the parse tree passed to the current script.
                 * Any script called directly by a GLASS interface will use that last parsed source's tree as
                   the value of "parseTree".
@@ -99,12 +110,16 @@ Changes:
     Interpretation Script:
         * Modified how all expression operations are handled, ensuring expressions are evaluated as expected (This
           was not a bug, as expression handling simply had a temporary system in place, which has been changed).
-        * The traverse() function must now receive a ParseTree object, which will be the ParseTree that is traversed.
-          (Old scripts may be fixed by simply replacing traverse() with traverse(parseTree)).
-        * traverse() and child() may now receive additional arguments beyond their required arguments.
-            * If a production function is successfully called from either traverse() or child(), within the function,
+        * Both traverse() and child() are no longer global functions. The way to traverse the parse tree via production
+          functions is not by calling traverse on a ParseNode object (ex. parseTree.traverse()).
+            * As the child function no longer exists, children of a particular node will now be saved to a "children"
+              array variable when a production function is called. traverse() can then be called on a child node by
+              accessing this array (ex. what was previously child(2) is now children[2].traverse()). This solution
+              is more verbose but allows for more flexibility.
+        * ParseNode.traverse() may now receive additional arguments beyond their required arguments.
+            * If a production function is successfully called by traverse(), within the found production function,
               the variable "args" will be set to an array containing each of the arguments passed to the traverse()
-              or child() function.
+              function.
     Internal:
         * Changed how Strings are represented internally to allow for extra functionality (accessible fields and
           functions) and to allow for more object data types (such as the newly added arrays) to be more easily added
@@ -119,4 +134,3 @@ Bug Fixes:
         * Fixed bug with reading in String literals containing escaped characters (in particular \", \n, \t, \r,
           and \\).
         * String literals can no longer span multiple lines.
-

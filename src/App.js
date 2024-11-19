@@ -9,6 +9,8 @@ import {projectFiles} from "./consts/Files";
 import React from "react";
 import Documentation from "./Documentation";
 import AboutUs from "./AboutUs";
+import DownloadArchive from "./DownloadArchive";
+import DocumentationArchive from "./DocumentationArchive";
 
 function App() {
     return <BrowserRouter history={history}>
@@ -18,6 +20,9 @@ function App() {
             <Route key='news' path="/news" element ={<News/>}/>
             <Route key='news' path="/news/:articleId" element ={<News/>}/>
             <Route key='download' path="/download" element ={<Download/>}/>
+            <Route key='download-archive' path="/archive/download" element ={<DownloadArchive/>}/>
+            <Route path="/archive/documentation/:version" element ={<DocumentationArchive/>}/>
+            <Route path="/archive/documentation/:version/:page" element ={<DocumentationArchive/>}/>
             <Route path="/documentation" element={<Documentation/>}/>
             <Route path="/documentation/:page" element={<Documentation/>}/>
             <Route key='aboutUs'  path="/about-us" element = {<AboutUs/>}/>

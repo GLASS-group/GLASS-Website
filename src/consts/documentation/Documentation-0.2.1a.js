@@ -296,7 +296,7 @@ export const documentation = [
                                 <li>Token names must only contain letters, numbers, and underscores</li>
                                 <li>Token names must start with a letter</li>
                                 <li>Token names must not end with an underscore</li>
-                                <li>All token names for a given syntax definition must be unique and are case insensitive (i.e. <code>apple</code> and <code>APPLE</code> are considered the same token name).</li>
+                                <li>All token names for a given syntax definition must be unique and are case sensitive.</li>
                             </ul>
                         </p>
                         <p>
@@ -1352,6 +1352,11 @@ export const documentation = [
                                 <p>
                                     This function returns the length of the String that the function is called
                                     on, as an <code>int</code>.
+                                </p>
+                                <h3><code>isEmpty()</code></h3>
+                                <p>
+                                    This function returns <code>true</code> if the length of the String is <code>0</code>,
+                                    otherwise returns <code>false</code>.
                                 </p>
                                 <h3><code>substring(start, end)</code></h3>
                                 <p>

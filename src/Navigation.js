@@ -152,6 +152,7 @@ const thisStyle = {
         width: '100%',
     },
     navMenuBackgroundMobile: {
+        zIndex : '10',
         position: 'fixed',
         top: '0',
         left: '0',

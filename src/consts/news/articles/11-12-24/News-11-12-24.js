@@ -1,6 +1,6 @@
 import GLASS_logo from './GLASS_logo.png'
 
-const article_11_12_24 = {
+const article = {
     title : "Alpha release out now!",
     path : '11-12-24-alpha-release-out-now',
     publishDate : "November 12, 2024",
@@ -41,4 +41,4 @@ const article_11_12_24 = {
     thumbnailImage: GLASS_logo
 }
 
-export default article_11_12_24;
+export default article;
