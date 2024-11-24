@@ -10,11 +10,13 @@ import useMobile from "./templates/Mobile";
 import {useState} from "react";
 import HorizontalBreak from "./templates/HorizontalBreak";
 import xPng from "./images/x.png";
+import useTopOfPage from "./templates/TopOfPage";
 
 function AboutUs() {
     const classes = createUseStyles(mergeJson(style, thisStyle))();
 
     const isMobile = useMobile();
+    useTopOfPage();
     const [showBio, setShowBio] = useState(false);
     const [currentBio, setCurrentBio] = useState(null);
 

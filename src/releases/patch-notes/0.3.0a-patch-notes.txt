@@ -1,0 +1,37 @@
+Additions:
+    Interpretation Script:
+        * New accessible functions for String object:
+            * Function isEmpty(), which returns "true" if the length of the String is 0, otherwise returns "false".
+            * Function charAt(index), which returns the character at the specified index of the String, as a String.
+            * Function strip(), which returns the String without any leading or trailing whitespace.
+            * Function split(delimiter), which returns an array of Strings, the contents of the original String split
+              into pieces separated by the specified delimiter.
+        * Added support for the modulus operator "%"
+        * Added support for negative integer and float literals
+    GUI:
+        * Added support for drag and drop files.
+
+Changes:
+    Syntax Definition:
+        * Token names are no longer case-insensitive (i.e. "apple" and "APPLE" used to be considered the same token
+          name. Now they are recognized as different names).
+        * The colons in a token definition have been replaced by the arrow symbol (->).
+    Interpretation Script:
+        * Attempting to access a variable whose value was not declared in the current previously yielded a value of
+          null, now throws an exception.
+        * ParseNode object type now returns text representation of parse tree when converted to String.
+    GUI:
+        * Changed terminology to be consistent with GLASS core and documentation.
+
+Bug Fixes:
+    Internal:
+        * Fixed issue where certain logger messages attempting to access null values caused GLASS to crash.
+    Interpretation Script:
+        * Fixed bug where boolean comparison operators defaulted to returning "null".
+            * Now, if a comparison cannot be performed between values, the expected boolean value will be
+              returned ("false" for ==, <, >, >=, <=, "true" for !=).
+        * Fixed bug where String values were not always being properly written to output files via File.write().
+    GUI:
+        * Fixed bug with execution window not showing tree string output.
+        * Fixed bug with productions getting out of order.
+        * Fixed bug with productions not being deleted from production list.

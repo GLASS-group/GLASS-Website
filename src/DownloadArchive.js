@@ -9,10 +9,12 @@ import Footer from "./Footer";
 import useMobile from "./templates/Mobile";
 import {useState} from "react";
 import xPng from "./images/x.png";
+import useTopOfPage from "./templates/TopOfPage";
 
 function DownloadArchive() {
 
     const isMobile = useMobile();
+    useTopOfPage();
     const [mobileArchiveInfo, setMobileArchiveInfo] = useState(null);
 
     if (!isMobile && mobileArchiveInfo) {

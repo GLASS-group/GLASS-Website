@@ -7,10 +7,12 @@ import { releases } from "./consts/Releases";
 import {NavbarHeader} from "./consts/NavbarPages";
 import Footer from "./Footer";
 import useMobile from "./templates/Mobile";
+import useTopOfPage from "./templates/TopOfPage";
 
 function Download() {
 
     const isMobile = useMobile();
+    useTopOfPage();
 
     const classes = createUseStyles(mergeJson(style, thisStyle))();
     return (

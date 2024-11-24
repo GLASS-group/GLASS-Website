@@ -7,10 +7,13 @@ import { createUseStyles } from "react-jss";
 import {mergeJson} from "./templates/MergeJson";
 import {NavLink} from "react-router-dom";
 import useMobile from "./templates/Mobile";
+import useTopOfPage from "./templates/TopOfPage";
 
 function Home() {
     const classes = createUseStyles(mergeJson(style, thisStyle))();
     const isMobile  = useMobile();
+    useTopOfPage();
+
     return(
         <div className={classes.mainBody}>
             <NavbarHeader/>

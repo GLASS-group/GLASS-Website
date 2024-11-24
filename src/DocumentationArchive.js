@@ -9,9 +9,12 @@ import {releases} from "./consts/Releases";
 import plusPng from './images/plus.png'
 import minusPng from './images/minus.png'
 import xPng from './images/x.png'
+import leftPng from './images/left_arrow.png'
+import rightPng from './images/right_arrow.png'
 import useMobile from "./templates/Mobile";
 import {useParams, useNavigate} from "react-router";
 import {useEffect} from "react";
+import useTopOfPage from "./templates/TopOfPage";
 
 function Documentation() {
 
@@ -19,6 +22,7 @@ function Documentation() {
 
     const [showTOC, setShowTOC] = useState(false);
     const isMobile = useMobile();
+    useTopOfPage();
     const { page, version } = useParams();
     const [docView, setDocView] = useState(null);
     const navigate = useNavigate();
@@ -31,7 +35,7 @@ function Documentation() {
         setShowTOC(false);
     }
 
-    const nameToPath = (section) => section.name.replaceAll(' ', '-').replaceAll('/','-').toLowerCase();
+    const nameToPath = (section) => section.replaceAll(' ', '-').replaceAll('/','-').toLowerCase();
 
     const updateDocView = (section) => {
         if (docView !== null && section.name !== docView.name) {
@@ -56,41 +60,54 @@ function Documentation() {
         return sectionList
     }
 
-    const buildTOC = (sections, openSections, fullIndexList) => {
+    const buildTOC = (sections, openSections, fullIndexList, lastPage) => {
         const sectionPrefix = fullIndexList.map((index) => `${index + 1}.`).join("");
-        return sections.map((section, index) => (
-            <div>
-                <div className={classes.sectionContainer}>
-                    <div className={page === nameToPath(section) ? classes.activeSection : classes.docNavSection}
-                         onClick={() => updateDocView(section)}>
-                        <a>{fullIndexList.length === 0 ? `${index + 1}.0` : sectionPrefix + `${index + 1}`} {section.name}</a>
-                    </div>
-                    {
-                        section.subsections ?
-                            <a className={classes.docNavSubsectionToggle}>
-                                <img className={classes.docNavSubsectionToggleImage}
-                                     onClick={() => toggleSection(fullIndexList.concat(index), 0)}
-                                     src={openSections[index].open ? minusPng : plusPng}
-                                     alt={"Expand or collapse current section"}/>
-                            </a>
-                            : null
-                    }
-                </div>
-
+        const tocSections = []
+        sections.forEach((section, index) => {
+            const subsectionTOCData = section.subsections ? buildTOC(section.subsections, openSections[index].subsections, fullIndexList.concat(index), lastPage) : null
+            const subsectionTOC = subsectionTOCData ? subsectionTOCData[0] : null
+            const subsectionLastPage = subsectionTOCData ? subsectionTOCData[1] : null
+            tocSections.push(
                 {
-                    section.subsections && openSections[index].open ?
-                        <div className={classes.subsectionIndent}>
-                            {buildTOC(section.subsections, openSections[index].subsections, fullIndexList.concat(index))}
-                        </div>
-                        : null
-                }
+                    tableEntry:
+                        <div>
+                            <div className={classes.sectionContainer}>
+                                <div
+                                    className={page === nameToPath(section.name) ? classes.activeSection : classes.docNavSection}
+                                    onClick={() => updateDocView(section)}>
+                                    <a>{fullIndexList.length === 0 ? `${index + 1}.0` : sectionPrefix + `${index + 1}`} {section.name}</a>
+                                </div>
+                                {
+                                    section.subsections ?
+                                        <a className={classes.docNavSubsectionToggle}>
+                                            <img className={classes.docNavSubsectionToggleImage}
+                                                 onClick={() => toggleSection(fullIndexList.concat(index), 0)}
+                                                 src={openSections[index].open ? minusPng : plusPng}
+                                                 alt={"Expand or collapse current section"}/>
+                                        </a>
+                                        : null
+                                }
+                            </div>
 
-            </div>
-        ))
+                            {
+                                openSections[index].open ?
+                                    <div className={classes.subsectionIndent}>
+                                        {subsectionTOC.map((section) => section.tableEntry)}
+                                    </div>
+                                    : null
+                            }
+
+                        </div>,
+                    previousSection : subsectionLastPage ? subsectionLastPage : lastPage,
+                    nextSection : null
+                })
+            lastPage = section
+        })
+        return [tocSections, lastPage]
     }
 
     const [TOCSectionsOpen, setTOCSectionsOpen] = useState(initializeTOCSectionsOpen(documentation))
-    const tableOfContents = buildTOC(documentation, TOCSectionsOpen, []);
+    const tableOfContents = buildTOC(documentation, TOCSectionsOpen, [], null)[0];
 
     const toggleSection = (sectionIndexList, currentIndex) => {
         const newOpens = updateSectionsOpen(TOCSectionsOpen, sectionIndexList, currentIndex)
@@ -116,7 +133,7 @@ function Documentation() {
 
     const findMatchingPage = (pageName, sections) => {
         for (let i in sections) {
-            if (nameToPath(sections[i]) === pageName) {
+            if (nameToPath(sections[i].name) === pageName) {
                 return sections[i]
             }
             else if (sections[i].subsections) {
@@ -134,7 +151,7 @@ function Documentation() {
             let shouldOpen = false;
             if (section.subsections) {
                 for (let j in section.subsections) {
-                    if (nameToPath(section.subsections[j]) === pathName) {
+                    if (nameToPath(section.subsections[j].name) === pathName) {
                         shouldOpen = true;
                     }
                 }
@@ -159,7 +176,7 @@ function Documentation() {
             if (desiredPage !== null) updateDocView(desiredPage)
             else updateDocView(documentation[0])
         } else {
-            const pathName = nameToPath(docView)
+            const pathName = nameToPath(docView.name)
             if (page !== pathName) {
                 navigate(`/archive/documentation/${version}/${pathName}`);
             }
@@ -179,11 +196,24 @@ function Documentation() {
 
     return (
         <div className={classes.mainBody}>
-            <Navigation pages={pages}/>
-            <div className={isMobile ? classes.documentationMainMobile : classes.documentationMain}>
+            {/*<Navigation pages={pages}/>*/}
+
+            <div className={isMobile ? classes.archiveHeaderMobile : classes.archiveHeader}>
+                {
+                    isMobile ?
+                        <div>
+                            <h1>Archived Documentation</h1>
+                            <h1>{matchingRelease.releaseName}</h1>
+                        </div>
+                        : <h1>Archived Documentation - {matchingRelease.releaseName}</h1>
+
+            }
+
+        </div>
+    <div className={isMobile ? classes.documentationMainMobile : classes.documentationMain}>
                 <div className={isMobile ? classes.hidden : classes.documentationNavbarContainer}>
                     <div className={classes.documentationNavbar}>
-                        {tableOfContents}
+                        {tableOfContents.map((section) => section.tableEntry)}
                     </div>
                 </div>
                 <div className={isMobile ? classes.hidden : classes.documentationSeparator}/>
@@ -196,7 +226,7 @@ function Documentation() {
                             <img className={classes.menuImage} src={xPng} alt={"Exit button"}/>
                         </a>
                         <div className={classes.mobileTocContainer}>
-                            {tableOfContents}
+                            {tableOfContents.map((section) => section.tableEntry)}
                         </div>
                     </div>
                 </div>
@@ -206,11 +236,41 @@ function Documentation() {
                     }}>View Table of Contents</a>
                 </div>
 
-                <div ref={documentationContentWindow} className={classes.documentationContentContainer}>
-                    <div className={classes.documentationContent}>
-                        {docView ? docView.content : null}
-                    </div>
-                </div>
+                {
+                    docView ?
+                        <div ref={documentationContentWindow} className={classes.documentationContentContainer}>
+                            <div className={classes.documentationContent}>
+                                {docView.content}
+                                <div className={isMobile ? classes.documentationAdjacentPageNavBarMobile : classes.documentationAdjacentPageNavBar}>
+                                    {
+                                        docView.previousPage ?
+                                            <div onClick={() => {
+                                                updateDocView(findMatchingPage(nameToPath(docView.previousPage), documentation))
+                                            }} className={classes.documentationPrevPage}>
+                                                <img className={classes.docNavArrowImage}
+                                                     src={leftPng}
+                                                     alt={"Expand or collapse current section"}/>
+                                                <a className={classes.adjacentPageLabel}>{docView.previousPage}</a>
+                                            </div> : null
+                                    }
+                                    {
+                                        docView.nextPage ?
+                                            <div onClick={() => {
+                                                updateDocView(findMatchingPage(nameToPath(docView.nextPage), documentation))
+                                            }} className={classes.documentationNextPage}>
+
+                                                <a className={classes.adjacentPageLabel}>{docView.nextPage}</a>
+                                                <img className={classes.docNavArrowImage}
+                                                     src={rightPng}
+                                                     alt={"Expand or collapse current section"}/>
+                                            </div> : null
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        : null
+                }
+
                 <div className={classes.documentationSeparatorTwo}></div>
             </div>
             <Footer override={{navFooter: {borderTopStyle: 'solid', borderTopWidth: '2px'}}}/>
@@ -221,6 +281,22 @@ function Documentation() {
 }
 
 const thisStyle = {
+    archiveHeader : {
+        textAlign: 'center',
+        width : '100%',
+        borderBottom : '2px solid white',
+        padding : '1rem 2rem',
+        '& h1' : {
+            color : '#E80000',
+            margin : '0.25rem'
+        }
+    },
+    archiveHeaderMobile : {
+        composes : "$archiveHeader",
+        '& h1' : {
+            fontSize : '1.6rem'
+        }
+    },
     mainBody: {
         maxHeight: '100vh'
     },
@@ -254,6 +330,8 @@ const thisStyle = {
         }
     },
     documentationContentContainer: {
+        display : 'flex',
+        flexDirection: 'column',
         minWidth: '0',
         width: '100%',
         composes: '$documentationNavbarContainer'
@@ -292,6 +370,39 @@ const thisStyle = {
     subsectionIndent: {
         marginLeft: '2rem'
     },
+    documentationAdjacentPageNavBar : {
+        display : 'flex',
+        flexDirection : 'row',
+        padding : '2rem 0rem'
+    },
+    documentationAdjacentPageNavBarMobile : {
+        composes : '$documentationAdjacentPageNavBar',
+        flexDirection : 'column',
+        alignItems : 'center'
+    },
+    documentationPrevPage : {
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems: 'center',
+        marginRight : 'auto',
+        '&:hover' : {
+            cursor: 'pointer',
+            textDecoration: 'underline'
+        }
+    },
+    documentationNextPage : {
+        composes : `$documentationPrevPage`,
+        marginLeft :  'auto',
+        marginRight: '0'
+    },
+    adjacentPageLabel : {
+        fontSize : '1.4rem'
+    },
+    docNavArrowImage : {
+        height : '1.5rem',
+        width : 'auto',
+        margin : '1rem'
+    },
     documentationContent: {
         boxSizing: "border-box",
         padding: '0 1.5em',
@@ -299,6 +410,9 @@ const thisStyle = {
         '& p': {
             margin: 0,
             marginBottom: '1rem',
+        },
+        '& li' : {
+            margin : '0.25rem 0 '
         },
         '& p code, & li code, & h2 code, & h3 code': {
             display: 'inline',

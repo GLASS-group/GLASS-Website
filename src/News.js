@@ -9,10 +9,12 @@ import {useEffect, useState} from "react";
 import xPng from "./images/x.png";
 import useMobile from "./templates/Mobile";
 import {useNavigate, useParams} from "react-router";
+import useTopOfPage from "./templates/TopOfPage";
 
 function News() {
     const classes = createUseStyles(mergeJson(style, thisStyle))();
     const isMobile = useMobile();
+    useTopOfPage();
     const [showArticle, setShowArticle] = useState(undefined);
     const {articleId} = useParams()
     const navigate = useNavigate();

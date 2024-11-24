@@ -30,7 +30,9 @@ export const documentation = [
                 <p>
                     If it is your first time using GLASS, we encourage you to follow along with these sections!
                 </p>
-            </div>
+            </div>,
+        previousPage : null,
+        nextPage : "Getting Started"
     },
     {
         name : "Getting Started",
@@ -60,6 +62,8 @@ export const documentation = [
                     of this documentation to refer to these different files.
                 </p>
             </div>,
+        previousPage : "Introduction",
+        nextPage : 'Installation and Running',
         subsections : [
             {
                 name : "Installation and Running",
@@ -94,7 +98,9 @@ export const documentation = [
                             Please note that in the above command, <code>GLASS-0.2.0a.jar</code> should be replace with the name
                             of the appropriate <code>.jar</code> file for your installed version of GLASS.
                         </p>
-                    </div>
+                    </div>,
+                previousPage : "Getting Started",
+                nextPage : 'Command Line Arguments',
             },
             {
                 name : "Command Line Arguments",
@@ -177,7 +183,9 @@ export const documentation = [
                             fetch the file at the path specified after the argument to be used as the interpretation
                             script file.
                         </p>
-                    </div>
+                    </div>,
+                previousPage : "Installation and Running",
+                nextPage : 'Syntax Definition',
             }
         ]
     },
@@ -206,6 +214,8 @@ export const documentation = [
                         "Show file extensions" option in Settings.</em>
                 </p>
             </div>,
+        previousPage : "Command Line Arguments",
+        nextPage : 'Syntax Definition Files',
         subsections: [
             {
                 name : "Syntax Definition Files",
@@ -262,7 +272,10 @@ export const documentation = [
                             <br/>
                             &#125;<br/>
                         </code>
-                    </div>
+                    </div>,
+                previousPage : "Syntax Definition",
+                nextPage : 'Tokens',
+
             },
             {
                 name : "Tokens",
@@ -379,7 +392,9 @@ export const documentation = [
                             {tab}ignored COMMENT : /#.*(\r\n)?/<br/>
                             &#125;
                         </code>
-                    </div>
+                    </div>,
+                previousPage : "Syntax Definition Files",
+                nextPage : 'Productions',
             },
             {
                 name : "Productions",
@@ -601,7 +616,9 @@ export const documentation = [
                             {tab}[SUBEXPRESSION] =&gt; LEFT_PARENTHESIS EXPRESSION RIGHT_PARENTHESIS.<br/>
                             &#125;
                         </code>
-                    </div>
+                    </div>,
+                previousPage : "Tokens",
+                nextPage : 'Interpretation Script',
             }
         ]
     },
@@ -630,6 +647,8 @@ export const documentation = [
                     "Show file extensions" option in Settings.</em>
             </p>
         </div>,
+        previousPage : "Productions",
+        nextPage : 'Basic Script Syntax',
         subsections : [
             {
                 name : "Basic Script Syntax",
@@ -767,7 +786,9 @@ export const documentation = [
                             <br/>
                             # Production functions go here
                         </code>
-                    </div>
+                    </div>,
+                previousPage : "Interpretation Script",
+                nextPage : 'Production Functions',
             },
             {
                 name: "Production Functions",
@@ -843,7 +864,7 @@ export const documentation = [
                             called, if
                             such a production function exists. If no such production
                             function exists, or the corresponding production function does not contain a return
-                            statement, then the <code>child</code> function call will return <code>null</code>.
+                            statement, then the <code>traverse</code> function call will return <code>null</code>.
                         </p>
                         <p>
                             If the calling node contains a terminal, then the <code>traverse</code> function will return the
@@ -982,7 +1003,9 @@ export const documentation = [
                             deeper insight into
                             how GLASS works. Happy reading!
                         </p>
-                    </div>
+                    </div>,
+                previousPage : "Basic Script Syntax",
+                nextPage : 'Scripting Details',
             }
         ]
     },
@@ -998,6 +1021,8 @@ export const documentation = [
                     the GLASS interpretation script system.
                 </p>
             </div>,
+        previousPage : "Production Functions",
+        nextPage : 'Statements',
         subsections : [
             {
                 name : 'Statements',
@@ -1188,7 +1213,9 @@ export const documentation = [
                             <br/>
                             # Production functions go here
                         </code>
-                    </div>
+                    </div>,
+                previousPage : "Scripting Details",
+                nextPage : 'Primitive Data Types',
             },
             {
                 name: "Primitive Data Types",
@@ -1211,7 +1238,9 @@ export const documentation = [
                                 in Java. Can store the values <code>true</code> and <code>false</code>.
                             </li>
                         </ul>
-                    </div>
+                    </div>,
+                previousPage : "Statements",
+                nextPage : 'Object Data Types',
             },
             {
                 name: "Object Data Types",
@@ -1251,6 +1280,8 @@ export const documentation = [
                             myFile = new File("some-file.txt");
                         </code>
                     </div>,
+                previousPage : "Primitive Data Types",
+                nextPage : 'Array',
                 subsections: [
                     {
                         name: "Array",
@@ -1308,7 +1339,9 @@ export const documentation = [
                                     This function is equivalent to <code>remove(0)</code>, and removes the
                                     value at the front of the array, returning the removed value.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "Object Data Types",
+                        nextPage : 'String',
                     },
                     {
                         name: "String",
@@ -1355,7 +1388,8 @@ export const documentation = [
                                 </p>
                                 <h3><code>isEmpty()</code></h3>
                                 <p>
-                                    This function returns <code>true</code> if the length of the String is <code>0</code>,
+                                    This function returns <code>true</code> if the length of the String
+                                    is <code>0</code>,
                                     otherwise returns <code>false</code>.
                                 </p>
                                 <h3><code>substring(start, end)</code></h3>
@@ -1364,17 +1398,34 @@ export const documentation = [
                                     is called on, starting at index <code>start</code> of the String (inclusive), and
                                     ending at index <code>end</code> of the string (exclusive).
                                 </p>
-                            </div>
+                                <h3><code>charAt(index)</code></h3>
+                                <p>
+                                    This function returns the character at the specified index of the String, as a
+                                    String.
+                                </p>
+                                <h3><code>strip()</code></h3>
+                                <p>
+                                    This function returns the String this function is called on, without any leading or
+                                    trailing whitespace.
+                                </p>
+                                <h3><code>split(delimiter)</code></h3>
+                                <p>
+                                    This function returns an array of String objects, being the original string
+                                    this function was called on, split at each instance of the specified delimiter.
+                                </p>
+                            </div>,
+                        previousPage: "Array",
+                        nextPage: 'File',
                     },
                     {
                         name: "File",
                         content:
                             <div>
-                                <h1>File</h1>
+                            <h1>File</h1>
                                 {lineBreak}
                                 <h2>Declaring a File</h2>
                                 <p>
-                                    Files can be declared using the declaration format described in Section 5.3 Object
+                                Files can be declared using the declaration format described in Section 5.3 Object
                                     Data Types. The File constructor takes a single argument, the path of the file
                                     which the declared File object will refer to. Below is an example of how to
                                     use the File constructor:
@@ -1433,7 +1484,9 @@ export const documentation = [
                                     If the File is opened in read mode, returns <code>true</code> if the file contains
                                     at least one more line of text to read, otherwise returns <code>false</code>.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "String",
+                        nextPage : 'SyntaxDefinition',
                     },
                     {
                         name: "SyntaxDefinition",
@@ -1470,7 +1523,9 @@ export const documentation = [
                                     argument, and returns a ParseNode object containing the parsed contents of the
                                     provided String, using the rules provided in the loaded syntax definition file.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "File",
+                        nextPage : 'Script',
                     },
                     {
                         name: "Script",
@@ -1506,7 +1561,9 @@ export const documentation = [
                                     argument, and returns the value returns by the loaded interpretation script.
                                     If the interpretation script returns no value, this function returns <code>null</code>.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "SyntaxDefinition",
+                        nextPage : 'ParseNode',
                     },
                     {
                         name: "ParseNode",
@@ -1545,7 +1602,9 @@ export const documentation = [
                                     the called production function, where individual arguments passed to the function may
                                     be accessed by indexing the <code>args</code> array.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "Script",
+                        nextPage : 'Functions',
                     }
                 ]
             },
@@ -1575,6 +1634,8 @@ export const documentation = [
                             x = type(false);
                         </code>
                     </div>,
+                previousPage : "ParseNode",
+                nextPage : 'I/O Functions',
                 subsections: [
                     {
                         name: "I/O Functions",
@@ -1604,7 +1665,9 @@ export const documentation = [
                                     This argument allows you to prompt the user with some message before receiving
                                     input.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "Functions",
+                        nextPage : 'Type Conversion Functions',
                     },
                     {
                         name: "Type Conversion Functions",
@@ -1635,7 +1698,9 @@ export const documentation = [
                                     This function takes the <code>value</code> provided and attempts to convert it to
                                     an String value. This function returns the converted <code>String</code> value.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "I/O Functions",
+                        nextPage : 'Miscellaneous Functions',
                     },
                     {
                         name: "Miscellaneous Functions",
@@ -1649,7 +1714,9 @@ export const documentation = [
                                     of the provided <code>value</code>. For example, the function
                                     call <code>type(1.4)</code> would return the String <code>"float"</code>.
                                 </p>
-                            </div>
+                            </div>,
+                        previousPage : "Type Conversion Functions",
+                        nextPage : 'User Defined Functions',
                     },
                     {
                         name: "User Defined Functions",
@@ -1689,15 +1756,17 @@ export const documentation = [
                                     {tab}&#125;<br/>
                                     &#125;
                                 </code>
-                            </div>
+                            </div>,
+                        previousPage : "Miscellaneous Functions",
+                        nextPage : 'Additional Details',
                     }
                 ]
             },
             {
-                name: "Additional Capabilities",
+                name: "Additional Details",
                 content:
                     <div>
-                        <h1>Additional Capabilities</h1>
+                        <h1>Additional Details</h1>
                         {lineBreak}
                         <h2>Variable scope</h2>
                         <p>
@@ -1721,7 +1790,38 @@ export const documentation = [
                             <br/>
                             print(x, y);
                         </code>
-                    </div>
+                        <h2>Operations and Precedence</h2>
+                        <p>
+                            The GLASS interpretation script system allows for a variety of operations to be used within
+                            expressions. Below is a list of the allowed operators, along with their precedence in evaluation,
+                            where operations higher in the list are performed first.
+                            <ul>
+                                <li>
+                                    Multiplicative operators - Multiplication (<code>*</code>), division (<code>/</code>),
+                                    integer division (<code>//</code>), and modulus (<code>%</code>)
+                                </li>
+                                <li>
+                                    Additive operators - Addition (<code>+</code>) and subtraction (<code>-</code>)
+                                </li>
+                                <li>
+                                    Relational operators - Equals (<code>==</code>), not equals (<code>!=</code>),
+                                    less than (<code>&lt;</code>), greater than (<code>&gt;</code>), less than
+                                    or equal to (<code>&lt;=</code>), and greater than or equal to (<code>&gt;=</code>)
+                                </li>
+                                <li>
+                                    Logical AND (<code>&&</code>)
+                                </li>
+                                <li>
+                                    Logical OR (<code>||</code>)
+                                </li>
+                            </ul>
+                            Operations grouped inside of
+                            parenthesis <code>()</code> always take precedence over all other operators, however, operators
+                            within parenthesis have the same precedence as described above.
+                        </p>
+                    </div>,
+                previousPage : "User Defined Functions",
+                nextPage : null
             }
         ]
     },

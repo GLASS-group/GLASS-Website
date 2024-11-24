@@ -7,6 +7,7 @@ import {mergeJson} from "./templates/MergeJson";
 import menuPng from './images/menu.png';
 import xPng from './images/x.png';
 import useMobile from "./templates/Mobile";
+import useTopOfPage from "./templates/TopOfPage";
 
 
 
