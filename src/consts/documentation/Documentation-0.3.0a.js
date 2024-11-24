@@ -299,7 +299,7 @@ export const documentation = [
                         <p>
                             A single token may be declared per line within the token block using the following syntax:
                         </p>
-                        <code>[TOKEN ACTIVITY] [TOKEN NAME] : /[TOKEN REGEX]/</code>
+                        <code>[TOKEN ACTIVITY] [TOKEN NAME] -> /[TOKEN REGEX]/</code>
                         <p>
                             Token activity will be either the keyword <code>active</code> or <code>ignored</code> depending on the type of token you wish to declare.
                         </p>
@@ -355,7 +355,7 @@ export const documentation = [
                             Below is an example of a full token declaration, including a regex pattern:
                         </p>
                         <code>
-                            visible A_SEQUENCE = /a+/
+                            visible A_SEQUENCE -> /a+/
                         </code>
                         <p>
                             Based on this token declaration, any string that contains a series of a's (i.e. <code>aaaaa</code>) could be should to be an <code>A_SEQUENCE</code> token.
@@ -367,9 +367,9 @@ export const documentation = [
                         <code>
                             tokens &#123;<br/>
                             {tab}active &#123;<br/>
-                            {tab}{tab}FRUIT_ONE: /apple/<br/>
-                            {tab}{tab}FRUIT_TWO: /banana/<br/>
-                            {tab}{tab}FRUIT_THREE: /cherry/<br/>
+                            {tab}{tab}FRUIT_ONE -> /apple/<br/>
+                            {tab}{tab}FRUIT_TWO -> /banana/<br/>
+                            {tab}{tab}FRUIT_THREE -> /cherry/<br/>
                             {tab}&#125;<br/>
                             &#125;
                         </code>
@@ -382,14 +382,14 @@ export const documentation = [
                         <code>
                         tokens &#123;<br/>
                             {tab}active &#123;<br/>
-                            {tab}{tab}LEFT_PARENTHESIS: /\(/<br/>
-                            {tab}{tab}RIGHT_PARENTHESIS: /\)/<br/>
-                            {tab}{tab}ADD_OPERATOR: /\+|\-/<br/>
-                            {tab}{tab}MULTIPLY_OPERATOR: /\*|\//<br/>
-                            {tab}{tab}NUMBER: /0|[1-9][0-9]*/<br/>
+                            {tab}{tab}LEFT_PARENTHESIS -> /\(/<br/>
+                            {tab}{tab}RIGHT_PARENTHESIS -> /\)/<br/>
+                            {tab}{tab}ADD_OPERATOR -> /\+|\-/<br/>
+                            {tab}{tab}MULTIPLY_OPERATOR -> /\*|\//<br/>
+                            {tab}{tab}NUMBER -> /0|[1-9][0-9]*/<br/>
                             {tab}&#125;<br/>
                             <br/>
-                            {tab}ignored COMMENT : /#.*(\r\n)?/<br/>
+                            {tab}ignored COMMENT -> /#.*(\r\n)?/<br/>
                             &#125;
                         </code>
                     </div>,
