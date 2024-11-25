@@ -164,7 +164,7 @@ export const documentation = [
                             fetch the file at the path specified after the argument to be used as the syntax definition
                             file.
                         </p>
-                        <h3><code>-sf / --syntax-definition [FILEPATH]</code></h3>
+                        <h3><code>-sf / --source-file [FILEPATH]</code></h3>
                         <p>
                             This argument allows you to pre-specify a source file to be used by the GLASS
                             system. GLASS will not prompt the user for a source file, and will instead
